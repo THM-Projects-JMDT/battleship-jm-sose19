@@ -1,0 +1,16 @@
+# Ignore Gradle project files 
+.gradle
+gradle
+.settings
+.classpath
+.project
+gradlew
+gradlew.bat
+settings.gradle
+
+# Ignore build output directory
+build
+bin
+
+# Ignore Vscode Data 
+.Vscode
