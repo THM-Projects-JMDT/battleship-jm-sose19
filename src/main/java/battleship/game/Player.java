@@ -30,7 +30,7 @@ public class Player {
         int [] n = {1,-1,10,-10};
         for (int i : n) {
             if(log.get(log.size()).getLeft()==field+i) {
-                log.add(new SimpleMap(field, shipsize, shipnumber));
+                log.add(new SimpleMap<>(field, shipsize, shipnumber));
                 setShipfield(field);
                 return true;
             }
