@@ -6,8 +6,8 @@ import io.javalin.security.AccessManager;
 import io.javalin.security.Role;
 
 public class Access {
-    public static Set<Role> anyone = Set.of(AccessRole.ANYONE);
-    public static Set<Role> registered = Set.of(AccessRole.REGISTERED);
+    public static final Set<Role> ANYONE = Set.of(AccessRole.ANYONE);
+    public static final Set<Role> REGISTERED = Set.of(AccessRole.REGISTERED);
 
     private enum AccessRole implements Role {
         ANYONE, REGISTERED;

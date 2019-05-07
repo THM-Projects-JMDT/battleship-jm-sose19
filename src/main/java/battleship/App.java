@@ -14,7 +14,7 @@ public class App {
         .start(7000);
 
         app.routes(() -> {
-            get(Path.NEWGAME, GameController.createGame, Access.anyone);
+            get(Path.NEWGAME, GameController.createGame, Access.ANYONE);
         });
     }
 }
