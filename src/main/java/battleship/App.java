@@ -1,8 +1,7 @@
 package battleship;
 
 import battleship.game.GameController;
-import battleship.util.Access;
-import battleship.util.Path;
+import battleship.util.*;
 import io.javalin.Javalin;
 import static io.javalin.apibuilder.ApiBuilder.*;
 
@@ -16,5 +15,7 @@ public class App {
         app.routes(() -> {
             get(Path.NEWGAME, GameController.createGame, Access.ANYONE);
         });
+
+        app.sse(Path.SSE, Sse.init, Access.REGISTERED);
     }
 }

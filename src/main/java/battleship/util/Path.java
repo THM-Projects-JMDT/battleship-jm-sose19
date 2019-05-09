@@ -4,4 +4,5 @@ public class Path {
     public static final String GAME = "/game";
     public static final String NEWGAME = GAME + "/new";
     public static final String JOINGAME = GAME + "/join";
+    public static final String SSE = "/sse";
 }
