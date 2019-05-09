@@ -2,6 +2,7 @@ package battleship.util;
 
 import java.util.Set;
 
+import battleship.players.Players;
 import io.javalin.security.AccessManager;
 import io.javalin.security.Role;
 
@@ -14,7 +15,7 @@ public class Access {
     }
 
     public static AccessManager manager = (handler, ctx, permittedRoles) -> {
-        if (permittedRoles.contains(AccessRole.ANYONE) /* || TODO Check if Registered Player*/)
+        if (permittedRoles.contains(AccessRole.ANYONE) || Players.isPlayer(ctx.sessionAttribute("player-id")))
             handler.handle(ctx);
         else
             ctx.status(401).result("Unauthorized");

@@ -2,6 +2,7 @@ package battleship.util;
 
 import java.util.function.Consumer;
 
+import battleship.players.Players;
 import io.javalin.serversentevent.SseClient;
 
 public class Sse {
@@ -10,7 +11,9 @@ public class Sse {
     };
     
     public static Consumer<SseClient> init = client -> {
-        //TODO
+        //Client zum Player Hinzufügen (Durch AccesManager ist Sichergestellt das Player-id da und valide)
+        Players.connect(client.ctx.sessionAttribute("player-id"), client);
+        client.sendEvent("conection", "conected");
         client.onClose(close);
     };
 }

@@ -3,18 +3,21 @@ package battleship.game;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import io.javalin.serversentevent.SseClient;
+
 public class Player {
-    private String name;
+    private SseClient client;
     private int [] field;
     private ArrayList<SimpleMap<Integer,Integer,Integer>> log;
 
-
-    Player(String name){
-        this.name=name;
+    public Player(){
         for (int n : field)
             field[n]=0;
         log = new ArrayList<>();
     }
+
+    public SseClient getClient() { return this.client; }
+    public void SetClient(SseClient client) { this.client = client; }
 
     public void setShipfield(int i){
         field[i]=2;
