@@ -6,16 +6,19 @@ import java.util.Arrays;
 import io.javalin.serversentevent.SseClient;
 
 public class Player {
+    private String id;
     private SseClient client;
     private int [] field;
     private ArrayList<SimpleMap<Integer,Integer,Integer>> log;
 
-    public Player(){
+    public Player(String id){
+        this.id = id;
         for (int n : field)
             field[n]=0;
         log = new ArrayList<>();
     }
 
+    public String getID(){ return this.id; }
     public SseClient getClient() { return this.client; }
     public void SetClient(SseClient client) { this.client = client; }
 

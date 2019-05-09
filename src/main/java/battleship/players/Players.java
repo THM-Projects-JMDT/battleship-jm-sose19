@@ -1,26 +1,29 @@
 package battleship.players;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
 import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.UUID;
 
 import battleship.game.Player;
 import io.javalin.serversentevent.SseClient;
 
 public class Players {
-    private static Map<String, Player> players = new HashMap<>();
+    private static Set<Player> players = new HashSet<>();
 
     //Add new Player
     public static String newPlayer() {
         String id = generateID();
-        players.put(id, new Player());
+        players.add(new Player(id));
         return id;
     }
 
     //Get Player by id
-    private static Player getPlayer(String id) {
-        return players.get(id);
+    private static Player getPlayer(String id)  throws NoSuchElementException {
+        return players.stream()
+            .filter(p -> p.getID().equals(id))
+            .findFirst()
+            .orElseThrow();
     }
 
     //Server Send Events
@@ -45,7 +48,13 @@ public class Players {
     }
     //Test is Player
     public static boolean isPlayer(String id) {
-        return getPlayer(id) != null;
+        //Noch besser lösen?
+        try {
+            getPlayer(id);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
     private Players() {};
