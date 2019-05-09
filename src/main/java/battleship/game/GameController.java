@@ -7,8 +7,8 @@ public class GameController {
     public static Handler newGame = ctx -> {
         String id = Players.newPlayer();
         ctx.sessionAttribute("player-id", id);
+        ctx.header("Content-ID", "1");
         //TODO new Game usw.
-        //TODO Redirect oder Render to game Login?
-        ctx.result("newGame");
+        ctx.render("sides/login.html");
     };
 }

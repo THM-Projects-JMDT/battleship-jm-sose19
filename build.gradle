@@ -9,8 +9,12 @@ repositories {
 }
 
 dependencies {
+    //Javalin
     compile 'io.javalin:javalin:2.8.0'
     compile 'org.slf4j:slf4j-simple:1.7.25'
+    //Javalin render
+    compile "org.thymeleaf:thymeleaf:3.0.9.RELEASE"
+    //Junti
     testImplementation 'junit:junit:4.12'
 }
 
