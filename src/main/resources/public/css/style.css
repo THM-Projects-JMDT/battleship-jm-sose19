@@ -1,4 +1,11 @@
+.blue {
+    background-color: gray;
+    padding: 4px;
+}
 #navtext {
     color: white;
     font-size: 30px;
+}
+#Nameform {
+    width: 50%;
 }
