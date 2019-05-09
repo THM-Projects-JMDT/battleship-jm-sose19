@@ -2,13 +2,22 @@
 var xhr = new XMLHttpRequest;
 
 //Listener
+//TODO Listener für nachgeladene Seitenteile wie? doch mit onclick? 
+window.onload = () => getPage();
 xhr.onreadystatechange = () => hadleResponse();
-document.getElementById("newGame").addEventListener('click', () => newGame());
 
-//Request Function
+//Request Functions
 function sentRequestGet(path = '') {
     xhr.open('Get', path);
     xhr.send();
+}
+
+function getPage() {
+    sentRequestGet('/getside')
+}
+
+function newGame() {
+    sentRequestGet('/game/new');
 }
 
 //Response Functions
@@ -27,9 +36,4 @@ function hadleResponse() {
 
 function newHtmlContent() {
     document.getElementById('htmlContent').innerHTML =  xhr.responseText;
-}
-
-//Listener Functions
-function newGame() {
-    sentRequestGet('/game/new');
 }

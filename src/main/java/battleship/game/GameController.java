@@ -1,6 +1,7 @@
 package battleship.game;
 
 import battleship.players.Players;
+import battleship.util.Path;
 import io.javalin.Handler;
 
 public class GameController {
@@ -9,6 +10,6 @@ public class GameController {
         ctx.sessionAttribute("player-id", id);
         ctx.header("Content-ID", "1");
         //TODO new Game usw.
-        ctx.render("sides/login.html");
+        ctx.render(Path.Pages.LOGIN);
     };
 }

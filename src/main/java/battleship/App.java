@@ -1,6 +1,7 @@
 package battleship;
 
 import battleship.game.GameController;
+import battleship.pages.PageController;
 import battleship.players.PlayersController;
 import battleship.util.*;
 import io.javalin.Javalin;
@@ -14,10 +15,11 @@ public class App {
         .start(7000);
 
         app.routes(() -> {
-            get(Path.NEWGAME, GameController.newGame, Access.ANYONE);
-            get(Path.SETNAME, PlayersController.setName, Access.REGISTERED);
+            get(Path.Web.GETPAGE, PageController.getPage, Access.ANYONE);
+            get(Path.Web.NEWGAME, GameController.newGame, Access.ANYONE);
+            get(Path.Web.SETNAME, PlayersController.setName, Access.REGISTERED);
         });
 
-        app.sse(Path.SSE, Sse.init, Access.REGISTERED);
+        app.sse(Path.Web.SSE, Sse.init, Access.REGISTERED);
     }
 }
