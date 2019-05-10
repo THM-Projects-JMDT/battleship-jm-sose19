@@ -10,13 +10,14 @@ public class Player {
     private SseClient client;
     private int [] field;
     private ArrayList<SimpleMap<Integer,Integer,Integer>> log;
+    private Game game;
 
     public Player(String id){
         this.id = id;
-        //TODO wie groß? Aktuell 10x10
         field =  new int[100];
         log = new ArrayList<>();
     }
+
 
     public String getID(){ return this.id; }
     public SseClient getClient() { return this.client; }
@@ -46,7 +47,7 @@ public class Player {
 
     }
     public int checkifthersaship(int i){
-        return field[++i];
+        return field[i++];
     }
     public boolean canilookatthisfield(int i){
         if (field[i]==1 ||field[i]==3)

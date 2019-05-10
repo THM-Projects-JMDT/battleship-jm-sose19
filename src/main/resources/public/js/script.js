@@ -19,6 +19,12 @@ function getPage() {
 function newGame() {
     sentRequestGet('/game/new');
 }
+function joinGame() {
+    sentRequestGet('/game/join');
+}
+function aboutGame() {
+    sentRequestGet('/game/about');
+}
 
 //Response Functions
 function hadleResponse() {
