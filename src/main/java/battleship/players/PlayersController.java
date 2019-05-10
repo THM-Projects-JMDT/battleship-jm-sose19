@@ -4,8 +4,8 @@ import io.javalin.Handler;
 
 public class PlayersController {
     public static Handler setName = ctx -> {
-        ctx.sessionAttribute(ctx.formParam("Name"));
-        //TODOD
+        ctx.sessionAttribute("Name", ctx.formParam("Name"));
+        //TODO
         ctx.result("wait for player Two");
     };
 }
