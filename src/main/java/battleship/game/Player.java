@@ -13,8 +13,8 @@ public class Player {
 
     public Player(String id){
         this.id = id;
-        //TODO wie groß? Aktuell 5x5
-        field =  new int[25];
+        //TODO wie groß? Aktuell 10x10
+        field =  new int[100];
         log = new ArrayList<>();
     }
 
