@@ -15,7 +15,7 @@ public class App {
         .start(7000);
 
         app.routes(() -> {
-            get(Path.Web.GETPAGE, PageController.getPage, Access.ANYONE);
+            get(Path.Web.GETPAGE, PageController.getPage, Access.REGISTERED);
             get(Path.Web.NEWGAME, GameController.newGame, Access.ANYONE);
             get(Path.Web.SETNAME, PlayersController.setName, Access.REGISTERED);
         });

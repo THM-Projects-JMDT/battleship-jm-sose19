@@ -18,6 +18,6 @@ public class Access {
         if (permittedRoles.contains(AccessRole.ANYONE) || Players.isPlayer(ctx.sessionAttribute("player-id")))
             handler.handle(ctx);
         else
-            ctx.status(401).result("Unauthorized");
+            ctx.header("Content-ID", "1").render(Path.Pages.START);
     };
 }
