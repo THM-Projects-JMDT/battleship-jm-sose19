@@ -6,16 +6,17 @@ import java.util.Set;
 import java.util.UUID;
 
 import battleship.game.Player;
+import io.javalin.Context;
 import io.javalin.serversentevent.SseClient;
 
 public class Players {
     private static Set<Player> players = new HashSet<>();
 
     //Add new Player
-    public static String newPlayer() {
+    public static void newPlayer(Context ctx) {
         String id = generateID();
         players.add(new Player(id));
-        return id;
+        ctx.sessionAttribute("player-id", id);
     }
 
     //Get Player by id

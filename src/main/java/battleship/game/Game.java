@@ -6,19 +6,17 @@ public class Game {
     private String id;
     protected Player player1;
     protected Player player2;
-    private int state=0;
+    private int state = 0;
 
     public Game() {
-        id= UUID.randomUUID().toString();
-        this.player1 = new Player("player1");
-        this.player2 = new Player("player2");
+        id = UUID.randomUUID().toString();
     }
 
-    public void joingame(Player p1){
-        if(state==0)
-            player1=p1;
+    public void joingame(Player p){
+        if(state == 0)
+            player1 = p;
         else
-            player2=p1;
+            player2 = p;
         state++;
     }
 
