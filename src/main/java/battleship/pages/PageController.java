@@ -7,7 +7,7 @@ public class PageController {
     public static Handler getPage = ctx -> {
         ctx.header("Content-ID", "1");
         //TODO if not have a Game
-        if(ctx.sessionAttribute("name") == null)
+        if(ctx.sessionAttribute("Name") == null)
             ctx.render(Path.Pages.LOGIN);
         ctx.render(Path.Pages.GAME);
     };

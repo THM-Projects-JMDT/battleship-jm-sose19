@@ -16,7 +16,7 @@ public class Players {
     public static void newPlayer(Context ctx) {
         String id = generateID();
         players.add(new Player(id));
-        ctx.sessionAttribute("player-id", id);
+        ctx.sessionAttribute("Player-ID", id);
     }
 
     //Get Player by id

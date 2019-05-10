@@ -15,7 +15,7 @@ public class Access {
     }
 
     public static AccessManager manager = (handler, ctx, permittedRoles) -> {
-        if (permittedRoles.contains(AccessRole.ANYONE) || Players.isPlayer(ctx.sessionAttribute("player-id")))
+        if (permittedRoles.contains(AccessRole.ANYONE) || Players.isPlayer(ctx.sessionAttribute("Player-ID")))
             handler.handle(ctx);
         else
             ctx.header("Content-ID", "1").render(Path.Pages.START);
