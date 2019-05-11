@@ -21,7 +21,8 @@ public class Player {
 
     public String getID(){ return this.id; }
     public SseClient getClient() { return this.client; }
-    public void SetClient(SseClient client) { this.client = client; }
+    public void setClient(SseClient client) { this.client = client; }
+    public Game getGame() { return this.game; }
 
     public void setShipfield(int i){
         field[i]=2;

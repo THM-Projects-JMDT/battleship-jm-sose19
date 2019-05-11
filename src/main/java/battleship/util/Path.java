@@ -8,6 +8,7 @@ public class Path {
         public static final String NEWGAME = GAME + "/new";
         public static final String JOINGAME = GAME + "/join";
         public static final String ABOUTGAME = GAME + "/about";
+        public static final String GETGAMEID = GAME + "/getid";
         public static final String SETNAME = PLAYER + "/setname";
         public static final String SSE = "/sse";
     }

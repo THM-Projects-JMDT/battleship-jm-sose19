@@ -20,27 +20,32 @@ public class Players {
     }
 
     //Get Player by id
-    private static Player getPlayer(String id)  throws NoSuchElementException {
+    private static Player getPlayer(Context ctx)  throws NoSuchElementException {
         return players.stream()
-            .filter(p -> p.getID().equals(id))
+            .filter(p -> p.getID().equals(ctx.sessionAttribute("Player-ID")))
             .findFirst()
             .orElseThrow();
     }
 
+    //Test if has a Game
+    public static boolean hasGame(Context ctx) {
+        return getPlayer(ctx).getGame() != null; 
+    }
+
     //Server Send Events
-    public static void connect(String id, SseClient client) {
-        getPlayer(id).SetClient(client);
+    public static void connect(SseClient client) {
+        getPlayer(client.ctx).setClient(client);
     }
     
-    public static SseClient getClient(String id) throws NoSuchElementException{
-        Player p = getPlayer(id);
+    public static SseClient getClient(Context ctx) throws NoSuchElementException{
+        Player p = getPlayer(ctx);
         if(p.getClient() == null)
             throw new NoSuchElementException();
         return p.getClient();
     
     }
-    public static void disconect(String id) {
-        getPlayer(id).SetClient(null);;
+    public static void disconect(Context ctx) {
+        getPlayer(ctx).setClient(null);;
     }
 
     //ID Generation
@@ -48,10 +53,10 @@ public class Players {
         return UUID.randomUUID().toString();
     }
     //Test is Player
-    public static boolean isPlayer(String id) {
+    public static boolean isPlayer(Context ctx) {
         //Noch besser lösen?
         try {
-            getPlayer(id);
+            getPlayer(ctx);
             return true;
         } catch (NoSuchElementException e) {
             return false;

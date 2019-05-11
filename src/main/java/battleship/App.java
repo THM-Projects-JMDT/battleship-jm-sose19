@@ -18,6 +18,7 @@ public class App {
             get(Path.Web.GETPAGE, PageController.getPage, Access.REGISTERED);
             get(Path.Web.NEWGAME, GameController.newGame, Access.ANYONE);
             get(Path.Web.JOINGAME, GameController.joinGame, Access.ANYONE);
+            get(Path.Web.GETGAMEID, GameController.getGameid, Access.REGISTERED);
             get(Path.Web.SETNAME, PlayersController.setName, Access.REGISTERED);
         });
 

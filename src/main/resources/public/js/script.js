@@ -35,6 +35,10 @@ function hadleResponse() {
                 newHtmlContent();
                 break;
             case '2':
+                displayGameID();
+                break;
+            case '3':
+                requestGameID();
                 break;
         }
     }
@@ -42,4 +46,12 @@ function hadleResponse() {
 
 function newHtmlContent() {
     document.getElementById('htmlContent').innerHTML =  xhr.responseText;
+}
+
+function displayGameID() {
+    //TODO übergebene gameID in feld eintragen 
+}
+
+function requestGameID() {
+    //TODO Game-ID feld freigeben zur eingaben
 }

@@ -12,7 +12,7 @@ public class Sse {
     
     public static Consumer<SseClient> init = client -> {
         //Client zum Player Hinzufügen (Durch AccesManager ist Sichergestellt das Player-id da und valide)
-        Players.connect(client.ctx.sessionAttribute("Player-ID"), client);
+        Players.connect(client);
         client.sendEvent("conection", "conected");
         client.onClose(close);
     };

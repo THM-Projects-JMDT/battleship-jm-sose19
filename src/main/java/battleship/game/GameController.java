@@ -18,6 +18,17 @@ public class GameController {
         loadLogin(ctx);
     };
 
+    public static Handler getGameid = ctx -> {
+        if(Players.hasGame(ctx)) {
+            ctx.header("Content-ID", "2");
+            //TODO resuslt game id 
+            ctx.result("Game-ID");
+            return;
+        }
+        
+        ctx.header("Content-ID", "3");
+    };
+
     private static void loadLogin(Context ctx) {
         ctx.header("Content-ID", "1");
         ctx.render(Path.Pages.LOGIN);
