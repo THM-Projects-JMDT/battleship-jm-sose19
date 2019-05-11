@@ -1,6 +1,5 @@
 package battleship.pages;
 
-import battleship.players.Players;
 import battleship.util.Path;
 import io.javalin.Handler;
 
