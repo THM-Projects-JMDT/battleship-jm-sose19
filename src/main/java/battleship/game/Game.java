@@ -12,6 +12,8 @@ public class Game {
         id = UUID.randomUUID().toString();
     }
 
+    public int getState() { return this.state; }
+
     public void joingame(Player p){
         if(state == 0)
             player1 = p;
