@@ -28,24 +28,34 @@ function aboutGame() {
 
 //Response Functions
 function hadleResponse() {
-    if(xhr.readyState == 4 && xhr.status == 200) {
+    if (xhr.readyState == 4) {
         var id = xhr.getResponseHeader("Content-ID");
-        switch(id) {
-            case '1':
-                newHtmlContent();
-                break;
-            case '2':
-                displayGameID();
-                break;
-            case '3':
-                requestGameID();
-                break;
+
+        //if request correct do
+        if (xhr.status == 200) {
+            switch(id) {
+                case '0':
+                    newHtmlContent();
+                    break;
+                case '1':
+                    displayGameID();
+                    break;
+            }
+        }
+
+        //if request incorrect do 
+        if (xhr.status == 404) {
+            switch(id) {
+                case '1':
+                    requestGameID();
+                    break;
+            }
         }
     }
 }
 
 function newHtmlContent() {
-    document.getElementById('htmlContent').innerHTML =  xhr.responseText;
+    document.getElementById('htmlContent').innerHTML = xhr.responseText;
 }
 
 function displayGameID() {

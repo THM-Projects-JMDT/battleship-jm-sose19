@@ -29,7 +29,7 @@ public class Players {
 
     //Test if has a Game that has one Player
     public static boolean hasGame(Context ctx) {
-        return getPlayer(ctx).getGame().getState() <= 1;
+        return getPlayer(ctx).getGame() != null;
     }
 
     //Server Send Events

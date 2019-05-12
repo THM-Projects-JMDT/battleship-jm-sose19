@@ -5,7 +5,7 @@ import io.javalin.Handler;
 
 public class PageController {
     public static Handler getPage = ctx -> {
-        ctx.header("Content-ID", "1");
+        ctx.header("Content-ID", "0");
         //TODO vlt. nicht mit Name sonder mit game status? 
         if(ctx.sessionAttribute("Name") == null) {
             ctx.render(Path.Pages.LOGIN);

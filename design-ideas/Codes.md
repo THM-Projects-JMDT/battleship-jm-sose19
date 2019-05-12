@@ -18,10 +18,10 @@
   - Spieler Name -> "Name"
 
 # Context-ID
-  - Fehler -> 0
-  - Neue Seite laden -> 1
-  - Mit Game-id -> 2
-  - Ohne Game-id -> 3
+  - Neue Seite laden -> 0
+  - Mit Game-id -> 1
+
+  - Gleiche Codes mit 404 fehler für den Code 
 
 # Game States 
   - erstellt -> 0 
