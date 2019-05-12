@@ -27,7 +27,9 @@
   - erstellt -> 0 
   - 1 Spieler -> 1
   - 2 Spieler -> 2
-  - Spieler 1 an der Reihe -> 3
-  - Spieler 2 an der Reihe -> 4
-  - Spieler 1 win -> 5
-  - Spieler 2 win -> 6 
+  - 1 Spieler Ready -> 3
+  - Beide Spieler Ready -> 4
+  - Spieler 1 an der Reihe -> 5
+  - Spieler 2 an der Reihe -> 6
+  - Spieler 1 win -> 7
+  - Spieler 2 win -> 8 

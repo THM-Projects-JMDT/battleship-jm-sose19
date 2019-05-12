@@ -11,4 +11,8 @@ public class PlayersController {
         //TODO render game(set boats)
         ctx.result("wait for player Two");
     };
+
+    public static Handler setBoat = ctx -> {
+        //TODO
+    };
 }

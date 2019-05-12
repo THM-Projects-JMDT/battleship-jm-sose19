@@ -20,6 +20,7 @@ public class App {
             get(Path.Web.JOINGAME, GameController.joinGame, Access.ANYONE);
             get(Path.Web.GETGAMEID, GameController.getGameid, Access.REGISTERED);
             get(Path.Web.SETNAME, PlayersController.setName, Access.REGISTERED);
+            get(Path.Web.SETBOAT, PlayersController.setBoat, Access.REGISTERED);
         });
 
         app.sse(Path.Web.SSE, Sse.init, Access.REGISTERED);
