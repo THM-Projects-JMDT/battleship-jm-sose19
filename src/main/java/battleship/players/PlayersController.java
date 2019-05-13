@@ -1,5 +1,6 @@
 package battleship.players;
 
+import battleship.util.Path;
 import io.javalin.Handler;
 
 public class PlayersController {
@@ -14,5 +15,11 @@ public class PlayersController {
 
     public static Handler setBoat = ctx -> {
         //TODO
+    };
+
+    public static Handler removePlayer = ctx -> {
+        Players.removePlayer(ctx);
+        ctx.header("Content-ID", "0");
+        ctx.render(Path.Pages.START);
     };
 }

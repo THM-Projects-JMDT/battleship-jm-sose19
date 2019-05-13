@@ -19,6 +19,11 @@ public class Players {
         ctx.sessionAttribute("Player-ID", id);
     }
 
+    public static void removePlayer(Context ctx) {
+        players.remove(getPlayer(ctx));
+        //TODO sessionAttribute löschen ? 
+    }
+
     //Get Player by id
     private static Player getPlayer(Context ctx)  throws NoSuchElementException {
         return players.stream()

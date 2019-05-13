@@ -17,7 +17,7 @@
   - Spieler ID -> "Player-ID"  
   - Spieler Name -> "Name"
 
-# Context-ID
+# Content-ID
   - Neue Seite laden -> 0
   - Mit Game-id -> 1
 
