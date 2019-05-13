@@ -1,7 +1,6 @@
 package battleship.game;
 
-import java.util.Arrays;
-
+import java.util.stream.Stream;
 import io.javalin.serversentevent.SseClient;
 
 public class Player {
@@ -127,8 +126,8 @@ public class Player {
     }
 
     public boolean checkifend() {
-        //an max, warum gibt es hier keine sum methode mehr? vorschläge?
-        return Arrays.stream(field).filter(n -> (int) n.getLeft() % 2 == 0).sum() == 0;
+        //So solte das Funktionieren man muss den Stream erst zu einem int Stream mappen 
+        //da es Sonste ein Stream vom type simpleMap ist und der hat kein sum()
+        return Stream.of(field).mapToInt(n -> n.getLeft()).filter(n -> n % 2 == 0).sum() == 0;
     }
-
 }
