@@ -18,6 +18,6 @@ public class Access {
         if (permittedRoles.contains(AccessRole.ANYONE) || Players.isPlayer(ctx))
             handler.handle(ctx);
         else
-            ctx.header("Content-ID", "1").render(Path.Pages.START);
+            ctx.header("Content-ID", "0").render(Path.Pages.START);
     };
 }
