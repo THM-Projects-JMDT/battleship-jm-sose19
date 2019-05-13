@@ -1,4 +1,502 @@
-<div id="Nameform"class="form-group">
-    <label for="Name">Name</label>
-    <input type="text" class="form-control" id="Name" placeholder="Enter Name">
+<link rel="stylesheet" href="css/style.css">
+<!-- Bootstrap css-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="icon" type="image/png" href="img/logo.png">
+
+<div class="row">
+    <div class="w-25 p-4">
+        <table id='schiffe'>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <br>
+
+        <table id='enemyboard'>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+
+    </div>
+    <div class="w-50 p-4">
+        <table id='mainboard'>
+            <tr>
+                <td style="background-color: #bbb;"></td>
+                <td style="background-color: #eff;">A</td>
+                <td style="background-color: #eff;">B</td>
+                <td style="background-color: #eff;">C</td>
+                <td style="background-color: #eff;">D</td>
+                <td style="background-color: #eff;">E</td>
+                <td style="background-color: #eff;">F</td>
+                <td style="background-color: #eff;">G</td>
+                <td style="background-color: #eff;">H</td>
+                <td style="background-color: #eff;">I</td>
+                <td style="background-color: #eff;">J</td>
+
+            </tr>
+            <tr>
+                <td style="background-color: #eff;">1</td>
+                <td onclick="sendMove(0)"></td>
+                <td onclick="sendMove(1)"></td>
+                <td onclick="sendMove(2)"></td>
+                <td onclick="sendMove(3)"></td>
+                <td onclick="sendMove(4)"></td>
+                <td onclick="sendMove(5)"></td>
+                <td onclick="sendMove(6)"></td>
+                <td onclick="sendMove(7)"></td>
+                <td onclick="sendMove(8)"></td>
+                <td onclick="sendMove(9)"></td>
+            </tr>
+            <tr>
+                <td style="background-color: #eff;">2</td>
+                <td onclick="sendMove(10)"></td>
+                <td onclick="sendMove(11)"></td>
+                <td onclick="sendMove(12)"></td>
+                <td onclick="sendMove(13)"></td>
+                <td onclick="sendMove(14)"></td>
+                <td onclick="sendMove(15)"></td>
+                <td onclick="sendMove(16)"></td>
+                <td onclick="sendMove(17)"></td>
+                <td onclick="sendMove(18)"></td>
+                <td onclick="sendMove(19)"></td>
+            </tr>
+            <tr>
+                <td style="background-color: #eff;">3</td>
+                <td onclick="sendMove(20)"></td>
+                <td onclick="sendMove(21)"></td>
+                <td onclick="sendMove(22)"></td>
+                <td onclick="sendMove(23)"></td>
+                <td onclick="sendMove(24)"></td>
+                <td onclick="sendMove(25)"></td>
+                <td onclick="sendMove(26)"></td>
+                <td onclick="sendMove(27)"></td>
+                <td onclick="sendMove(28)"></td>
+                <td onclick="sendMove(29)"></td>
+            </tr>
+            <tr>
+                <td style="background-color: #eff;">4</td>
+                <td onclick="sendMove(30)"></td>
+                <td onclick="sendMove(31)"></td>
+                <td onclick="sendMove(32)"></td>
+                <td onclick="sendMove(33)"></td>
+                <td onclick="sendMove(34)"></td>
+                <td onclick="sendMove(35)"></td>
+                <td onclick="sendMove(36)"></td>
+                <td onclick="sendMove(37)"></td>
+                <td onclick="sendMove(38)"></td>
+                <td onclick="sendMove(39)"></td>
+            </tr>
+            <tr>
+                <td style="background-color: #eff;">5</td>
+                <td onclick="sendMove(40)"></td>
+                <td onclick="sendMove(41)"></td>
+                <td onclick="sendMove(42)"></td>
+                <td onclick="sendMove(43)"></td>
+                <td onclick="sendMove(44)"></td>
+                <td onclick="sendMove(45)"></td>
+                <td onclick="sendMove(46)"></td>
+                <td onclick="sendMove(47)"></td>
+                <td onclick="sendMove(48)"></td>
+                <td onclick="sendMove(49)"></td>
+            </tr>
+            <tr>
+                <td style="background-color: #eff;">6</td>
+                <td onclick="sendMove(50)"></td>
+                <td onclick="sendMove(51)"></td>
+                <td onclick="sendMove(52)"></td>
+                <td onclick="sendMove(53)"></td>
+                <td onclick="sendMove(54)"></td>
+                <td onclick="sendMove(55)"></td>
+                <td onclick="sendMove(56)"></td>
+                <td onclick="sendMove(57)"></td>
+                <td onclick="sendMove(58)"></td>
+                <td onclick="sendMove(59)"></td>
+            </tr>
+            <tr>
+                <td style="background-color: #eff;">7</td>
+                <td onclick="sendMove(60)"></td>
+                <td onclick="sendMove(61)"></td>
+                <td onclick="sendMove(62)"></td>
+                <td onclick="sendMove(63)"></td>
+                <td onclick="sendMove(64)"></td>
+                <td onclick="sendMove(65)"></td>
+                <td onclick="sendMove(66)"></td>
+                <td onclick="sendMove(67)"></td>
+                <td onclick="sendMove(68)"></td>
+                <td onclick="sendMove(69)"></td>
+            </tr>
+            <tr>
+                <td style="background-color: #eff;">8</td>
+                <td onclick="sendMove(70)"></td>
+                <td onclick="sendMove(71)"></td>
+                <td onclick="sendMove(72)"></td>
+                <td onclick="sendMove(73)"></td>
+                <td onclick="sendMove(74)"></td>
+                <td onclick="sendMove(75)"></td>
+                <td onclick="sendMove(76)"></td>
+                <td onclick="sendMove(77)"></td>
+                <td onclick="sendMove(78)"></td>
+                <td onclick="sendMove(79)"></td>
+            </tr>
+            <tr>
+                <td style="background-color: #eff;">9</td>
+                <td onclick="sendMove(80)"></td>
+                <td onclick="sendMove(81)"></td>
+                <td onclick="sendMove(82)"></td>
+                <td onclick="sendMove(83)"></td>
+                <td onclick="sendMove(84)"></td>
+                <td onclick="sendMove(85)"></td>
+                <td onclick="sendMove(86)"></td>
+                <td onclick="sendMove(87)"></td>
+                <td onclick="sendMove(88)"></td>
+                <td onclick="sendMove(89)"></td>
+            </tr>
+            <tr>
+                <td style="background-color: #eff;">10</td>
+                <td onclick="sendMove(90)"></td>
+                <td onclick="sendMove(91)"></td>
+                <td onclick="sendMove(92)"></td>
+                <td onclick="sendMove(93)"></td>
+                <td onclick="sendMove(94)"></td>
+                <td onclick="sendMove(95)"></td>
+                <td onclick="sendMove(96)"></td>
+                <td onclick="sendMove(97)"></td>
+                <td onclick="sendMove(98)"></td>
+                <td onclick="sendMove(99)"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="w-25 p-4">
+        <table id='schiffe'>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
 </div>
+<style>
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    #mainboard {
+        padding: 0px;
+        margin: 0 auto;
+    }
+
+    #mainboard tr td {
+        width: 45px;
+        height: 45px;
+        border: 1px solid #1c1c1c;
+        font-family: Helvetica;
+        font-size: 30px;
+        text-align: center;
+    }
+    #schiffe {
+        padding: 0px;
+        margin: 0 auto;
+    }
+
+    #schiffe tr td {
+        width: 35px;
+        height: 20px;
+        border: 1px solid #1c1c1c;
+        font-family: Helvetica;
+        font-size: 30px;
+        text-align: center;
+    }
+    #enemyboard {
+        padding: 0px;
+        margin: 0 auto;
+    }
+
+    #enemyboard tr td {
+        width: 26px;
+        height: 26px;
+        border: 1px solid #1c1c1c;
+        font-family: Helvetica;
+        font-size: 30px;
+        text-align: center;
+    }
+
+
+
+    #mainboard tr td:hover {
+        background: #e4e4e4;
+        cursor: pointer;
+    }
+</style>
