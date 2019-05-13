@@ -21,7 +21,10 @@
   - Neue Seite laden -> 0
   - Mit Game-id -> 1
 
-  - Gleiche Codes mit 404 fehler für den Code 
+  - Gleiche Codes mit 404 fehler für den Code
+
+# Server Send events
+  - Verbindungs Details -> Conection
 
 # Game States 
   - erstellt -> 0 

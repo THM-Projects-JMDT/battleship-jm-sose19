@@ -26,4 +26,4 @@ public class App {
 
         app.sse(Path.Web.SSE, Sse.init, Access.REGISTERED);
     }
-}
+} 
