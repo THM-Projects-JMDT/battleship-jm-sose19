@@ -9,3 +9,54 @@
 #Nameform {
     width: 50%;
 }
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+#mainboard {
+    padding: 0px;
+    margin: 0 auto;
+}
+
+#mainboard tr td {
+    width: 45px;
+    height: 45px;
+    border: 1px solid #1c1c1c;
+    font-family: Helvetica;
+    font-size: 30px;
+    text-align: center;
+}
+#schiffe {
+    padding: 0px;
+    margin: 0 auto;
+}
+
+#schiffe tr td {
+    width: 35px;
+    height: 20px;
+    border: 1px solid #1c1c1c;
+    font-family: Helvetica;
+    font-size: 30px;
+    text-align: center;
+}
+#enemyboard {
+    padding: 0px;
+    margin: 0 auto;
+}
+
+#enemyboard tr td {
+    width: 26px;
+    height: 26px;
+    border: 1px solid #1c1c1c;
+    font-family: Helvetica;
+    font-size: 30px;
+    text-align: center;
+}
+
+
+
+#mainboard tr td:hover {
+    background: #e4e4e4;
+    cursor: pointer;
+}
