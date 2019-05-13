@@ -1,21 +1,21 @@
 package battleship.game;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-
 import io.javalin.serversentevent.SseClient;
 
 public class Player {
     private String id;
     private SseClient client;
-    private int [] field;
-    private ArrayList<SimpleMap<Integer,Integer,Integer>> log;
+    private SimpleMap<Integer,Integer> [] field;
+    private int log=0;
     private Game game;
+    private int[] shipslength ={2,2,2,2,3,3,3,4,4,5};
+    private final int[] shipsize =shipslength;
+    private boolean[] firstfieldship={true,true,true,true,true,true,true,true,true,true};
 
     public Player(String id){
         this.id = id;
-        field =  new int[100];
-        log = new ArrayList<>();
+        field =  new SimpleMap[100];
     }
 
 
@@ -24,22 +24,27 @@ public class Player {
     public void setClient(SseClient client) { this.client = client; }
     public Game getGame() { return this.game; }
 
-    public void setShipfield(int i){
-        field[i]=2;
-    }
 
-    public boolean checkfornewshipfield(int field,int shipsize, int shipnumber){
-        if(log.get(log.size()-shipsize).getRight()==shipnumber)
+    public boolean setships(int feld){
+        if(shipslength[0]==0)
+            // game auf neuen stand setzen setzen beendet
             return false;
-        if(log.get(log.size()).getLeft()%10 == 0 && field % 10 == 9)
-            return false;
-        if(log.get(log.size()).getLeft()%10 == 9 && field % 10 == 0)
-            return false;
-        int [] n = {1,-1,10,-10};
-        for (int i : n) {
-            if(log.get(log.size()).getLeft()==field+i) {
-                log.add(new SimpleMap<>(field, shipsize, shipnumber));
-                setShipfield(field);
+        int counter= shipslength.length-1;
+        while(shipslength[counter]==0)
+            counter--;
+
+        if(firstfieldship[counter]==true) {
+            firstfieldship[counter] = false;
+            shipslength[counter]--;
+            log = feld;
+            field[feld]=new SimpleMap<>(2,counter);
+            return true;
+        }else{
+            int temp=log-feld;
+            if(temp==10||temp==-10||temp==1||temp==-1) {
+                shipslength[counter]--;
+                log = feld;
+                field[feld]=new SimpleMap<>(2,counter);
                 return true;
             }
 
@@ -47,11 +52,25 @@ public class Player {
         return false;
 
     }
+
+    public String getshipstatus(){
+        String ausgabe="";
+        for(int i=0;i<shipsize.length-1;i++){
+
+            for(int j=0;j<shipsize[i];j++){
+
+
+            }
+
+        }
+        return ausgabe;
+    }
+
     public int checkifthersaship(int i){
-        return field[i++];
+        return field[i++].getLeft();
     }
     public boolean canilookatthisfield(int i){
-        if (field[i]==1 ||field[i]==3)
+        if (field[i].getLeft()==1 ||field[i].getLeft()==3)
             return false;
         return true;
     }
