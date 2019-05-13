@@ -17,6 +17,10 @@ public class PlayersController {
         //TODO
     };
 
+    public static Handler move = ctx -> {
+        //TODO 
+    };
+
     public static Handler removePlayer = ctx -> {
         Players.removePlayer(ctx);
         ctx.header("Content-ID", "0");
