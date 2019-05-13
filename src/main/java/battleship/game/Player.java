@@ -56,9 +56,17 @@ public class Player {
     public String getshipstatus(){
         String ausgabe="";
         for(int i=0;i<shipsize.length-1;i++){
+            int[] temp=new int[shipsize[i]-1];
+            int x = 0;
+                for(int j=0;j<field.length;j++) {
+                    if (field[j].getRight() == i)
+                        temp[x++] = field[j].getRight();
+                }
 
-            for(int j=0;j<shipsize[i];j++){
-
+                 for(int y=0;y<temp.length;y++){
+                     if(temp[y]==0)
+                         if(temp[y]==2)
+                             if(temp[y]==3)
 
             }
 
@@ -75,7 +83,7 @@ public class Player {
         return true;
     }
     public boolean checkifend(){
-        return Arrays.stream(field).filter(n -> n % 2 == 0).sum()==0;
+        return Arrays.stream(field).filter(n -> (int) n.getLeft() % 2 == 0).sum()==0;
     }
 
 }
