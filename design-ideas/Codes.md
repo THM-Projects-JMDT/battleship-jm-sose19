@@ -20,6 +20,8 @@
 # Content-ID
   - Neue Seite laden -> 0
   - Mit Game-id -> 1
+  - Falche Game-id > 2 
+  - Neue Seite Laden + request GameID -> 3
 
   - Gleiche Codes mit 404 fehler für den Code
 

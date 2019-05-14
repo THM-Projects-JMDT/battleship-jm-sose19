@@ -1,4 +1,14 @@
 <div id="Nameform"class="form-group">
+    <label for="Name">Game-ID</label>
+    <input type="text" class="form-control" id="GameID" placeholder="Game-ID">
+    <button id="copyID" type="button" class="btn btn-primary" onclick="copyID()">Copy to Clipboard</button>
+</div>
+
+<div id="Nameform"class="form-group">
     <label for="Name">Name</label>
     <input type="text" class="form-control" id="Name" placeholder="Enter Name">
+</div>
+
+<div class="col-md-4">
+    <button id="newGame" type="button" class="btn btn-primary btn-lg" onclick="setName()">Start Game</button>
 </div>

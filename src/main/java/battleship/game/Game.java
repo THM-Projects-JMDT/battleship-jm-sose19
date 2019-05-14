@@ -8,18 +8,21 @@ public class Game {
     protected Player player2;
     private int state = 0;
 
-    public Game() {
+    public Game(Player p) {
+        player1 = p;
+        state++;
         id = UUID.randomUUID().toString();
     }
 
     public int getState() { return this.state; }
 
-    public void joingame(Player p){
-        if(state == 0)
-            player1 = p;
-        else
+    public boolean joingame(Player p){
+        if(state == 1){
             player2 = p;
-        state++;
+            state++;
+            return true;
+        }
+        return false;
     }
 
     public String getId() {

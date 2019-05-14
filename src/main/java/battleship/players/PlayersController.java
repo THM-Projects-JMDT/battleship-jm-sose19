@@ -1,16 +1,27 @@
 package battleship.players;
 
+import java.util.NoSuchElementException;
+
 import battleship.util.Path;
+import io.javalin.BadRequestResponse;
 import io.javalin.Handler;
 
 public class PlayersController {
     public static Handler setName = ctx -> {
         ctx.sessionAttribute("Name", ctx.formParam("Name"));
         if(!Players.hasGame(ctx)) {
-            //TODO joing game wit formParam("Game-ID")
+            try {
+                if(!Players.getPlayer(ctx).newGame(Players.getGame(ctx))) {
+                    //TODO Hadle if Player has Already a game (vtl nich nötig wenn überprüft von Acces manager)
+                    return;
+                }
+            } catch(NoSuchElementException ex) {
+                ctx.header("Content-ID", "2");
+                throw new BadRequestResponse("Invalide Game-ID");
+            }
         }
-        //TODO render game(set boats)
-        ctx.result("wait for player Two");
+        ctx.header("Content-ID", "0");
+        ctx.render(Path.Pages.GAME);
     };
 
     public static Handler setBoat = ctx -> {

@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.UUID;
 
+import battleship.game.Game;
 import battleship.game.Player;
 import io.javalin.Context;
 import io.javalin.serversentevent.SseClient;
@@ -13,10 +14,12 @@ public class Players {
     private static Set<Player> players = new HashSet<>();
 
     //Add new Player
-    public static void newPlayer(Context ctx) {
+    public static Player newPlayer(Context ctx) {
         String id = generateID();
-        players.add(new Player(id));
+        Player p = new Player(id);
+        players.add(p);
         ctx.sessionAttribute("Player-ID", id);
+        return p;
     }
 
     public static void removePlayer(Context ctx) {
@@ -25,7 +28,7 @@ public class Players {
     }
 
     //Get Player by id
-    private static Player getPlayer(Context ctx)  throws NoSuchElementException {
+    public static Player getPlayer(Context ctx)  throws NoSuchElementException {
         return players.stream()
             .filter(p -> p.getID().equals(ctx.sessionAttribute("Player-ID")))
             .findFirst()
@@ -35,6 +38,15 @@ public class Players {
     //Test if has a Game that has one Player
     public static boolean hasGame(Context ctx) {
         return getPlayer(ctx).getGame() != null;
+    }
+
+    public static Game getGame(Context ctx) throws NoSuchElementException {
+        return players.stream()
+                .filter(p -> p.getGame() != null)
+                .map(p -> p.getGame())
+                .filter(g -> g.getId().equals(ctx.queryParam("Game")))
+                .findFirst()
+                .orElseThrow();
     }
 
     //Server Send Events

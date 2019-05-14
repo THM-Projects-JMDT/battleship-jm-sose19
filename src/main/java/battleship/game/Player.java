@@ -39,6 +39,18 @@ public class Player {
         return this.game;
     }
 
+    public boolean newGame() {
+        if(this.game != null)
+            return false;
+        this.game = new Game(this);
+        return true;
+    }
+    public boolean newGame(Game game) {
+        if(this.game != null || !game.joingame(this))
+            return false;
+        return true;
+    }
+
 
     public boolean setships(int feld) {
         if (shipslength[0] == 0)

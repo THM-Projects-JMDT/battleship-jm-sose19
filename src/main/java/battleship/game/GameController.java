@@ -8,31 +8,28 @@ import io.javalin.Handler;
 
 public class GameController {
     public static Handler newGame = ctx -> {
-        Players.newPlayer(ctx);
-        //TODO new Game usw.
+        Players.newPlayer(ctx).newGame();
         loadLogin(ctx);
     };
 
     public static Handler joinGame = ctx -> {
         Players.newPlayer(ctx);
-        System.out.println(ctx.sessionAttribute("Player-ID") + "");
         loadLogin(ctx);
     };
 
     public static Handler getGameid = ctx -> {
         if(Players.hasGame(ctx)) {
             ctx.header("Content-ID", "1");
-            //TODO resuslt game id 
-            ctx.result("Game-ID");
+            ctx.result(Players.getPlayer(ctx).getGame().getId());
             return;
         }
         
         ctx.header("Content-ID", "1");
-        throw new BadRequestResponse();
+        throw new BadRequestResponse("Player has no Game");
     };
 
     private static void loadLogin(Context ctx) {
-        ctx.header("Content-ID", "0");
+        ctx.header("Content-ID", "3");
         ctx.render(Path.Pages.LOGIN);
     }
 }
