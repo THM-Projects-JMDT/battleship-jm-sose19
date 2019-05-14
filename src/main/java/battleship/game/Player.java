@@ -46,9 +46,13 @@ public class Player {
         return true;
     }
     public boolean newGame(Game game) {
-        if(this.game != null || !game.joingame(this))
+        if(this.game != null)
             return false;
-        return true;
+        if(game.joingame(this)) {
+            this.game = game;
+            return true;
+        }
+        return false;
     }
 
 

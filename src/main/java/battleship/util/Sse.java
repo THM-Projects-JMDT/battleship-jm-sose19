@@ -13,12 +13,15 @@ public class Sse {
     public static Consumer<SseClient> init = client -> {
         //Client zum Player Hinzufügen (Durch AccesManager ist Sichergestellt das Player-id da und valide)
         Players.connect(client);
-        client.sendEvent("Conection", "conected");
+        client.sendEvent("Conection", "Conected");
         client.onClose(close);
     };
 
     public static void deletetGame(SseClient client) {
-        System.out.println(client.ctx.sessionAttribute("Name") + "");
         client.sendEvent("QuitGame", "Other Player quit the Game!");
+    }
+
+    public static void closeConection(SseClient client) {
+        client.sendEvent("Conection", "Disconect");
     }
 }

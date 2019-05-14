@@ -23,21 +23,31 @@ public class Players {
         return p;
     }
 
-    //Remove Player and delet Game
+    //Remove Player close SSe and delet Game
     public static boolean removeWithGame(Context ctx) {
-        if(!isPlayer(ctx))
+        if(!isPlayer(ctx) || !hasGame(ctx))
             return false;
+        
         Player p = getPlayer(ctx);
+        
+        if(p.getClient() != null);
+            Sse.closeConection(p.getClient());
+        
         players.remove(p);
         return p.getGame().delete(p);
         //TODO sessionAttribute löschen ? 
         //TODO SSE benenden?
     }
 
-    //Remove Player 
+    //Remove Player and Close Sse
     public static boolean remove(Player p) {
-        //TODO test If SSE client is there 
-        Sse.deletetGame(p.getClient());
+        //TODO test If SSE client is there
+        if(p.getClient() != null) {
+            SseClient client = p.getClient();
+            Sse.deletetGame(client);
+            Sse.closeConection(client);
+        }
+        
         return players.remove(p);
         //TODO sessionAttribute löschen ? 
         //TODO SSE benenden?
@@ -78,12 +88,9 @@ public class Players {
     }
     
     public static SseClient getClient(Context ctx) throws NoSuchElementException{
-        Player p = getPlayer(ctx);
-        if(p.getClient() == null)
-            throw new NoSuchElementException();
-        return p.getClient();
-    
+        return getPlayer(ctx).getClient();
     }
+
     public static void disconect(Context ctx) {
         getPlayer(ctx).setClient(null);;
     }
