@@ -3,7 +3,6 @@ package battleship.pages;
 import battleship.players.Players;
 import battleship.util.Path;
 import io.javalin.Handler;
-import java.util.NoSuchElementException;
 
 public class PageController {
     public static Handler getPage = ctx -> {
