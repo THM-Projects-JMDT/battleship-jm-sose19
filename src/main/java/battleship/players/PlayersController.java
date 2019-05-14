@@ -26,7 +26,7 @@ public class PlayersController {
             //Send Message to other player
             SseClient client = Players.playWith(ctx).getClient();
 
-            if(client != null);
+            if(client != null)
                 Sse.playerConect(Players.playWith(ctx).getClient() , ctx.sessionAttribute("Name"));
         }
         
