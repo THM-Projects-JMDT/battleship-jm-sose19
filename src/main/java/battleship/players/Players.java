@@ -30,7 +30,7 @@ public class Players {
         
         Player p = getPlayer(ctx);
         
-        if(p.getClient() != null);
+        if(p.getClient() != null)
             Sse.closeConection(p.getClient());
         
         players.remove(p);
