@@ -171,4 +171,13 @@ public class Player {
         //da es Sonste ein Stream vom type simpleMap ist und der hat kein sum()
         return Stream.of(field).mapToInt(n -> n.getLeft()).filter(n -> n % 2 == 0).sum() == 0;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o)
+            return true;
+        if(o instanceof Player)
+            return this.id.equals(((Player)o).id);
+        return false;
+    }
 }

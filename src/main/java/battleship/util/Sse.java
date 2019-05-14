@@ -16,4 +16,9 @@ public class Sse {
         client.sendEvent("Conection", "conected");
         client.onClose(close);
     };
+
+    public static void deletetGame(SseClient client) {
+        System.out.println(client.ctx.sessionAttribute("Name") + "");
+        client.sendEvent("QuitGame", "Other Player quit the Game!");
+    }
 }

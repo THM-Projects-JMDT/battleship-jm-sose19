@@ -3,6 +3,7 @@ package battleship.pages;
 import battleship.players.Players;
 import battleship.util.Path;
 import io.javalin.Handler;
+import java.util.NoSuchElementException;
 
 public class PageController {
     public static Handler getPage = ctx -> {
@@ -12,7 +13,13 @@ public class PageController {
             return;
         }
         
-        ctx.header("Content-ID", "0");
+        //If Player has no SSe client force to Conect 
+        try {
+            Players.getClient(ctx);
+            ctx.header("Content-ID", "0");
+        } catch (NoSuchElementException ex) {
+            ctx.header("Content-ID", "4");
+        }
         ctx.render(Path.Pages.GAME);
     };
 }

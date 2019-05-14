@@ -19,19 +19,35 @@ function getPage() {
 function newGame() {
     sentRequestGet('/game/new');
 }
-function getGameID() {
-    sentRequestGet('/game/getid');
-}
-function setName() {
-    sentRequestGet('/player/setname', 'Game=' + document.getElementById('GameID').value + '&Name=' + document.getElementById('Name').value);
-}
+
 function joinGame() {
     sentRequestGet('/game/join');
 }
+
+function getGameID() {
+    sentRequestGet('/game/getid');
+}
+
+function setName() {
+    sentRequestGet('/player/setname', 'Game=' + document.getElementById('GameID').value + '&Name=' + document.getElementById('Name').value);
+}
+
 function aboutGame() {
     sentRequestGet('/game/about');
 }
 
+function sendMove(value) {
+    //TODo send with value (Post ? )
+    //sentRequestGet('/player/move');
+    alert(value);
+}
+
+function quitGame() {
+    var check = confirm('\u26A0 Are you sure you want to leave the game? \n (All progress will be lost)');
+    if(check == true) {
+        sentRequestGet('/player/remove');
+    }
+}
 //Response Functions
 function hadleResponse() {
     if (xhr.readyState == 4) {
@@ -48,6 +64,10 @@ function hadleResponse() {
                     break;
                 case '3':
                     onloadLogin();
+                    break;
+                case '4':
+                    onloadGame();
+                    break;
             }
         }
 
@@ -85,9 +105,33 @@ function onloadLogin() {
     getGameID();
 }
 
+function onloadGame() {
+    newHtmlContent();
+    conectSSE();
+}
+
 function invalidGamID() {
     //TODO vtl feld rot aufblinken + text über button
     alert("False Game-ID Plese try agan!")
+}
+//SSE
+
+async function conectSSE() {
+    var eventSource = new EventSource("http://" + location.hostname + ":" + location.port + "/sse");
+
+    //Listener 
+    eventSource.addEventListener('Conection', e => conectionStatus(e.data));
+    eventSource.addEventListener('QuitGame', e => playerQuited(e.data));
+
+    //Message handle Functions
+    function conectionStatus(data) {
+        //TODO
+    }
+    
+    function playerQuited(data) {
+        alert(data);
+        getPage();
+    }
 }
 
 //Other Functions

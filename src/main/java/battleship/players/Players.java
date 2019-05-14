@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import battleship.game.Game;
 import battleship.game.Player;
+import battleship.util.Sse;
 import io.javalin.Context;
 import io.javalin.serversentevent.SseClient;
 
@@ -22,10 +23,24 @@ public class Players {
         return p;
     }
 
-    //Remove Player
-    public static void removePlayer(Context ctx) {
-        players.remove(getPlayer(ctx));
+    //Remove Player and delet Game
+    public static boolean removeWithGame(Context ctx) {
+        if(!isPlayer(ctx))
+            return false;
+        Player p = getPlayer(ctx);
+        players.remove(p);
+        return p.getGame().delete(p);
         //TODO sessionAttribute löschen ? 
+        //TODO SSE benenden?
+    }
+
+    //Remove Player 
+    public static boolean remove(Player p) {
+        //TODO test If SSE client is there 
+        Sse.deletetGame(p.getClient());
+        return players.remove(p);
+        //TODO sessionAttribute löschen ? 
+        //TODO SSE benenden?
     }
 
     //Get Player by id

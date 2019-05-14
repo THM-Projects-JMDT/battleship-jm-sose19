@@ -8,7 +8,7 @@ import io.javalin.Handler;
 
 public class PlayersController {
     public static Handler setName = ctx -> {
-        ctx.sessionAttribute("Name", ctx.formParam("Name"));
+        ctx.sessionAttribute("Name", ctx.queryParam("Name"));
         if(!Players.hasGame(ctx)) {
             try {
                 if(!Players.getPlayer(ctx).newGame(Players.getGame(ctx))) {
@@ -20,7 +20,7 @@ public class PlayersController {
                 throw new BadRequestResponse("Invalide Game-ID");
             }
         }
-        ctx.header("Content-ID", "0");
+        ctx.header("Content-ID", "4");
         ctx.render(Path.Pages.GAME);
     };
 
@@ -33,7 +33,7 @@ public class PlayersController {
     };
 
     public static Handler removePlayer = ctx -> {
-        Players.removePlayer(ctx);
+        Players.removeWithGame(ctx);
         ctx.header("Content-ID", "0");
         ctx.render(Path.Pages.START);
     };

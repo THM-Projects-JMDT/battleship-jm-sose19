@@ -26,7 +26,8 @@
   - Gleiche Codes mit 404 fehler für den Code
 
 # Server Send events
-  - Verbindungs Details -> Conection
+  - Verbindungs Details -> "Conection"
+  - Game Status meldungen -> "GameStatus"
 
 # Game States 
   - erstellt -> 0 

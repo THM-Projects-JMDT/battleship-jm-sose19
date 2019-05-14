@@ -1,6 +1,7 @@
 package battleship.game;
 
 import java.util.UUID;
+import battleship.players.Players;
 
 public class Game {
     private String id;
@@ -14,9 +15,15 @@ public class Game {
         id = UUID.randomUUID().toString();
     }
 
-    public int getState() { return this.state; }
+    public int getState() { 
+        return this.state; 
+    }
 
-    public boolean joingame(Player p){
+    public String getId() {
+        return id;
+    }
+    
+    public boolean joingame(Player p) {
         if(state == 1){
             player2 = p;
             state++;
@@ -25,7 +32,11 @@ public class Game {
         return false;
     }
 
-    public String getId() {
-        return id;
+    public boolean delete(Player p) {
+        if(player1.equals(p))
+            return Players.remove(player2);
+        else if(player2.equals(p))
+            return Players.remove(player1);
+        return false;
     }
 }
