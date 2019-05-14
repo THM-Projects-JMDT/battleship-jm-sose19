@@ -112,10 +112,10 @@ function onloadGame() {
 
 function invalidGamID() {
     //TODO vtl feld rot aufblinken + text über button
-    alert("False Game-ID Plese try agan!")
+    alert("Wrong Game-ID! please try again")
 }
-//SSE
 
+//SSE
 async function conectSSE() {
     var eventSource = new EventSource("http://" + location.hostname + ":" + location.port + "/sse");
     //Listener 
@@ -129,7 +129,7 @@ async function conectSSE() {
             case 'Conected':
                 //TODO
                 break;
-            case 'Disconect':
+            case 'Disconnected':
                 eventSource.close();
                 break;
         }

@@ -26,6 +26,6 @@ public class Sse {
     }
 
     public static void closeConection(SseClient client) {
-        client.sendEvent("Conection", "Disconect");
+        client.sendEvent("Conection", "Disconnected");
     }
 }

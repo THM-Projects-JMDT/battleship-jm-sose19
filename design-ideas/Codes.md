@@ -27,6 +27,8 @@
 
 # Server Send events
   - Verbindungs Details -> "Conection"
+  - Spieler ist einem Spiel beigetreten -> "PlayerConect"
+  - Anderer Spieler hat Spiel verlassen -> "QuitGame"
   - Game Status meldungen -> "GameStatus"
 
 # Game States 
