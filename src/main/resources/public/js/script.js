@@ -118,9 +118,8 @@ function invalidGamID() {
 
 async function conectSSE() {
     var eventSource = new EventSource("http://" + location.hostname + ":" + location.port + "/sse");
-
     //Listener 
-    eventSource.addEventListener('Conection', e => test(e.data));
+    eventSource.addEventListener('Conection', e => conectionStatus(e.data));
     eventSource.addEventListener('QuitGame', e => playerQuited(e.data));
 
     //Message handle Functions
@@ -131,7 +130,6 @@ async function conectSSE() {
                 //TODO
                 break;
             case 'Disconect':
-                //TODO close Conection .close() is not working 
                 eventSource.close();
                 break;
         }

@@ -22,6 +22,15 @@ public class Game {
     public String getId() {
         return id;
     }
+
+    public Player otherPlayer(Player p) {
+        if(player1.equals(p))
+            return player2;
+        else if(player2.equals(p))
+            return player1;
+            
+        return null;
+    }
     
     public boolean joingame(Player p) {
         if(state == 1){
@@ -32,11 +41,11 @@ public class Game {
         return false;
     }
 
-    public boolean delete(Player p) {
-        if(player1.equals(p))
-            return Players.remove(player2);
-        else if(player2.equals(p))
-            return Players.remove(player1);
-        return false;
+    public boolean delete(Player player) {
+        Player p = otherPlayer(player);
+        if(p == null)
+            return false;
+        
+        return Players.remove(p);
     }
 }

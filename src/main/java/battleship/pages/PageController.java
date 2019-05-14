@@ -17,6 +17,7 @@ public class PageController {
             ctx.header("Content-ID", "4");
         else
             ctx.header("Content-ID", "0");
+            
         ctx.render(Path.Pages.GAME);
     };
 }

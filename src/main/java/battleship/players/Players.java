@@ -61,6 +61,10 @@ public class Players {
             .orElseThrow();
     }
 
+    public static Player playWith(Context ctx) {
+        return getPlayer(ctx).getGame().otherPlayer(getPlayer(ctx));
+    }
+
     //Test if player has a game
     public static boolean hasGame(Context ctx) {
         return getPlayer(ctx).getGame() != null;

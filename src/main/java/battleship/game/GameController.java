@@ -2,6 +2,7 @@ package battleship.game;
 
 import battleship.players.Players;
 import battleship.util.Path;
+import battleship.util.Sse;
 import io.javalin.BadRequestResponse;
 import io.javalin.Context;
 import io.javalin.Handler;
