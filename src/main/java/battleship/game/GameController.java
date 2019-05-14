@@ -2,7 +2,6 @@ package battleship.game;
 
 import battleship.players.Players;
 import battleship.util.Path;
-import battleship.util.Sse;
 import io.javalin.BadRequestResponse;
 import io.javalin.Context;
 import io.javalin.Handler;
@@ -16,6 +15,12 @@ public class GameController {
     public static Handler joinGame = ctx -> {
         Players.newPlayer(ctx);
         loadLogin(ctx);
+    };
+
+    public static Handler aboutGame = ctx -> {
+        ctx.header("Content-ID", "0");
+        //TODO geht aktuell noch nicht vtl. da getResources() nicht geht? 
+        //ctx.render(Path.Pages.ABOUT);
     };
 
     public static Handler getGameid = ctx -> {

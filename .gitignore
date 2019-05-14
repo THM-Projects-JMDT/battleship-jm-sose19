@@ -14,3 +14,6 @@ bin
 
 # Ignore Vscode Data 
 .Vscode
+
+# Ignore Logs
+*.log

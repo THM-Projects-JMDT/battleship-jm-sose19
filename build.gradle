@@ -13,7 +13,10 @@ dependencies {
     compile 'io.javalin:javalin:2.8.0'
     compile 'org.slf4j:slf4j-simple:1.7.25'
     //Javalin render
-    compile "org.thymeleaf:thymeleaf:3.0.9.RELEASE"
+    //html
+    compile 'org.thymeleaf:thymeleaf:3.0.9.RELEASE'
+    //Mark down
+    compile 'com.atlassian.commonmark:commonmark:0.11.0'
     //Junti
     testImplementation 'junit:junit:4.12'
 }
