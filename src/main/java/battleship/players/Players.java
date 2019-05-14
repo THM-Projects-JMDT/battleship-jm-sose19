@@ -22,6 +22,7 @@ public class Players {
         return p;
     }
 
+    //Remove Player
     public static void removePlayer(Context ctx) {
         players.remove(getPlayer(ctx));
         //TODO sessionAttribute löschen ? 
@@ -35,10 +36,17 @@ public class Players {
             .orElseThrow();
     }
 
-    //Test if has a Game that has one Player
+    //Test if player has a game
     public static boolean hasGame(Context ctx) {
         return getPlayer(ctx).getGame() != null;
     }
+    //Test if Player has a game with status
+    public static boolean hasGameState(Context ctx, int state) {
+        if(!hasGame(ctx))
+            return false;
+        return getPlayer(ctx).getGame().getState() == state;
+    }
+
 
     public static Game getGame(Context ctx) throws NoSuchElementException {
         return players.stream()
