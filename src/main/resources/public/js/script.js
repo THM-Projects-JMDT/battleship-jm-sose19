@@ -68,6 +68,9 @@ function hadleResponse() {
                 case '4':
                     onloadGame();
                     break;
+                case '5':
+                    newWindow();
+                    break;
             }
         }
 
@@ -113,6 +116,10 @@ function onloadGame() {
 function invalidGamID() {
     //TODO vtl feld rot aufblinken + text über button
     alert("Wrong Game-ID! please try again")
+}
+
+function newWindow() {
+    //TODO
 }
 
 //SSE

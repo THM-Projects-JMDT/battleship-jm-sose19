@@ -18,9 +18,8 @@ public class GameController {
     };
 
     public static Handler aboutGame = ctx -> {
-        ctx.header("Content-ID", "0");
-        //TODO geht aktuell noch nicht vtl. da getResources() nicht geht? 
-        //ctx.render(Path.Pages.ABOUT);
+        ctx.header("Content-ID", "5");
+        ctx.render(Path.Pages.ABOUT);
     };
 
     public static Handler getGameid = ctx -> {

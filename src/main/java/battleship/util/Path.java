@@ -22,7 +22,7 @@ public class Path {
         public static final String INDEX = "public/index" + END;
         public static final String START = DIR + "start" + END;
         public static final String LOGIN = DIR + "login" + END;
-        public static final String ABOUT = DIR + "about.md";
+        public static final String ABOUT = "/" + DIR + "about.md";
         public static final String GAME = DIR + "game" + END;
     }
 }
