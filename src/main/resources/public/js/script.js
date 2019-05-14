@@ -1,10 +1,14 @@
 //Request variable
 var xhr = new XMLHttpRequest;
 
+//variable
+var myWindow = document.getElementById('window');
+
 //Listener
 //TODO Listener für nachgeladene Seitenteile wie? doch mit onclick? 
 window.onload = () => getPage();
 xhr.onreadystatechange = () => hadleResponse();
+myWindow.onclick = e => closeWindowbyFokus(e);
 
 //Request Functions
 function sentRequestGet(path = '', query = '') {
@@ -69,7 +73,7 @@ function hadleResponse() {
                     onloadGame();
                     break;
                 case '5':
-                    newWindow();
+                    openWindow();
                     break;
             }
         }
@@ -118,8 +122,18 @@ function invalidGamID() {
     alert("Wrong Game-ID! please try again")
 }
 
-function newWindow() {
-    //TODO
+function openWindow() {
+    myWindow.style.display = "block";
+    document.getElementById('lodedWindowContent').innerHTML = xhr.responseText;
+}
+
+function closeWindow() {
+    myWindow.style.display = "none";
+}
+function closeWindowbyFokus(e) {
+    if(e.target == myWindow) {
+        closeWindow();
+    }
 }
 
 //SSE

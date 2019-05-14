@@ -1,6 +1,32 @@
-.blue {
-    background-color: gray;
-    padding: 4px;
+#window {
+    display: none;
+    position: fixed;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+}
+#windowContent {
+    background-color: #fefefe;
+    margin: auto;
+    border: solid lightgrey;
+    width: 80%;
+    height: 90%;
+    border-radius: 8px;
+}
+#lodedWindowContent {
+    padding: 20px;
+}
+#close {
+    color: gray;
+    float: right;
+    size: 25px;
+    font-size: 25px;
+    border: none;
+    background-color: transparent;
 }
 #navtext {
     color: white;
