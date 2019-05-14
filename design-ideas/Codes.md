@@ -5,7 +5,7 @@
     - /about
     - /getid
   - /player
-    - /setname
+    - /startgame
   - /getside
   - /sse
 

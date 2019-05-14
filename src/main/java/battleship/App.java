@@ -19,7 +19,7 @@ public class App {
             get(Path.Web.NEWGAME, GameController.newGame, Access.ANYONE);
             get(Path.Web.JOINGAME, GameController.joinGame, Access.ANYONE);
             get(Path.Web.GETGAMEID, GameController.getGameid, Access.REGISTERED);
-            get(Path.Web.SETNAME, PlayersController.setName, Access.REGISTERED);
+            get(Path.Web.STARTGAME, PlayersController.startGame, Access.REGISTERED);
             get(Path.Web.SETBOAT, PlayersController.setBoat, Access.REGISTERED);
             get(Path.Web.MOVE, PlayersController.move, Access.REGISTERED);
             get(Path.Web.REMOVEPLAYER, PlayersController.removePlayer, Access.REGISTERED);

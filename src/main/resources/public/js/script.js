@@ -28,8 +28,8 @@ function getGameID() {
     sentRequestGet('/game/getid');
 }
 
-function setName() {
-    sentRequestGet('/player/setname', 'Game=' + document.getElementById('GameID').value + '&Name=' + document.getElementById('Name').value);
+function startGame() {
+    sentRequestGet('/player/startgame', 'Game=' + document.getElementById('GameID').value + '&Name=' + document.getElementById('Name').value);
 }
 
 function aboutGame() {

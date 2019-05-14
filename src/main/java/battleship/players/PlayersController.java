@@ -9,7 +9,7 @@ import io.javalin.Handler;
 import io.javalin.serversentevent.SseClient;
 
 public class PlayersController {
-    public static Handler setName = ctx -> {
+    public static Handler startGame = ctx -> {
         ctx.sessionAttribute("Name", ctx.queryParam("Name"));
         //Join game with Game-ID
         if(!Players.hasGame(ctx)) {
