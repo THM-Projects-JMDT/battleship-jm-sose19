@@ -8,7 +8,6 @@ var falseGameID = false;
 //Listener
 //TODO Listener für nachgeladene Seitenteile wie? doch mit onclick? 
 window.onload = () => getPage();
-xhr.onreadystatechange = () => hadleResponse();
 myWindow.onclick = e => closeWindowbyFokus(e);
 
 //Request Functions
@@ -55,39 +54,41 @@ function quitGame() {
     }
 }
 //Response Functions
-function hadleResponse() {
+xhr.onreadystatechange = async function() {
     if (xhr.readyState == 4) {
-        var id = xhr.getResponseHeader("Content-ID");
+        var id = this.getResponseHeader("Content-ID");
+
+        var response = this.responseText;
 
         //if request correct do
         if (xhr.status == 200) {
             switch(id) {
                 case '0':
-                    newHtmlContent();
+                    newHtmlContent(response);
                     break;
                 case '1':
-                    displayGameID();
+                    displayGameID(response);
                     break;
                 case '3':
-                    onloadLogin();
+                    onloadLogin(response);
                     break;
                 case '4':
-                    onloadGame();
+                    onloadGame(response);
                     break;
                 case '5':
-                    openWindow();
+                    openWindow(response);
                     break;
                 case '6':
-                    realoadField();
+                    realoadField(response);
                     break;
                 case '7':
-                    reloadmyShips();
+                    reloadmyShips(response);
                     break;
                 case '8':
-                    reloadenemyShips();
+                    reloadenemyShips(response);
                     break;
                 case '9':
-                    reloadenemyField();
+                    reloadenemyField(response);
                     break;
             }
         }
@@ -96,10 +97,10 @@ function hadleResponse() {
         if (xhr.status == 400) {
             switch(id) {
                 case '1':
-                    requestGameID();
+                    requestGameID(response);
                     break;
                 case '2':
-                    invalidGamID();
+                    invalidGamID(response);
                 case '6':
                     invalidePlacement();
             }
@@ -107,13 +108,13 @@ function hadleResponse() {
     }
 }
 
-function newHtmlContent() {
-    document.getElementById('htmlContent').innerHTML = xhr.responseText;
+function newHtmlContent(resonse='') {
+    document.getElementById('htmlContent').innerHTML = resonse;
 }
 
-function displayGameID() {
+function displayGameID(resonse='') {
     var gameid = document.getElementById('GameID');
-    gameid.value = xhr.responseText;
+    gameid.value = resonse;
     gameid.readOnly = true;
     document.getElementById('copyID').style.display = "inline-block";
 }
@@ -123,13 +124,13 @@ function requestGameID() {
     document.getElementById('copyID').style.display = "none";
 }
 
-function onloadLogin() {
-    newHtmlContent()
+function onloadLogin(resonse='') {
+    newHtmlContent(resonse)
     getGameID();
 }
 
-function onloadGame() {
-    newHtmlContent();
+function onloadGame(resonse='') {
+    newHtmlContent(resonse);
     conectSSE();
 }
 
@@ -146,9 +147,9 @@ function resetFalseGameID() {
     }
 }
 
-function openWindow() {
+function openWindow(resonse='') {
     myWindow.style.display = "block";
-    document.getElementById('lodedWindowContent').innerHTML = xhr.responseText;
+    document.getElementById('lodedWindowContent').innerHTML = resonse;
 }
 
 function closeWindow() {
@@ -160,20 +161,20 @@ function closeWindowbyFokus(e) {
     }
 }
 
-function realoadField() {
-    document.getElementById('mainboard').innerHTML = xhr.responseText;
+function realoadField(resonse='') {
+    document.getElementById('mainboard').innerHTML = resonse;
 }
-function reloadenemyField() {
-    document.getElementById('enemyboard').innerHTML = xhr.responseText;
+function reloadenemyField(resonse='') {
+    document.getElementById('enemyboard').innerHTML = resonse;
 }
-function reloadmyShips() {
-    document.getElementById('schiffe').innerHTML = xhr.responseText;
+function reloadmyShips(resonse='') {
+    document.getElementById('schiffe').innerHTML = resonse;
 }
-function reloadenemyShips() {
-    document.getElementById('enemyschiffe').innerHTML = xhr.responseText;
+function reloadenemyShips(resonse='') {
+    document.getElementById('enemyschiffe').innerHTML = resonse;
 }
 
-function invalidePlacement() {
+function invalidePlacement(resonse='') {
     alert('Invalid Placement! Please Try again!');
 }
 
@@ -204,9 +205,11 @@ async function conectSSE() {
         alert(data);
         getPage();
     }
-    function getMyShips() {
-        getEnemyShips()
-        sentRequestGet('/player/getmyships');
+    async function getMyShips() {
+        setTimeout(function() {
+            getEnemyShips()
+            sentRequestGet('/player/getmyships');
+        }, 10)
     }
     function getEnemyShips() {
         sentRequestGet('/player/getenemyships');
