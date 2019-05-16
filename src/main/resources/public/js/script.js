@@ -45,6 +45,7 @@ function sendMove(value) {
     sentRequestGet('/player/move', "Cordinate=" + value);
 }
 
+
 function quitGame() {
     var check = confirm('\u26A0 Are you sure you want to leave the game? \n (All progress will be lost)');
     if(check == true) {
@@ -76,6 +77,15 @@ function hadleResponse() {
                     break;
                 case '6':
                     realoadField();
+                    break;
+                case '7':
+                    reloadmyShips();
+                    break;
+                case '8':
+                    reloadenemyShips();
+                    break;
+                case '9':
+                    reloadenemyField();
                     break;
             }
         }
@@ -150,6 +160,15 @@ function closeWindowbyFokus(e) {
 
 function realoadField() {
     document.getElementById('mainboard').innerHTML = xhr.responseText;
+}
+function reloadenemyField() {
+    document.getElementById('enemyboard').innerHTML = xhr.responseText;
+}
+function reloadmyShips() {
+    document.getElementById('schiffe').innerHTML = xhr.responseText;
+}
+function reloadenemyShips() {
+    document.getElementById('enemyschiffe').innerHTML = xhr.responseText;
 }
 
 function invalidePlacement() {

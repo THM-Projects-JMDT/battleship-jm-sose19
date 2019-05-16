@@ -2,26 +2,24 @@ package battleship.game;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
+
 import io.javalin.serversentevent.SseClient;
 
 public class Player {
     private String id;
     private SseClient client;
     private SimpleMap<Integer, Integer>[] field;
-    private int log = 0;
     private Game game;
     private int[] shipslength = {2, 2, 2, 2, 3, 3, 3, 4, 4, 5};
-    private final int[] shipsize = Arrays.copyOf(shipslength,10);
-    private boolean[] firstfieldship = {true, true, true, true, true, true, true, true, true, true};
+    private final int[] shipsize = Arrays.copyOf(shipslength, 10);
 
     public Player(String id) {
         this.id = id;
         field = new SimpleMap[100];
-        for(int i=0;i<field.length;i++){
-            field[i]=new SimpleMap<>(0,-1);
+        for (int i = 0; i < field.length; i++) {
+            field[i] = new SimpleMap<>(0, -1);
         }
     }
-
 
     public String getID() {
         return this.id;
@@ -40,15 +38,16 @@ public class Player {
     }
 
     public boolean newGame() {
-        if(this.game != null)
+        if (this.game != null)
             return false;
         this.game = new Game(this);
         return true;
     }
+
     public boolean newGame(Game game) {
-        if(this.game != null)
+        if (this.game != null)
             return false;
-        if(game.joingame(this)) {
+        if (game.joingame(this)) {
             this.game = game;
             return true;
         }
@@ -62,25 +61,45 @@ public class Player {
         int counter = shipslength.length - 1;
         while (shipslength[counter] == 0)
             counter--;
-        if(field[feld].getRight()!=-1){
-            return false;
-        }
-        if (firstfieldship[counter] == true) {
-            firstfieldship[counter] = false;
+        if (field[feld].getRight() != -1) return false;
+
+        int[] temp = new int[shipsize[counter] - shipslength[counter]];
+        if (temp.length == 0) {
             shipslength[counter]--;
-            log = feld;
             field[feld] = new SimpleMap<>(2, counter);
             return true;
-        } else {
-            int temp = feld-log;
-            if (temp == 10 || temp == -10 || temp == 1 || temp == -1) {
+        }
+        int j = 0;
+        for (int i = 0; i < field.length; i++) {
+            if (field[i].getRight() == counter) {
+                temp[j++] = i;
+            }
+
+        }
+        if (temp.length == 1 && (temp[0] - feld == 10 || temp[0] - feld == -10 || temp[0] - feld == 1 || temp[0] - feld == -1)) {
+            shipslength[counter]--;
+            field[feld] = new SimpleMap<>(2, counter);
+            return true;
+        }
+        if (temp.length > 1) {
+            int multiplikator = 1;
+            if (temp[1] - temp[0] == 10) {
+                multiplikator = 10;
+            }
+            if (temp[0] - multiplikator == feld) {
                 shipslength[counter]--;
-                log = feld;
+                field[feld] = new SimpleMap<>(2, counter);
+                return true;
+            }
+            if (temp[temp.length - 1] + multiplikator == feld) {
+                shipslength[counter]--;
                 field[feld] = new SimpleMap<>(2, counter);
                 return true;
             }
 
+
         }
+
         return false;
 
     }
@@ -88,7 +107,7 @@ public class Player {
     public String getshipstatus() {
         String ausgabe = "";
         for (int i = 0; i < shipsize.length; i++) {
-            ausgabe+="<tr>\n";
+            ausgabe += "<tr>\n";
             int[] temp = new int[shipsize[i]];
             int x = 0;
             for (int j = 0; j < field.length; j++) {
@@ -98,20 +117,20 @@ public class Player {
 
             for (int y = 0; y < temp.length; y++) {
                 if (temp[y] == 0) {
-                    ausgabe+=String.format(" <td style=\"background-color: #fff;\"></td>\n");
+                    ausgabe += String.format(" <td style=\"background-color: #fff;\"></td>\n");
                 }
                 if (temp[y] == 2) {
-                    ausgabe+=String.format(" <td style=\"background-color: #080;\"></td>\n");
+                    ausgabe += String.format(" <td style=\"background-color: #080;\"></td>\n");
 
                 }
                 if (temp[y] == 3) {
-                    ausgabe+=String.format(" <td style=\"background-color: #f00;\"></td>\n");
+                    ausgabe += String.format(" <td style=\"background-color: #f00;\"></td>\n");
 
                 }
 
 
             }
-            ausgabe+="</tr>\n";
+            ausgabe += "</tr>\n";
 
         }
         return ausgabe;
@@ -119,7 +138,7 @@ public class Player {
 
     public String getfield(boolean sichtweiße) {
         String ausgabe = "";
-        ausgabe+=String.format("<tr>\n" +
+        ausgabe += String.format("<tr>\n" +
                 "                <td style=\"background-color: #bbb;\"></td>\n" +
                 "                <td style=\"background-color: #eff;\">A</td>\n" +
                 "                <td style=\"background-color: #eff;\">B</td>\n" +
@@ -134,26 +153,26 @@ public class Player {
                 "\n" +
                 "            </tr>");
         for (int i = 0; i < field.length; i++) {
-            if(i%10==0)
-            ausgabe+=" <tr>\n"+String.format("<td style=\"background-color: #eff;\">")+(i/10+1)+"</td>\n";
+            if (i % 10 == 0)
+                ausgabe += " <tr>\n" + String.format("<td style=\"background-color: #eff;\">") + (i / 10 + 1) + "</td>\n";
             if (field[i].getLeft() == 0) {
-                ausgabe+=String.format("<td onclick=\"sendMove(")+i+String.format(")\" style=\"background-color: #fff;\\\"></td>\n");
+                ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #fff;\\\"></td>\n");
             }
             if (field[i].getLeft() == 1) {
-                ausgabe+=String.format("<td onclick=\"sendMove(")+i+String.format(")\" style=\"background-color: #888;\\\"></td>\n");
+                ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #888;\\\"></td>\n");
             }
             if (field[i].getLeft() == 2) {
                 if (sichtweiße == false) {
-                    ausgabe+=String.format("<td onclick=\"sendMove(")+i+String.format(")\" style=\"background-color: #080;\\\"></td>\n");
+                    ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #080;\\\"></td>\n");
                 } else {
-                    ausgabe+=String.format("<td onclick=\"sendMove(")+i+String.format(")\" style=\"background-color: #fff;\\\"></td>\n");
+                    ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #fff;\\\"></td>\n");
                 }
             }
             if (field[i].getLeft() == 3) {
-                ausgabe+=String.format("<td onclick=\"sendMove(")+i+String.format(")\" style=\"background-color: #f00;\\\"></td>\n");
+                ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #f00;\\\"></td>\n");
             }
-            if(i%10==9)
-                ausgabe+="</tr>\n";
+            if (i % 10 == 9)
+                ausgabe += "</tr>\n";
         }
 
         return ausgabe;
@@ -170,17 +189,17 @@ public class Player {
     }
 
     public boolean checkifend() {
-        //So solte das Funktionieren man muss den Stream erst zu einem int Stream mappen 
+        //So solte das Funktionieren man muss den Stream erst zu einem int Stream mappen
         //da es Sonste ein Stream vom type simpleMap ist und der hat kein sum()
         return Stream.of(field).mapToInt(n -> n.getLeft()).filter(n -> n % 2 == 0).sum() == 0;
     }
 
     @Override
     public boolean equals(Object o) {
-        if(this == o)
+        if (this == o)
             return true;
-        if(o instanceof Player)
-            return this.id.equals(((Player)o).id);
+        if (o instanceof Player)
+            return this.id.equals(((Player) o).id);
         return false;
     }
 }
