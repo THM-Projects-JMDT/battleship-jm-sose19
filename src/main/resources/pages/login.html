@@ -1,7 +1,8 @@
 <div id="Nameform"class="form-group">
     <label for="Name">Game-ID</label>
-    <input type="text" class="form-control" id="GameID" placeholder="Game-ID">
+    <input type="text" class="form-control" id="GameID" placeholder="Game-ID" oninput="resetFalseGameID()">
     <button id="copyID" type="button" class="btn btn-primary" onclick="copyID()">Copy to Clipboard</button>
+    <label id="GameIDError">Wrong Game-ID! Please try again.</label>
 </div>
 
 <div id="Nameform"class="form-group">

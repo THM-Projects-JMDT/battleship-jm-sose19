@@ -3,6 +3,7 @@ var xhr = new XMLHttpRequest;
 
 //variable
 var myWindow = document.getElementById('window');
+var falseGameID = false;
 
 //Listener
 //TODO Listener für nachgeladene Seitenteile wie? doch mit onclick? 
@@ -118,8 +119,16 @@ function onloadGame() {
 }
 
 function invalidGamID() {
-    //TODO vtl feld rot aufblinken + text über button
-    alert("Wrong Game-ID! please try again")
+    falseGameID = true;
+    document.getElementById('GameID').style.borderColor = "red";
+    document.getElementById('GameIDError').style.display = "inline-block"
+}
+
+function resetFalseGameID() {
+    if(falseGameID == true) {
+        document.getElementById('GameID').style.borderColor = "lightgrey";
+        document.getElementById('GameIDError').style.display = "none";
+    }
 }
 
 function openWindow() {

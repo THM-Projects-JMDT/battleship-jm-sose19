@@ -28,6 +28,10 @@
     border: none;
     background-color: transparent;
 }
+#GameIDError {
+    display: none;
+    color: red;
+}
 #navtext {
     color: white;
     font-size: 30px;
