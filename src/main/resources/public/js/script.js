@@ -44,9 +44,6 @@ function sendMove(value) {
     sentRequestGet('/player/move', "Cordinate=" + value);
 }
 
-
-
-
 function quitGame() {
     var check = confirm('\u26A0 Are you sure you want to leave the game? \n (All progress will be lost)');
     if(check == true) {
@@ -207,7 +204,6 @@ async function conectSSE() {
     }
     async function getMyShips() {
         setTimeout(function() {
-            getEnemyShips()
             sentRequestGet('/player/getmyships');
         }, 10)
     }
