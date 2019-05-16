@@ -55,6 +55,7 @@ public class Player {
     }
 
     public boolean setships(int feld) {
+        client.sendEvent("7", getshipstatus());
         if (shipslength[0] == 0)
             // game auf neuen stand setzen, setzen beendet
             return false;
@@ -71,17 +72,17 @@ public class Player {
         }
         int j = 0;
         for (int i = 0; i < field.length; i++) {
-            if (field[i].getRight() == counter) {
-                temp[j++] = i;
-            }
-
+            if (field[i].getRight() == counter) temp[j++] = i;
         }
+        if ((temp[0] % 10 == 0 || feld % 10 == 0) && (temp[0] % 10 == 9 || feld % 10 == 9)) return false;
         if (temp.length == 1 && (temp[0] - feld == 10 || temp[0] - feld == -10 || temp[0] - feld == 1 || temp[0] - feld == -1)) {
             shipslength[counter]--;
             field[feld] = new SimpleMap<>(2, counter);
             return true;
         }
         if (temp.length > 1) {
+            if ((temp[temp.length - 1] % 10 == 0 || feld % 10 == 0) && (temp[temp.length - 1] % 10 == 9 || feld % 10 == 9))
+                return false;
             int multiplikator = 1;
             if (temp[1] - temp[0] == 10) {
                 multiplikator = 10;
@@ -96,12 +97,8 @@ public class Player {
                 field[feld] = new SimpleMap<>(2, counter);
                 return true;
             }
-
-
         }
-
         return false;
-
     }
 
     public String getshipstatus() {

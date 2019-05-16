@@ -192,6 +192,10 @@ async function conectSSE() {
             case 'Disconnected':
                 eventSource.close();
                 break;
+            case '7':
+                reloadmyShips()
+                break;
+
         }
     }
     
