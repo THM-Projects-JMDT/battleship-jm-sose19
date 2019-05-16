@@ -16,6 +16,7 @@
 # sessionAttribute
   - Spieler ID -> "Player-ID"  
   - Spieler Name -> "Name"
+  - Feld Cordinate -> "Cordinate"
 
 # Content-ID
   - Neue Seite laden -> 0
@@ -24,6 +25,7 @@
   - Neue Seite Laden + request GameID -> 3
   - Neue Sete Landen + starte SSe -> 4
   - Seite im Fester Öffnen -> 5
+  - Antwort auf Boat setzen -> 6
 
   - Gleiche Codes mit 404 fehler für den Code
 

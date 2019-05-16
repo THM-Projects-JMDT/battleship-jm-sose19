@@ -10,7 +10,6 @@ public class Path {
         public static final String ABOUTGAME = GAME + "/about";
         public static final String GETGAMEID = GAME + "/getid";
         public static final String STARTGAME = PLAYER + "/startgame";
-        public static final String SETBOAT = PLAYER + "/setboat";
         public static final String MOVE = PLAYER + "/move";
         public static final String REMOVEPLAYER = PLAYER + "/remove";
         public static final String SSE = "/sse";

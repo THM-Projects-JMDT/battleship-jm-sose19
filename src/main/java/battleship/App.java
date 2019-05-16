@@ -21,7 +21,6 @@ public class App {
             get(Path.Web.ABOUTGAME, GameController.aboutGame, Access.ANYONE);
             get(Path.Web.GETGAMEID, GameController.getGameid, Access.REGISTERED);
             get(Path.Web.STARTGAME, PlayersController.startGame, Access.REGISTERED);
-            get(Path.Web.SETBOAT, PlayersController.setBoat, Access.REGISTERED);
             get(Path.Web.MOVE, PlayersController.move, Access.REGISTERED);
             get(Path.Web.REMOVEPLAYER, PlayersController.removePlayer, Access.REGISTERED);
         });

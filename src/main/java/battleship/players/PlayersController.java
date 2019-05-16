@@ -2,9 +2,11 @@ package battleship.players;
 
 import java.util.NoSuchElementException;
 
+import battleship.game.Player;
 import battleship.util.Path;
 import battleship.util.Sse;
 import io.javalin.BadRequestResponse;
+import io.javalin.Context;
 import io.javalin.Handler;
 import io.javalin.serversentevent.SseClient;
 
@@ -34,13 +36,22 @@ public class PlayersController {
         ctx.render(Path.Pages.GAME);
     };
 
-    public static Handler setBoat = ctx -> {
-        //TODO
+    public static Handler move = ctx -> {
+        //TODO check if gamestatus ready 
+        setBoat(ctx);
     };
 
-    public static Handler move = ctx -> {
-        //TODO 
-    };
+    private static void setBoat(Context ctx) {
+        ctx.header("Content-ID", "6");
+        Player p = Players.getPlayer(ctx);
+
+        if(p.setships(ctx.queryParam("Cordinate", Integer.class).get())) {
+            ctx.result(p.getfield(false));
+            return;
+        }
+
+        throw new BadRequestResponse("Invalide Placement!");
+    }
 
     public static Handler removePlayer = ctx -> {
         Players.removeWithGame(ctx);

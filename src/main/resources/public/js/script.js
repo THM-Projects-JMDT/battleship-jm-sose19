@@ -42,9 +42,7 @@ function aboutGame() {
 }
 
 function sendMove(value) {
-    //TODo send with value (Post ? )
-    //sentRequestGet('/player/move');
-    alert(value);
+    sentRequestGet('/player/move', "Cordinate=" + value);
 }
 
 function quitGame() {
@@ -76,6 +74,9 @@ function hadleResponse() {
                 case '5':
                     openWindow();
                     break;
+                case '6':
+                    realoadField();
+                    break;
             }
         }
 
@@ -87,6 +88,8 @@ function hadleResponse() {
                     break;
                 case '2':
                     invalidGamID();
+                case '6':
+                    invalidePlacement();
             }
         }
     }
@@ -143,6 +146,14 @@ function closeWindowbyFokus(e) {
     if(e.target == myWindow) {
         closeWindow();
     }
+}
+
+function realoadField() {
+    document.getElementById('mainboard').innerHTML = xhr.responseText;
+}
+
+function invalidePlacement() {
+    alert('Invalid Placement! Please Try again!');
 }
 
 //SSE
