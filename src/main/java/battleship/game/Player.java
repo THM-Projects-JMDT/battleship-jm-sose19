@@ -55,7 +55,6 @@ public class Player {
     }
 
     public boolean setships(int feld) {
-        client.sendEvent("7", getshipstatus());
         if (shipslength[0] == 0)
             // game auf neuen stand setzen, setzen beendet
             return false;

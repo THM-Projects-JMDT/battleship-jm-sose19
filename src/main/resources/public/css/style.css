@@ -70,6 +70,19 @@ table {
     font-size: 30px;
     text-align: center;
 }
+#enemyschiffe {
+    padding: 0px;
+    margin: 0 auto;
+}
+
+#enemyschiffe tr td {
+    width: 35px;
+    height: 20px;
+    border: 1px solid #1c1c1c;
+    font-family: Helvetica;
+    font-size: 30px;
+    text-align: center;
+}
 #enemyboard {
     padding: 0px;
     margin: 0 auto;

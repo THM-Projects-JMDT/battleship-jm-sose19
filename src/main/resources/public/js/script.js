@@ -46,6 +46,8 @@ function sendMove(value) {
 }
 
 
+
+
 function quitGame() {
     var check = confirm('\u26A0 Are you sure you want to leave the game? \n (All progress will be lost)');
     if(check == true) {
@@ -181,6 +183,9 @@ async function conectSSE() {
     //Listener 
     eventSource.addEventListener('Conection', e => conectionStatus(e.data));
     eventSource.addEventListener('QuitGame', e => playerQuited(e.data));
+    eventSource.addEventListener('UpdateMyships', e => getMyShips());
+    eventSource.addEventListener('UpdateEnemyships', e => getEnemyField());
+    eventSource.addEventListener('UpdateEnemyboard', e => getEnemyShips());
 
     //Message handle Functions
     function conectionStatus(data) {
@@ -192,10 +197,6 @@ async function conectSSE() {
             case 'Disconnected':
                 eventSource.close();
                 break;
-            case '7':
-                reloadmyShips()
-                break;
-
         }
     }
     
@@ -203,7 +204,18 @@ async function conectSSE() {
         alert(data);
         getPage();
     }
+    function getMyShips() {
+        getEnemyShips()
+        sentRequestGet('/player/getmyships');
+    }
+    function getEnemyShips() {
+        sentRequestGet('/player/getenemyships');
+    }
+    function getEnemyField() {
+        sentRequestGet('/player/getenemyfield');
+    }
 }
+
 
 //Other Functions
 

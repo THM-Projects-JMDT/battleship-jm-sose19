@@ -39,7 +39,19 @@ public class PlayersController {
     public static Handler move = ctx -> {
         //TODO check if gamestatus ready 
         setBoat(ctx);
-        // getBoats(ctx);
+    };
+
+    public static Handler myShips = ctx -> {
+        getmyShips(ctx);
+    };
+
+    public static Handler enemyShips = ctx -> {
+        getenemyShips(ctx);
+    };
+
+    public static Handler enemyField = ctx -> {
+
+        getenemyField(ctx);
     };
 
     private static void setBoat(Context ctx) {
@@ -47,6 +59,7 @@ public class PlayersController {
         Player p = Players.getPlayer(ctx);
 
         if (p.setships(ctx.queryParam("Cordinate", Integer.class).get())) {
+            p.getClient().sendEvent("UpdateMyships","UpdateMyships");
             ctx.result(p.getfield(false));
             return;
         }
@@ -54,12 +67,23 @@ public class PlayersController {
         throw new BadRequestResponse("Invalide Placement!");
     }
 
-    private static void getBoats(Context ctx) {
+    public static void getmyShips(Context ctx) {
+        System.out.println("hi");
         ctx.header("Content-ID", "7");
         Player p = Players.getPlayer(ctx);
         ctx.result(p.getshipstatus());
     }
 
+    public static void getenemyShips(Context ctx) {
+        ctx.header("Content-ID", "8");
+        Player p = Players.getPlayer(ctx);
+        ctx.result(p.getGame().otherPlayer(p).getshipstatus());
+    }
+    public static void getenemyField(Context ctx) {
+        ctx.header("Content-ID", "9");
+        Player p = Players.getPlayer(ctx);
+        ctx.result(p.getshipstatus());
+    }
 
     public static Handler removePlayer = ctx -> {
         Players.removeWithGame(ctx);
