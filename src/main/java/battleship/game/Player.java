@@ -160,20 +160,32 @@ public class Player {
             if (i % 10 == 0)
                 ausgabe += " <tr>\n" + String.format("<td style=\"background-color: #eff;\">") + (i / 10 + 1) + "</td>\n";
             if (field[i].getLeft() == 0) {
-                ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #fff;\\\"></td>\n");
+                if (sichtweiße == false) {
+                    ausgabe += String.format("<td style=\"background-color: #fff;\"></td>\n");
+                }else {
+                    ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #fff;\"></td>\n");
+                }
             }
             if (field[i].getLeft() == 1) {
-                ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #888;\\\"></td>\n");
+                if (sichtweiße == false) {
+                    ausgabe += String.format("<td style=\"background-color: #888;\"></td>\n");
+                } else {
+                    ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #888;\"></td>\n");
+                }
             }
             if (field[i].getLeft() == 2) {
                 if (sichtweiße == false) {
-                    ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #080;\\\"></td>\n");
+                    ausgabe += String.format("<td style=\"background-color: #080;\"></td>\n");
                 } else {
-                    ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #fff;\\\"></td>\n");
+                    ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #fff;\"></td>\n");
                 }
             }
             if (field[i].getLeft() == 3) {
-                ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #f00;\\\"></td>\n");
+                if (sichtweiße == false) {
+                    ausgabe += String.format("<td style=\"background-color: #f00;\"></td>\n");
+                } else {
+                    ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #f00;\"></td>\n");
+                }
             }
             if (i % 10 == 9)
                 ausgabe += "</tr>\n";
