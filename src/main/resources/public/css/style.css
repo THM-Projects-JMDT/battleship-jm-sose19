@@ -28,6 +28,20 @@
     border: none;
     background-color: transparent;
 }
+#close:hover {
+    color: darkgray;
+}
+#login {
+    border: 1px solid lightgrey;
+    border-radius: 8px;
+    position: relative;
+    left: 400px;
+    margin: 8px;
+    align-content: center;
+}
+#copyID {
+    margin: 4px;
+}
 #GameIDError {
     display: none;
     color: red;
@@ -57,6 +71,16 @@ table {
     font-size: 30px;
     text-align: center;
 }
+#mainboardError {
+    display: none;
+    position: fixed;
+    margin: 0;
+    margin-left: 215px;
+    width: 495px;
+    height: 530px;
+    background-color: rgba(100,0,0,0.6);
+}
+
 #schiffe {
     padding: 0px;
     margin: 0 auto;

@@ -55,7 +55,6 @@ public class PlayersController {
     }
 
     public static Handler myShips = ctx -> {
-        System.out.println("hi");
         ctx.header("Content-ID", "7");
         Player p = Players.getPlayer(ctx);
         ctx.result(p.getshipstatus());

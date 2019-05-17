@@ -172,7 +172,15 @@ function reloadenemyShips(resonse='') {
 }
 
 function invalidePlacement(resonse='') {
-    alert('Invalid Placement! Please Try again!');
+    //alert('Invalid Placement! Please Try again!');
+    document.getElementById('mainboardError').style.display = "block";
+    resetInvalidePlacement();
+}
+
+async function resetInvalidePlacement() {
+    setTimeout(function() {
+        document.getElementById('mainboardError').style.display = "none";
+    }, 200)
 }
 
 //SSE
