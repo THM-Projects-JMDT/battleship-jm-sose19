@@ -17,8 +17,6 @@ dependencies {
     compile 'org.thymeleaf:thymeleaf:3.0.9.RELEASE'
     //Mark down
     compile 'com.atlassian.commonmark:commonmark:0.11.0'
-    //Junti
-    testImplementation 'junit:junit:4.12'
 }
 
 mainClassName = 'battleship.App'

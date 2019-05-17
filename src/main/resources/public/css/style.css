@@ -61,12 +61,14 @@ table {
 #mainboard {
     padding: 0px;
     margin: 0 auto;
+    /*border: 8px solid #1b86c1;*/
 }
 
 #mainboard tr td {
     width: 45px;
     height: 45px;
-    border: 1px solid #1c1c1c;
+    border: 1px solid;
+    border-color: #1c1c1c;
     font-family: Helvetica;
     font-size: 30px;
     text-align: center;
