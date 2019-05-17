@@ -98,8 +98,10 @@ xhr.onreadystatechange = async function() {
                     break;
                 case '2':
                     invalidGamID(response);
+                    break;
                 case '6':
                     invalidePlacement();
+                    break;
             }
         }
     }
