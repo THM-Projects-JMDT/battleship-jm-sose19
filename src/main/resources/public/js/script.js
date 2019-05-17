@@ -213,10 +213,12 @@ async function conectSSE() {
     async function getMyShips() {
         setTimeout(function() {
             sentRequestGet('/player/getmyships');
-        }, 10)
+        }, 10);
     }
     function getEnemyShips() {
-        sentRequestGet('/player/getenemyships');
+        setTimeout(function() {
+            sentRequestGet('/player/getenemyships');
+        }, 20);
     }
     function getEnemyField() {
         sentRequestGet('/player/getenemyfield');

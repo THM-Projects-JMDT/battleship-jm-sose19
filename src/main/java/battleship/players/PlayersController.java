@@ -48,6 +48,9 @@ public class PlayersController {
         if (p.setships(ctx.queryParam("Cordinate", Integer.class).get())) {
             ctx.result(p.getfield(false));
             p.getClient().sendEvent("UpdateMyships","UpdateMyships");
+            Player pO = p.getGame().otherPlayer(p);
+            if(pO != null && pO.getClient() != null)
+                pO.getClient().sendEvent("UpdateEnemyboard", "UpdateEnemyboard");
             return;
         }
 
