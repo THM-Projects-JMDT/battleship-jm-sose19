@@ -122,7 +122,7 @@ function requestGameID() {
 }
 
 function onloadLogin(resonse='') {
-    newHtmlContent(resonse)
+    newHtmlContent(resonse);
     getGameID();
 }
 
