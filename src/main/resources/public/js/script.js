@@ -172,7 +172,6 @@ function reloadenemyShips(resonse='') {
 }
 
 function invalidePlacement(resonse='') {
-    //alert('Invalid Placement! Please Try again!');
     document.getElementById('mainboardError').style.display = "block";
     resetInvalidePlacement();
 }
@@ -223,14 +222,15 @@ async function conectSSE() {
         sentRequestGet('/player/getenemyfield');
     }
     function shipReady() {
-        //alert('Invalid Placement! Please Try again!');
         document.getElementById('mainboardError').style.display = "block";
+        document.getElementById('mainboardError').style.backgroundColor = "rgba(0,0,100,0.6)";
         resetshipReady();
     }
 
     async function resetshipReady() {
         setTimeout(function() {
             document.getElementById('mainboardError').style.display = "none";
+            document.getElementById('mainboardError').style.backgroundColor = "rgba(100,0,0,0.6)";
         }, 200)
     }
 
