@@ -2,7 +2,6 @@ package battleship.game;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
-
 import io.javalin.serversentevent.SseClient;
 
 public class Player {
@@ -52,6 +51,9 @@ public class Player {
             return true;
         }
         return false;
+    }
+    public int getshipslength(){
+        return shipslength[0];
     }
 
     public boolean setships(int feld) {
@@ -205,8 +207,6 @@ public class Player {
     }
 
     public boolean checkifend() {
-        //So solte das Funktionieren man muss den Stream erst zu einem int Stream mappen
-        //da es Sonste ein Stream vom type simpleMap ist und der hat kein sum()
         return Stream.of(field).mapToInt(n -> n.getLeft()).filter(n -> n % 2 == 0).sum() == 0;
     }
 
@@ -218,4 +218,5 @@ public class Player {
             return this.id.equals(((Player) o).id);
         return false;
     }
+
 }

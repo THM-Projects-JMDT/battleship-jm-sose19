@@ -37,8 +37,16 @@ public class PlayersController {
     };
 
     public static Handler move = ctx -> {
-        //TODO check if gamestatus ready 
-        setBoat(ctx);
+        Player p = Players.getPlayer(ctx);
+        if (p.getGame().getState()<4){
+            setBoat(ctx);
+        }
+        if(p.getGame().getState()>=4 && p.getGame().getState()<6){
+
+        }
+
+
+        //TODO check if gamestatus ready
     };
 
     private static void setBoat(Context ctx) {
@@ -51,6 +59,9 @@ public class PlayersController {
             Player pO = p.getGame().otherPlayer(p);
             if(pO != null && pO.getClient() != null)
                 pO.getClient().sendEvent("UpdateEnemyboard", "UpdateEnemyboard");
+            if(p.getshipslength()==0)
+                p.getGame().Stateadd();
+            // TODO umswitchen , wartescreen
             return;
         }
 

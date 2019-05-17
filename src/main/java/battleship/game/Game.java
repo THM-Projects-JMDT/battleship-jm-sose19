@@ -48,4 +48,8 @@ public class Game {
         
         return Players.remove(p);
     }
+
+    public void Stateadd(){
+        state++;
+    }
 }
