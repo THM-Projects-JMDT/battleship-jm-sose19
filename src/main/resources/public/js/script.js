@@ -192,6 +192,7 @@ async function conectSSE() {
     eventSource.addEventListener('UpdateMyships', e => getMyShips());
     eventSource.addEventListener('UpdateEnemyships', e => getEnemyField());
     eventSource.addEventListener('UpdateEnemyboard', e => getEnemyShips());
+    eventSource.addEventListener('ShipReady', e => shipReady());
 
     //Message handle Functions
     function conectionStatus(data) {
@@ -221,6 +222,19 @@ async function conectSSE() {
     function getEnemyField() {
         sentRequestGet('/player/getenemyfield');
     }
+    function shipReady() {
+        //alert('Invalid Placement! Please Try again!');
+        document.getElementById('mainboardError').style.display = "block";
+        resetshipReady();
+    }
+
+    async function resetshipReady() {
+        setTimeout(function() {
+            document.getElementById('mainboardError').style.display = "none";
+        }, 200)
+    }
+
+
 }
 
 

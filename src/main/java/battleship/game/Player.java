@@ -67,6 +67,8 @@ public class Player {
         if (temp.length == 0) {
             shipslength[counter]--;
             field[feld] = new SimpleMap<>(2, counter);
+            if(shipsize[counter]-shipslength[counter]==shipsize[counter])
+                client.sendEvent("ShipReady","ShipReady");
             return true;
         }
         int j = 0;
@@ -77,6 +79,8 @@ public class Player {
         if (temp.length == 1 && (temp[0] - feld == 10 || temp[0] - feld == -10 || temp[0] - feld == 1 || temp[0] - feld == -1)) {
             shipslength[counter]--;
             field[feld] = new SimpleMap<>(2, counter);
+            if(shipsize[counter]-shipslength[counter]==shipsize[counter])
+                client.sendEvent("ShipReady","ShipReady");
             return true;
         }
         if (temp.length > 1) {
@@ -89,11 +93,15 @@ public class Player {
             if (temp[0] - multiplikator == feld) {
                 shipslength[counter]--;
                 field[feld] = new SimpleMap<>(2, counter);
+                if(shipsize[counter]-shipslength[counter]==shipsize[counter])
+                    client.sendEvent("ShipReady","ShipReady");
                 return true;
             }
             if (temp[temp.length - 1] + multiplikator == feld) {
                 shipslength[counter]--;
                 field[feld] = new SimpleMap<>(2, counter);
+                if(shipsize[counter]-shipslength[counter]==shipsize[counter])
+                    client.sendEvent("ShipReady","ShipReady");
                 return true;
             }
         }
