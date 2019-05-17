@@ -46,7 +46,7 @@ public class PlayersController {
         Player p = Players.getPlayer(ctx);
 
         if (p.setships(ctx.queryParam("Cordinate", Integer.class).get())) {
-            ctx.result(p.getfield(false));
+            ctx.result(p.getfield(true));
             p.getClient().sendEvent("UpdateMyships","UpdateMyships");
             return;
         }

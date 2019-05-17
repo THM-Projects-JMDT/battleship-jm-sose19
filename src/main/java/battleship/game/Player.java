@@ -10,7 +10,7 @@ public class Player {
     private SseClient client;
     private SimpleMap<Integer, Integer>[] field;
     private Game game;
-    private int[] shipslength = {2, 2, 2, 2, 3, 3, 3, 4, 4, 5};
+    private int[] shipslength = {2, 2, 3, 3, 4, 5};
     private final int[] shipsize = Arrays.copyOf(shipslength, 10);
 
     public Player(String id) {
@@ -174,7 +174,7 @@ public class Player {
                 }
             }
             if (field[i].getLeft() == 2) {
-                if (sichtweiße == false) {
+                if (sichtweiße == true) {
                     ausgabe += String.format("<td style=\"background-color: #080;\"></td>\n");
                 } else {
                     ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #fff;\"></td>\n");

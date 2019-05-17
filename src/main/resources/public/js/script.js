@@ -231,7 +231,7 @@ async function conectSSE() {
         setTimeout(function() {
             document.getElementById('mainboardError').style.display = "none";
             document.getElementById('mainboardError').style.backgroundColor = "rgba(100,0,0,0.6)";
-        }, 200)
+        }, 400)
     }
 
 
