@@ -11,7 +11,7 @@ public class Player {
     private SimpleMap<Integer, Integer>[] field;
     private Game game;
     private int[] shipslength = {2, 2, 3, 3, 4, 5};
-    private final int[] shipsize = Arrays.copyOf(shipslength, 10);
+    private final int[] shipsize = Arrays.copyOf(shipslength, shipslength.length);
 
     public Player(String id) {
         this.id = id;
