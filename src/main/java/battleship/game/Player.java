@@ -11,6 +11,7 @@ public class Player {
     private Game game;
     private int[] shipslength = {2, 2, 3, 3, 4, 5};
     private final int[] shipsize = Arrays.copyOf(shipslength, shipslength.length);
+    private boolean ichbindran= true;
 
     public Player(String id) {
         this.id = id;
@@ -196,18 +197,23 @@ public class Player {
         return ausgabe;
     }
 
-    public int checkifthersaship(int i) {
-        return field[i++].getLeft();
-    }
-
     public boolean canilookatthisfield(int i) {
-        if (field[i].getLeft() == 1 || field[i].getLeft() == 3)
+        if (ichbindran==false &&(field[i].getLeft() == 1 || field[i].getLeft() == 3))
             return false;
+        field[i].setLeft(field[i].getLeft()+1);
         return true;
     }
 
     public boolean checkifend() {
         return Stream.of(field).mapToInt(n -> n.getLeft()).filter(n -> n % 2 == 0).sum() == 0;
+    }
+
+    public void changeichbindran(){
+        if(ichbindran==false) {
+            ichbindran = true;
+        }else {
+            ichbindran = false;
+        }
     }
 
     @Override

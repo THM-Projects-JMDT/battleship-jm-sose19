@@ -42,12 +42,29 @@ public class PlayersController {
             setBoat(ctx);
         }
         if(p.getGame().getState()>=4 && p.getGame().getState()<6){
-
+            lookatfield(ctx);
         }
 
 
         //TODO check if gamestatus ready
     };
+
+    private static void lookatfield(Context ctx) {
+        ctx.header("Content-ID", "6");
+        Player p = Players.getPlayer(ctx);
+        Player p0 = p.getGame().otherPlayer(p);
+        if (p0.canilookatthisfield(ctx.queryParam("Cordinate", Integer.class).get())) {
+            p0.changeichbindran();
+            p.changeichbindran();
+            p.getClient().sendEvent("UpdateEnemyships", "UpdateEnemyships");
+            p0.getClient().sendEvent("UpdateMyships", "UpdateMyships");
+            p0.getClient().sendEvent("UpdateEnemyboard", "UpdateEnemyboard");
+            ctx.result(p0.getfield(false));
+            return;
+        }
+
+        throw new BadRequestResponse("Invalide Placement!");
+    }
 
     private static void setBoat(Context ctx) {
         ctx.header("Content-ID", "6");
@@ -58,10 +75,15 @@ public class PlayersController {
             p.getClient().sendEvent("UpdateMyships","UpdateMyships");
             Player pO = p.getGame().otherPlayer(p);
             if(pO != null && pO.getClient() != null)
-                pO.getClient().sendEvent("UpdateEnemyboard", "UpdateEnemyboard");
-            if(p.getshipslength()==0)
+                pO.getClient().sendEvent("UpdateEnemyships", "UpdateEnemyships");
+            if(p.getshipslength()==0) {
                 p.getGame().Stateadd();
-            // TODO umswitchen , wartescreen
+                if(p.getGame().getState()==4){
+                    p.getClient().sendEvent("Updateboard","Updateboard");
+                    pO.getClient().sendEvent("Updateboard", "Updateboard");
+                }
+            }
+
             return;
         }
 
@@ -72,6 +94,11 @@ public class PlayersController {
         ctx.header("Content-ID", "7");
         Player p = Players.getPlayer(ctx);
         ctx.result(p.getshipstatus());
+    };
+    public static Handler myField = ctx -> {
+        ctx.header("Content-ID", "6");
+        Player p = Players.getPlayer(ctx);
+        ctx.result(p.getGame().otherPlayer(p).getfield(false));
     };
 
     public static Handler enemyShips = ctx -> {
@@ -87,7 +114,7 @@ public class PlayersController {
     public static Handler enemyField = ctx -> {
         ctx.header("Content-ID", "9");
         Player p = Players.getPlayer(ctx);
-        ctx.result(p.getshipstatus());
+        ctx.result(p.getfield(true));
     };
 
     public static Handler removePlayer = ctx -> {

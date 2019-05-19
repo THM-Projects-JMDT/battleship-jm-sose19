@@ -191,8 +191,9 @@ async function conectSSE() {
     eventSource.addEventListener('Conection', e => conectionStatus(e.data));
     eventSource.addEventListener('QuitGame', e => playerQuited(e.data));
     eventSource.addEventListener('UpdateMyships', e => getMyShips());
-    eventSource.addEventListener('UpdateEnemyships', e => getEnemyField());
-    eventSource.addEventListener('UpdateEnemyboard', e => getEnemyShips());
+    eventSource.addEventListener('UpdateEnemyships', e => getEnemyShips());
+    eventSource.addEventListener('UpdateEnemyboard', e => getEnemyField());
+    eventSource.addEventListener('Updateboard', e => getmyField());
     eventSource.addEventListener('ShipReady', e => shipReady());
 
     //Message handle Functions
@@ -223,8 +224,16 @@ async function conectSSE() {
         }, 20);
     }
     function getEnemyField() {
+        setTimeout(function() {
         sentRequestGet('/player/getenemyfield');
+        }, 30);
     }
+    function getmyField() {
+        setTimeout(function() {
+            sentRequestGet('/player/getmyfield');
+        }, 1000);
+    }
+
     function shipReady() {
         document.getElementById('mainboardError').style.display = "block";
         document.getElementById('mainboardError').style.backgroundColor = "rgba(0,0,100,0.6)";
