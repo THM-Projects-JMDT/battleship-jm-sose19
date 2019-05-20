@@ -9,9 +9,11 @@ public class Player {
     private SseClient client;
     private SimpleMap<Integer, Integer>[] field;
     private Game game;
-    private int[] shipslength = {2, 2, 3, 3, 4, 5};
+    private int[] shipslength = {2};
+    private int[] shipslength2 = {2, 2, 3, 3, 4, 5};
     private final int[] shipsize = Arrays.copyOf(shipslength, shipslength.length);
-    private boolean myTurn= true;
+
+    private boolean myTurn = false;
 
     public Player(String id) {
         this.id = id;
@@ -143,7 +145,7 @@ public class Player {
         return ausgabe;
     }
 
-    public String getfield(boolean sichtweiße) {
+    public String getfield(boolean sichtweiße, boolean sichtweiße2) {
         String ausgabe = "";
         ausgabe += String.format("<tr>\n" +
                 "                <td style=\"background-color: #bbb;\"></td>\n" +
@@ -170,14 +172,10 @@ public class Player {
                 }
             }
             if (field[i].getLeft() == 1) {
-                if (sichtweiße == false) {
                     ausgabe += String.format("<td style=\"background-color: #888;\"></td>\n");
-                } else {
-                    ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #888;\"></td>\n");
-                }
             }
             if (field[i].getLeft() == 2) {
-                if (sichtweiße == true) {
+                if (sichtweiße == false && sichtweiße2==true) {
                     ausgabe += String.format("<td style=\"background-color: #080;\"></td>\n");
                 } else {
                     ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #fff;\"></td>\n");
@@ -198,10 +196,14 @@ public class Player {
     }
 
     public boolean canilookatthisfield(int i) {
-        if (myTurn==false &&(field[i].getLeft() == 1 || field[i].getLeft() == 3))
+        if (myTurn ==false)
             return false;
-        field[i].setLeft(field[i].getLeft()+1);
-        return true;
+        if (field[i].getLeft() == 0 || field[i].getLeft() == 2) {
+            field[i].setLeft(field[i].getLeft() + 1);
+            return true;
+        }
+        return false;
+
     }
 
     public boolean checkifend() {
@@ -211,6 +213,7 @@ public class Player {
     public void changeMyTurn(){
         myTurn = !myTurn;
     }
+
 
     @Override
     public boolean equals(Object o) {
