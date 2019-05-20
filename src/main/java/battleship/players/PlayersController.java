@@ -54,8 +54,8 @@ public class PlayersController {
         Player p = Players.getPlayer(ctx);
         Player p0 = p.getGame().otherPlayer(p);
         if (p0.canilookatthisfield(ctx.queryParam("Cordinate", Integer.class).get())) {
-            p0.changeichbindran();
-            p.changeichbindran();
+            p0.changeMyTurn();
+            p.changeMyTurn();
             p.getClient().sendEvent("UpdateEnemyships", "UpdateEnemyships");
             p0.getClient().sendEvent("UpdateMyships", "UpdateMyships");
             p0.getClient().sendEvent("UpdateEnemyboard", "UpdateEnemyboard");
