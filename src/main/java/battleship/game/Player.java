@@ -217,6 +217,10 @@ public class Player {
         myTurn = !myTurn;
     }
 
+    public void beendegame(){
+        myTurn=false;
+    }
+
 
     @Override
     public boolean equals(Object o) {

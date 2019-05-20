@@ -60,6 +60,12 @@ public class PlayersController {
             p0.getClient().sendEvent("UpdateEnemyboard", "UpdateEnemyboard");
             ctx.header("Content-ID", "6");
             ctx.result(p0.getfield(true, false));
+            if(p.checkifend() || p0.checkifend()) {
+                p.getClient().sendEvent("Finish","Finish");
+                p0.getClient().sendEvent("Finish","Finish");
+                p.beendegame();
+                p0.beendegame();
+            }
             return;
         }
         ctx.header("Content-ID", "10");

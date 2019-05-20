@@ -85,7 +85,7 @@ xhr.onreadystatechange = async function() {
                     reloadenemyShips(response);
                     break;
                 case '9':
-                    reloadenemyField(response);
+                    alert("Du bist nicht dran");
                     break;
             }
         }
@@ -103,7 +103,7 @@ xhr.onreadystatechange = async function() {
                     invalidePlacement();
                     break;
                 case '10':
-                    alert("Du bist nicht dran!")
+                    alert("Du bist nicht dran");
                     break;
             }
         }
@@ -198,6 +198,7 @@ async function conectSSE() {
     eventSource.addEventListener('UpdateEnemyboard', e => getEnemyField());
     eventSource.addEventListener('Updateboard', e => getmyField());
     eventSource.addEventListener('ShipReady', e => shipReady());
+    eventSource.addEventListener('Finish', e => finish());
 
     //Message handle Functions
     function conectionStatus(data) {
@@ -221,20 +222,23 @@ async function conectSSE() {
             sentRequestGet('/player/getmyships');
         }, 10);
     }
-    function getEnemyShips() {
+    async function getEnemyShips() {
         setTimeout(function() {
             sentRequestGet('/player/getenemyships');
         }, 20);
     }
-    function getEnemyField() {
+    async function getEnemyField() {
         setTimeout(function() {
         sentRequestGet('/player/getenemyfield');
-        }, 30);
+        }, 40);
     }
-    function getmyField() {
+    async function getmyField() {
         setTimeout(function() {
             sentRequestGet('/player/getmyfield');
-        }, 10000);
+        }, 5000);
+    }
+    function finish() {
+           alert("Game finished");
     }
 
     function shipReady() {
