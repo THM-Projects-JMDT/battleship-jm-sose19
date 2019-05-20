@@ -102,6 +102,9 @@ xhr.onreadystatechange = async function() {
                 case '6':
                     invalidePlacement();
                     break;
+                case '10':
+                    alert("Du bist nicht dran!")
+                    break;
             }
         }
     }
@@ -231,7 +234,7 @@ async function conectSSE() {
     function getmyField() {
         setTimeout(function() {
             sentRequestGet('/player/getmyfield');
-        }, 1000);
+        }, 10000);
     }
 
     function shipReady() {

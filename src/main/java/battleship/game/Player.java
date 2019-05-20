@@ -2,6 +2,8 @@ package battleship.game;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
+
+import io.javalin.BadRequestResponse;
 import io.javalin.serversentevent.SseClient;
 
 public class Player {
@@ -145,7 +147,7 @@ public class Player {
         return ausgabe;
     }
 
-    public String getfield(boolean sichtweiße, boolean sichtweiße2) {
+    public String getfield(boolean hauptfeld, boolean phase2) {
         String ausgabe = "";
         ausgabe += String.format("<tr>\n" +
                 "                <td style=\"background-color: #bbb;\"></td>\n" +
@@ -165,7 +167,7 @@ public class Player {
             if (i % 10 == 0)
                 ausgabe += " <tr>\n" + String.format("<td style=\"background-color: #eff;\">") + (i / 10 + 1) + "</td>\n";
             if (field[i].getLeft() == 0) {
-                if (sichtweiße == false) {
+                if (hauptfeld == false) {
                     ausgabe += String.format("<td style=\"background-color: #fff;\"></td>\n");
                 }else {
                     ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #fff;\"></td>\n");
@@ -175,14 +177,14 @@ public class Player {
                     ausgabe += String.format("<td style=\"background-color: #888;\"></td>\n");
             }
             if (field[i].getLeft() == 2) {
-                if (sichtweiße == false && sichtweiße2==true) {
+                if (phase2==true) {
                     ausgabe += String.format("<td style=\"background-color: #080;\"></td>\n");
                 } else {
                     ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #fff;\"></td>\n");
                 }
             }
             if (field[i].getLeft() == 3) {
-                if (sichtweiße == false) {
+                if (hauptfeld == false) {
                     ausgabe += String.format("<td style=\"background-color: #f00;\"></td>\n");
                 } else {
                     ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #f00;\"></td>\n");
@@ -196,13 +198,14 @@ public class Player {
     }
 
     public boolean canilookatthisfield(int i) {
-        if (myTurn ==false)
+        if (myTurn==false)
             return false;
+
+
         if (field[i].getLeft() == 0 || field[i].getLeft() == 2) {
             field[i].setLeft(field[i].getLeft() + 1);
-            return true;
         }
-        return false;
+        return true;
 
     }
 

@@ -50,7 +50,6 @@ public class PlayersController {
     };
 
     private static void lookatfield(Context ctx) {
-        ctx.header("Content-ID", "6");
         Player p = Players.getPlayer(ctx);
         Player p0 = p.getGame().otherPlayer(p);
         if (p0.canilookatthisfield(ctx.queryParam("Cordinate", Integer.class).get())) {
@@ -59,11 +58,12 @@ public class PlayersController {
             p.getClient().sendEvent("UpdateEnemyships", "UpdateEnemyships");
             p0.getClient().sendEvent("UpdateMyships", "UpdateMyships");
             p0.getClient().sendEvent("UpdateEnemyboard", "UpdateEnemyboard");
-            ctx.result(p0.getfield(false));
+            ctx.header("Content-ID", "6");
+            ctx.result(p0.getfield(true, false));
             return;
         }
-
-        throw new BadRequestResponse("Invalide Placement!");
+        ctx.header("Content-ID", "10");
+        throw new BadRequestResponse("Du bist nicht dran!");
     }
 
     private static void setBoat(Context ctx) {
@@ -71,16 +71,18 @@ public class PlayersController {
         Player p = Players.getPlayer(ctx);
 
         if (p.setships(ctx.queryParam("Cordinate", Integer.class).get())) {
-            ctx.result(p.getfield(true));
+            ctx.result(p.getfield(true, true));
             p.getClient().sendEvent("UpdateMyships","UpdateMyships");
             Player pO = p.getGame().otherPlayer(p);
             if(pO != null && pO.getClient() != null)
                 pO.getClient().sendEvent("UpdateEnemyships", "UpdateEnemyships");
             if(p.getshipslength()==0) {
                 p.getGame().Stateadd();
+                p.getClient().sendEvent("UpdateEnemyships", "UpdateEnemyships");
                 if(p.getGame().getState()==4){
                     p.getClient().sendEvent("Updateboard","Updateboard");
                     pO.getClient().sendEvent("Updateboard", "Updateboard");
+                    p.changeMyTurn();
                 }
             }
 
@@ -98,7 +100,7 @@ public class PlayersController {
     public static Handler myField = ctx -> {
         ctx.header("Content-ID", "6");
         Player p = Players.getPlayer(ctx);
-        ctx.result(p.getGame().otherPlayer(p).getfield(false));
+        ctx.result(p.getGame().otherPlayer(p).getfield(true, false));
     };
 
     public static Handler enemyShips = ctx -> {
@@ -114,7 +116,7 @@ public class PlayersController {
     public static Handler enemyField = ctx -> {
         ctx.header("Content-ID", "9");
         Player p = Players.getPlayer(ctx);
-        ctx.result(p.getfield(true));
+        ctx.result(p.getfield(false, true));
     };
 
     public static Handler removePlayer = ctx -> {
