@@ -72,16 +72,14 @@ public class PlayersController {
             Player pO = p.getGame().otherPlayer(p);
             if(pO != null && pO.getClient() != null)
                 pO.getClient().sendEvent("UpdateEnemyships", "UpdateEnemyships");
-            if(p.getshipslength()==0) {
+            if(p.getshipslength() == 0) {
                 p.getGame().Stateadd();
-                p.getClient().sendEvent("UpdateEnemyships", "UpdateEnemyships");
-                if(p.getGame().getState()==4){
-                    p.getClient().sendEvent("Updateboard","Updateboard");
-                    p.getClient().sendEvent("UpdateEnemyboard", "UpdateEnemyboard");
-                    pO.getClient().sendEvent("Updateboard", "Updateboard");
-                    p.getClient().sendEvent("UpdateEnemyboard", "UpdateEnemyboard");
+                if(p.getGame().getState() == 4) {
+                    Sse.changeBoards(p.getClient(), pO.getClient());
                     p.changeMyTurn();
-                }
+                } else 
+                    Sse.wait(p.getClient());
+                ctx.result(pO.getfield(true, false));
             }
 
             return;

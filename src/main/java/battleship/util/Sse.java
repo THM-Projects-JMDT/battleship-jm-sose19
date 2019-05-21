@@ -22,6 +22,16 @@ public class Sse {
         client.sendEvent("PlayerConect", name + " conected to the Game!");
     }
 
+    public static void wait(SseClient client) {
+        client.sendEvent("Wait", "Wait");
+    }
+
+    public static void changeBoards(SseClient client, SseClient clientOther) {
+        client.sendEvent("UpdateEnemyboard", "UpdateEnemyboard");
+        clientOther.sendEvent("StartGame", "StartGame");
+        clientOther.sendEvent("UpdateEnemyboard", "UpdateEnemyboard");
+    }
+
     public static void boardChanged(SseClient client, SseClient clientOther) {
         client.sendEvent("UpdateEnemyships", "UpdateEnemyships");
         clientOther.sendEvent("UpdateMyships", "UpdateMyships");
