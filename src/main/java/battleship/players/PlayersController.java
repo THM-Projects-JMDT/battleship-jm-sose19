@@ -37,46 +37,36 @@ public class PlayersController {
     };
 
     public static Handler move = ctx -> {
+        int cordinate = ctx.queryParam("Cordinate", Integer.class).get();
         Player p = Players.getPlayer(ctx);
-        if (p.getGame().getState()<4){
-            setBoat(ctx);
-        }
-        if(p.getGame().getState()>=4 && p.getGame().getState()<6){
-            lookatfield(ctx);
+        Player po = p.getGame().otherPlayer(p);
+
+        //setboats
+        if (p.getGame().getState() < 4){
+            setBoat(ctx, cordinate);
+        // move at Position
+        } else if(p.getGame().move(p, cordinate)) {
+            Sse.boardChanged(p.getClient(), po.getClient());
+
+            if(p.getGame().isFinished()) {
+                Player winner = p.getGame().winner();
+                Sse.finish(winner.getClient(), winner.getGame().otherPlayer(winner).getClient());
+            } 
+
+            ctx.header("Content-ID", "6");
+            ctx.result(po.getfield(true, false));
+        } else {
+            ctx.header("Content-ID", "10");
+            throw new BadRequestResponse("Du bist nicht dran!");
         }
 
-
-        //TODO check if gamestatus ready
     };
 
-    private static void lookatfield(Context ctx) {
-        Player p = Players.getPlayer(ctx);
-        Player p0 = p.getGame().otherPlayer(p);
-        if (p0.canilookatthisfield(ctx.queryParam("Cordinate", Integer.class).get())) {
-            p0.changeMyTurn();
-            p.changeMyTurn();
-            p.getClient().sendEvent("UpdateEnemyships", "UpdateEnemyships");
-            p0.getClient().sendEvent("UpdateMyships", "UpdateMyships");
-            p0.getClient().sendEvent("UpdateEnemyboard", "UpdateEnemyboard");
-            ctx.header("Content-ID", "6");
-            ctx.result(p0.getfield(true, false));
-            if(p.checkifend() || p0.checkifend()) {
-                p.getClient().sendEvent("Finish","Finish");
-                p0.getClient().sendEvent("Finish","Finish");
-                p.beendegame();
-                p0.beendegame();
-            }
-            return;
-        }
-        ctx.header("Content-ID", "10");
-        throw new BadRequestResponse("Du bist nicht dran!");
-    }
-
-    private static void setBoat(Context ctx) {
+    private static void setBoat(Context ctx, int cordinate) {
         ctx.header("Content-ID", "6");
         Player p = Players.getPlayer(ctx);
 
-        if (p.setships(ctx.queryParam("Cordinate", Integer.class).get())) {
+        if (p.setships(cordinate)) {
             ctx.result(p.getfield(true, true));
             p.getClient().sendEvent("UpdateMyships","UpdateMyships");
             Player pO = p.getGame().otherPlayer(p);
@@ -87,7 +77,9 @@ public class PlayersController {
                 p.getClient().sendEvent("UpdateEnemyships", "UpdateEnemyships");
                 if(p.getGame().getState()==4){
                     p.getClient().sendEvent("Updateboard","Updateboard");
+                    p.getClient().sendEvent("UpdateEnemyboard", "UpdateEnemyboard");
                     pO.getClient().sendEvent("Updateboard", "Updateboard");
+                    p.getClient().sendEvent("UpdateEnemyboard", "UpdateEnemyboard");
                     p.changeMyTurn();
                 }
             }

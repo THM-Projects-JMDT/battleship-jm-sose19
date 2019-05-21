@@ -14,6 +14,7 @@ public class Player {
     private int[] shipslength = {2};
     private int[] shipslength2 = {2, 2, 3, 3, 4, 5};
     private final int[] shipsize = Arrays.copyOf(shipslength, shipslength.length);
+    private boolean hitBoat; 
 
     private boolean myTurn = false;
 
@@ -39,6 +40,10 @@ public class Player {
 
     public Game getGame() {
         return this.game;
+    }
+
+    public boolean hitBoat() {
+        return this.hitBoat;
     }
 
     public boolean newGame() {
@@ -197,16 +202,17 @@ public class Player {
         return ausgabe;
     }
 
-    public boolean canilookatthisfield(int i) {
-        if (myTurn==false)
+    public boolean move(int i) {
+        if (!myTurn)
             return false;
 
+        hitBoat = field[i].getLeft() == 2;
 
-        if (field[i].getLeft() == 0 || field[i].getLeft() == 2) {
+        if (field[i].getLeft() == 0 || hitBoat) {
             field[i].setLeft(field[i].getLeft() + 1);
+            return true;
         }
-        return true;
-
+        return false;
     }
 
     public boolean checkifend() {

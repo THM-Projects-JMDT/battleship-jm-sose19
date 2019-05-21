@@ -85,6 +85,9 @@ xhr.onreadystatechange = async function() {
                     reloadenemyShips(response);
                     break;
                 case '9':
+                    reloadenemyField(response);
+                    break;
+                case '10': 
                     alert("Du bist nicht dran");
                     break;
             }
@@ -166,7 +169,7 @@ function closeWindowbyFokus(e) {
 function realoadField(resonse='') {
     document.getElementById('mainboard').innerHTML = resonse;
 }
-function reloadenemyField(resonse='') {
+async function reloadenemyField(resonse='') {
     document.getElementById('enemyboard').innerHTML = resonse;
 }
 function reloadmyShips(resonse='') {
@@ -222,20 +225,20 @@ async function conectSSE() {
             sentRequestGet('/player/getmyships');
         }, 10);
     }
-    async function getEnemyShips() {
+    function getEnemyShips() {
         setTimeout(function() {
             sentRequestGet('/player/getenemyships');
-        }, 20);
+        }, 10);
     }
     async function getEnemyField() {
         setTimeout(function() {
-        sentRequestGet('/player/getenemyfield');
-        }, 40);
+            sentRequestGet('/player/getenemyfield');
+        }, 20);
     }
     async function getmyField() {
         setTimeout(function() {
             sentRequestGet('/player/getmyfield');
-        }, 5000);
+        }, 20);
     }
     function finish() {
            alert("Game finished");
