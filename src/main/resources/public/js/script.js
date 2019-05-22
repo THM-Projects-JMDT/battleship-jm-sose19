@@ -201,7 +201,8 @@ async function conectSSE() {
     eventSource.addEventListener('UpdateEnemyboard', e => getEnemyField());
     eventSource.addEventListener('Updateboard', e => getmyField());
     eventSource.addEventListener('ShipReady', e => shipReady());
-    eventSource.addEventListener('Finish', e => finish());
+    eventSource.addEventListener('YouWon', e => win());
+    eventSource.addEventListener('YouLose', e => lose());
 
     //Message handle Functions
     function conectionStatus(data) {
@@ -240,9 +241,13 @@ async function conectSSE() {
             sentRequestGet('/player/getmyfield');
         }, 20);
     }
-    function finish() {
-           alert("Game finished");
+    function win() {
+           alert("You Won the Game!");
     }
+
+    function lose() {
+        alert("You Lost the Game!");
+ }
 
     function shipReady() {
         document.getElementById('mainboardError').style.display = "block";
