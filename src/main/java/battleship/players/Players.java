@@ -9,7 +9,6 @@ import battleship.game.Game;
 import battleship.game.Player;
 import battleship.util.Sse;
 import io.javalin.Context;
-import io.javalin.serversentevent.SseClient;
 
 public class Players {
     private static Set<Player> players = new HashSet<>();
@@ -30,8 +29,7 @@ public class Players {
         
         Player p = getPlayer(ctx);
         
-        if(p.getClient() != null)
-            Sse.closeConection(p.getClient());
+        Sse.closeConection(p);
         
         players.remove(p);
         return p.getGame().delete(p);
@@ -42,11 +40,8 @@ public class Players {
     //Remove Player and Close Sse
     public static boolean remove(Player p) {
         //TODO test If SSE client is there
-        if(p.getClient() != null) {
-            SseClient client = p.getClient();
-            Sse.deletetGame(client);
-            Sse.closeConection(client);
-        }
+        Sse.deletetGame(p);
+        Sse.closeConection(p);
         
         return players.remove(p);
         //TODO sessionAttribute löschen ? 
@@ -84,19 +79,6 @@ public class Players {
                 .filter(g -> g.getId().equals(ctx.queryParam("Game")))
                 .findFirst()
                 .orElseThrow();
-    }
-
-    //Server Send Events
-    public static void connect(SseClient client) {
-        getPlayer(client.ctx).setClient(client);
-    }
-    
-    public static SseClient getClient(Context ctx) throws NoSuchElementException{
-        return getPlayer(ctx).getClient();
-    }
-
-    public static void disconect(Context ctx) {
-        getPlayer(ctx).setClient(null);;
     }
 
     //ID Generation

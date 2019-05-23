@@ -3,7 +3,6 @@ package battleship.game;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import io.javalin.BadRequestResponse;
 import io.javalin.serversentevent.SseClient;
 
 public class Player {

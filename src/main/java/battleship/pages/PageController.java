@@ -13,7 +13,7 @@ public class PageController {
         }
         
         //If Player has no SSe client force to Conect 
-        if(Players.getClient(ctx) == null)
+        if(Players.getPlayer(ctx).getClient() == null)
             ctx.header("Content-ID", "4");
         else
             ctx.header("Content-ID", "0");

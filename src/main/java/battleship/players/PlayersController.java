@@ -8,7 +8,6 @@ import battleship.util.Sse;
 import io.javalin.BadRequestResponse;
 import io.javalin.Context;
 import io.javalin.Handler;
-import io.javalin.serversentevent.SseClient;
 
 public class PlayersController {
     public static Handler startGame = ctx -> {
@@ -26,10 +25,8 @@ public class PlayersController {
             }
 
             //Send Message to other player
-            SseClient client = Players.playWith(ctx).getClient();
 
-            if (client != null)
-                Sse.playerConect(Players.playWith(ctx).getClient(), ctx.sessionAttribute("Name"));
+            Sse.playerConect(Players.playWith(ctx), ctx.sessionAttribute("Name"));
         }
 
         ctx.header("Content-ID", "4");
@@ -46,11 +43,11 @@ public class PlayersController {
             setBoat(ctx, cordinate);
         // move at Position
         } else if(p.getGame().move(p, cordinate)) {
-            Sse.boardChanged(p.getClient(), po.getClient());
+            Sse.boardChanged(p, po);
 
             if(p.getGame().isFinished()) {
                 Player winner = p.getGame().winner();
-                Sse.finish(winner.getClient(), winner.getGame().otherPlayer(winner).getClient());
+                Sse.finish(winner, winner.getGame().otherPlayer(winner));
             } 
 
             ctx.header("Content-ID", "6");
@@ -68,17 +65,17 @@ public class PlayersController {
 
         if (p.setships(cordinate)) {
             ctx.result(p.getfield(true, true));
-            p.getClient().sendEvent("UpdateMyships","UpdateMyships");
+            Sse.updateMyships(p);
             Player pO = p.getGame().otherPlayer(p);
-            if(pO != null && pO.getClient() != null)
-                pO.getClient().sendEvent("UpdateEnemyships", "UpdateEnemyships");
+            if(pO != null)
+                Sse.updateEnemyships(pO);
             if(p.getshipslength() == 0) {
                 p.getGame().Stateadd();
                 if(p.getGame().getState() == 4) {
-                    Sse.changeBoards(p.getClient(), pO.getClient());
+                    Sse.changeBoards(p, pO);
                     p.changeMyTurn();
                 } else 
-                    Sse.wait(p.getClient());
+                    Sse.wait(p);
                 ctx.result(pO.getfield(true, false));
             }
 

@@ -200,14 +200,13 @@ async function conectSSE() {
     //Listener 
     eventSource.addEventListener('Conection', e => conectionStatus(e.data));
     eventSource.addEventListener('QuitGame', e => playerQuited(e.data));
-    eventSource.addEventListener('UpdateMyships', e => getMyShips());
-    eventSource.addEventListener('UpdateEnemyships', e => getEnemyShips());
-    eventSource.addEventListener('UpdateEnemyboard', e => getEnemyField());
-    eventSource.addEventListener('Updateboard', e => getmyField());
+    eventSource.addEventListener('UpdateMyships', e => reloadmyShips(e.data));
+    eventSource.addEventListener('UpdateEnemyships', e => reloadenemyShips(e.data));
+    eventSource.addEventListener('UpdateEnemyboard', e => reloadenemyField(e.data));
+    eventSource.addEventListener('Updateboard', e => realoadField(e.data));
     eventSource.addEventListener('ShipReady', e => shipReady());
     eventSource.addEventListener('YouWon', e => win());
     eventSource.addEventListener('YouLose', e => lose());
-
     //Message handle Functions
     function conectionStatus(data) {
         //TODO vlt. mit id wie? 
@@ -224,26 +223,6 @@ async function conectSSE() {
     function playerQuited(data) {
         alert(data);
         getPage();
-    }
-    async function getMyShips() {
-        setTimeout(function() {
-            sentRequestGet('/player/getmyships');
-        }, 10);
-    }
-    function getEnemyShips() {
-        setTimeout(function() {
-            sentRequestGet('/player/getenemyships');
-        }, 10);
-    }
-    async function getEnemyField() {
-        setTimeout(function() {
-            sentRequestGet('/player/getenemyfield');
-        }, 20);
-    }
-    async function getmyField() {
-        setTimeout(function() {
-            sentRequestGet('/player/getmyfield');
-        }, 20);
     }
     function win() {
             alert("You Won the Game!");
