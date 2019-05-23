@@ -15,8 +15,17 @@ public class Sse {
     
     public static Consumer<SseClient> init = client -> {
         //Client zum Player Hinzufügen (Durch AccesManager ist Sichergestellt das Player-id da und valide)
-        Players.getPlayer(client.ctx).setClient(client);
+        Player p = Players.getPlayer(client.ctx);
+        Player po = p.getGame().otherPlayer(p);
+        p.setClient(client);
         client.sendEvent("Conection", "Conected");
+        updateMyships(p);
+        //TODO chek if in second game phase and do then other things 
+        updateMyBoard(p);
+        if(po != null) {
+            updateEnemyships(p, po);
+        }
+
         client.onClose(close);
     };
 
@@ -25,14 +34,24 @@ public class Sse {
             po.getClient().sendEvent("PlayerConect", name + " conected to the Game!");
     }
 
+    public static void updateMyBoard(Player p) {
+        if(hasClient(p))
+            p.getClient().sendEvent("updateMyBoard", p.getfield(true, true));
+    }
+    
+    public static void updateEnemyBoard(Player p) {
+        if(hasClient(p))
+            p.getClient().sendEvent("UpdateEnemyboard", p.getfield(false, true));
+    }
+
     public static void updateMyships(Player p) {
         if(hasClient(p))
             p.getClient().sendEvent("UpdateMyships", p.getshipstatus());
     }
 
     public static void updateEnemyships(Player p, Player po) {
-        if(hasClient(po))
-            po.getClient().sendEvent("UpdateEnemyships", p.getshipstatus());
+        if(hasClient(p))
+            p.getClient().sendEvent("UpdateEnemyships", po.getshipstatus());
     }
 
     public static void wait(Player p) {
@@ -41,21 +60,16 @@ public class Sse {
     }
 
     public static void changeBoards(Player p, Player po) {
-        if(hasClient(p))
-            p.getClient().sendEvent("UpdateEnemyboard", p.getfield(false, true));
-        if(hasClient(po)) {
+        updateEnemyBoard(p);
+        updateEnemyBoard(po);
+        if(hasClient(po))
             po.getClient().sendEvent("StartGame", "StartGame");
-            po.getClient().sendEvent("UpdateEnemyboard", po.getfield(false, true));
-        }
     }
 
     public static void boardChanged(Player p, Player po) {
-        if(hasClient(p))
-            p.getClient().sendEvent("UpdateEnemyships", po.getshipstatus());
-        if(hasClient(po)) {
-            po.getClient().sendEvent("UpdateMyships", po.getshipstatus());
-            po.getClient().sendEvent("UpdateEnemyboard", po.getfield(false, true));
-        }
+        updateEnemyships(p, po);
+        updateMyships(po);
+        updateEnemyBoard(po);
     }
 
     public static void finish(Player winner, Player po) {

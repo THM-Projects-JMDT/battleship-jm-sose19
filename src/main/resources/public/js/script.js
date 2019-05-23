@@ -203,7 +203,7 @@ async function conectSSE() {
     eventSource.addEventListener('UpdateMyships', e => reloadmyShips(e.data));
     eventSource.addEventListener('UpdateEnemyships', e => reloadenemyShips(e.data));
     eventSource.addEventListener('UpdateEnemyboard', e => reloadenemyField(e.data));
-    eventSource.addEventListener('Updateboard', e => realoadField(e.data));
+    eventSource.addEventListener('updateMyBoard', e => realoadField(e.data));
     eventSource.addEventListener('ShipReady', e => shipReady());
     eventSource.addEventListener('YouWon', e => win());
     eventSource.addEventListener('YouLose', e => lose());
