@@ -24,6 +24,7 @@ public class Sse {
         getSetBoard(p);
         if(po != null) {
             updateEnemyships(p, po);
+            updateEnemyships(po, p);
         }
 
         client.onClose(close);
