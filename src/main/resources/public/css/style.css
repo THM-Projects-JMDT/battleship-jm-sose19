@@ -96,6 +96,7 @@ table {
     text-align: center;
 }
 #enemyschiffe {
+    display: none;
     padding: 0px;
     margin: 0 auto;
 }
@@ -109,13 +110,12 @@ table {
     text-align: center;
 }
 #enemyboard {
+    display: none;
     padding: 0px;
     margin: 0 auto;
 }
 
 #enemyboard tr td {
-    width: 26px;
-    height: 26px;
     border: 1px solid #1c1c1c;
     font-family: Helvetica;
     font-size: 30px;
