@@ -35,6 +35,21 @@
 #close:hover {
     color: darkgray;
 }
+
+#waitText {
+    color: #1b86c1;
+}
+#waitSpinner {
+    width: 3rem;
+    height: 3rem;
+    color: #1b86c1;
+}
+#quitGame {
+    position: fixed;
+    margin: 8px;
+    top: 0;
+    right: 0;
+}
 #login {
     border: 1px solid lightgrey;
     border-radius: 8px;

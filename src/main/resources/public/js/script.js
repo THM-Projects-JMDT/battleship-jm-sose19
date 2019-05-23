@@ -273,3 +273,12 @@ function copyID() {
     el.select();
     document.execCommand('copy');
 }
+
+function quitWait() {
+    var check = confirm('\u26A0 Are you sure you want to leave the game? \n (All progress will be lost)');
+    if(check == true) {
+        sentRequestGet('/player/remove');
+        myWindow.style.display = "none";
+        waiting.style.display = "none";
+    }
+}
