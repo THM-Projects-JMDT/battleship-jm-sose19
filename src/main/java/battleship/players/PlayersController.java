@@ -68,7 +68,7 @@ public class PlayersController {
             Sse.updateMyships(p);
             Player pO = p.getGame().otherPlayer(p);
             if(pO != null)
-                Sse.updateEnemyships(pO);
+                Sse.updateEnemyships(p, pO);
             if(p.getshipslength() == 0) {
                 p.getGame().Stateadd();
                 if(p.getGame().getState() == 4) {

@@ -30,9 +30,9 @@ public class Sse {
             p.getClient().sendEvent("UpdateMyships", p.getshipstatus());
     }
 
-    public static void updateEnemyships(Player po) {
+    public static void updateEnemyships(Player p, Player po) {
         if(hasClient(po))
-            po.getClient().sendEvent("UpdateEnemyships", po.getshipstatus());
+            po.getClient().sendEvent("UpdateEnemyships", p.getshipstatus());
     }
 
     public static void wait(Player p) {
