@@ -27,5 +27,6 @@ public class Path {
         public static final String LOGIN = DIR + "login" + END;
         public static final String ABOUT = "/" + DIR + "about.md";
         public static final String GAME = DIR + "game" + END;
+        public static final String WAIT = DIR + "wait" + END;
     }
 }

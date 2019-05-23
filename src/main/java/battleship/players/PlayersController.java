@@ -72,11 +72,11 @@ public class PlayersController {
             if(p.getshipslength() == 0) {
                 p.getGame().Stateadd();
                 if(p.getGame().getState() == 4) {
+                    ctx.result(pO.getfield(true, false));
                     Sse.changeBoards(p, pO);
                     p.changeMyTurn();
                 } else 
                     Sse.wait(p);
-                ctx.result(pO.getfield(true, false));
             }
 
             return;

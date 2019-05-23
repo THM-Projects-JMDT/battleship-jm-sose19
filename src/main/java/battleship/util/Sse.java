@@ -21,7 +21,7 @@ public class Sse {
         client.sendEvent("Conection", "Conected");
         updateMyships(p);
         //TODO chek if in second game phase and do then other things 
-        updateMyBoard(p);
+        getSetBoard(p);
         if(po != null) {
             updateEnemyships(p, po);
         }
@@ -34,11 +34,16 @@ public class Sse {
             po.getClient().sendEvent("PlayerConect", name + " conected to the Game!");
     }
 
-    public static void updateMyBoard(Player p) {
+    public static void getSetBoard(Player p) {
         if(hasClient(p))
             p.getClient().sendEvent("updateMyBoard", p.getfield(true, true));
     }
-    
+
+    public static void updateMyBoard(Player p, Player po) {
+        if(hasClient(p))
+            p.getClient().sendEvent("updateMyBoard", po.getfield(true, false));
+    }
+
     public static void updateEnemyBoard(Player p) {
         if(hasClient(p))
             p.getClient().sendEvent("UpdateEnemyboard", p.getfield(false, true));
@@ -56,12 +61,13 @@ public class Sse {
 
     public static void wait(Player p) {
         if(hasClient(p))
-            p.getClient().sendEvent("Wait", "Wait");
+            p.getClient().sendEvent("Wait", p.getClient().ctx.render(Path.Pages.WAIT).resultString());
     }
 
     public static void changeBoards(Player p, Player po) {
         updateEnemyBoard(p);
         updateEnemyBoard(po);
+        updateMyBoard(po, p);
         if(hasClient(po))
             po.getClient().sendEvent("StartGame", "StartGame");
     }

@@ -3,6 +3,7 @@ var xhr = new XMLHttpRequest;
 
 //variable
 var myWindow = document.getElementById('window');
+var waiting = document.getElementById('wating');
 var falseGameID = false;
 
 //Listener
@@ -155,14 +156,17 @@ function resetFalseGameID() {
 
 function openWindow(resonse='') {
     myWindow.style.display = "block";
+    document.getElementById('windowContent').style.display = "block";
     document.getElementById('lodedWindowContent').innerHTML = resonse;
 }
 
 function closeWindow() {
     myWindow.style.display = "none";
+    document.getElementById('windowContent').style.display = "none";
+    document.getElementById('wating').style.display = "none";
 }
 function closeWindowbyFokus(e) {
-    if(e.target == myWindow) {
+    if(e.target == myWindow && waiting.style.display == "none") {
         closeWindow();
     }
 }
@@ -205,6 +209,8 @@ async function conectSSE() {
     eventSource.addEventListener('UpdateEnemyboard', e => reloadenemyField(e.data));
     eventSource.addEventListener('updateMyBoard', e => realoadField(e.data));
     eventSource.addEventListener('ShipReady', e => shipReady());
+    eventSource.addEventListener('Wait', e => wait(e.data));
+    eventSource.addEventListener('StartGame', e => start());
     eventSource.addEventListener('YouWon', e => win());
     eventSource.addEventListener('YouLose', e => lose());
     //Message handle Functions
@@ -224,6 +230,17 @@ async function conectSSE() {
         alert(data);
         getPage();
     }
+
+    function wait(data = '') {
+        myWindow.style.display = "block";
+        waiting.style.display = "block";
+        waiting.innerHTML = data;
+    }
+
+    function start() {
+        closeWindow();
+    }
+
     function win() {
             alert("You Won the Game!");
     }

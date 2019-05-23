@@ -10,6 +10,7 @@
     background-color: rgba(0,0,0,0.8);
 }
 #windowContent {
+    display: none;
     background-color: #fefefe;
     margin: auto;
     border: solid lightgrey;
@@ -19,6 +20,9 @@
 }
 #lodedWindowContent {
     padding: 20px;
+}
+#wating {
+    display: none;
 }
 #close {
     color: gray;
