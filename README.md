@@ -2,7 +2,7 @@
 
 > Unser Projekt ist "Schiffe versenken". //TODO: Beschreibung
 
-![Screenshot](Screenshot.png)
+![Screenshot](Screenshot-Battleship.png)
 
 Keywords: Bootstrap, Server-Sent Events (SSE), Accessmanager, Path
 
