@@ -85,33 +85,6 @@ public class PlayersController {
         throw new BadRequestResponse("Invalide Placement!");
     }
 
-    public static Handler myShips = ctx -> {
-        ctx.header("Content-ID", "7");
-        Player p = Players.getPlayer(ctx);
-        ctx.result(p.getshipstatus());
-    };
-    public static Handler myField = ctx -> {
-        ctx.header("Content-ID", "6");
-        Player p = Players.getPlayer(ctx);
-        ctx.result(p.getGame().otherPlayer(p).getfield(true, false));
-    };
-
-    public static Handler enemyShips = ctx -> {
-        ctx.header("Content-ID", "8");
-        Player p = Players.getPlayer(ctx);
-        Player pO = p.getGame().otherPlayer(p);
-
-        if(pO == null)
-            throw new BadRequestResponse("Enemy has no Board!");
-        ctx.result(pO.getshipstatus());
-    };
-
-    public static Handler enemyField = ctx -> {
-        ctx.header("Content-ID", "9");
-        Player p = Players.getPlayer(ctx);
-        ctx.result(p.getfield(false, true));
-    };
-
     public static Handler removePlayer = ctx -> {
         Players.removeWithGame(ctx);
         ctx.header("Content-ID", "0");

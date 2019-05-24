@@ -138,7 +138,6 @@ function onloadLogin(resonse='') {
 function onloadGame(resonse='') {
     newHtmlContent(resonse);
     conectSSE();
-    sentRequestGet('/player/getmyships')
 }
 
 function invalidGamID() {

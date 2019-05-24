@@ -22,10 +22,6 @@ public class App {
             get(Path.Web.GETGAMEID, GameController.getGameid, Access.REGISTERED);
             get(Path.Web.STARTGAME, PlayersController.startGame, Access.REGISTERED);
             get(Path.Web.MOVE, PlayersController.move, Access.REGISTERED);
-            get(Path.Web.GETMYSHIPS, PlayersController.myShips, Access.REGISTERED);
-            get(Path.Web.GETENEMYSHIPS, PlayersController.enemyShips, Access.REGISTERED);
-            get(Path.Web.GETENEMYFIELD, PlayersController.enemyField, Access.REGISTERED);
-            get(Path.Web.GETMYFIELD, PlayersController.myField, Access.REGISTERED);
             get(Path.Web.REMOVEPLAYER, PlayersController.removePlayer, Access.REGISTERED);
         });
 
