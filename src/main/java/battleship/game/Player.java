@@ -10,8 +10,7 @@ public class Player {
     private SseClient client;
     private SimpleMap<Integer, Integer>[] field;
     private Game game;
-    private int[] shipslength = {2};
-    private int[] shipslength2 = {2, 2, 3, 3, 4, 5};
+    private int[] shipslength = {2, 2, 3, 3, 4, 5};
     private final int[] shipsize = Arrays.copyOf(shipslength, shipslength.length);
     private boolean hitBoat; 
 
@@ -153,23 +152,29 @@ public class Player {
 
     public String getfield(boolean hauptfeld, boolean phase2) {
         String ausgabe = "";
-        ausgabe += String.format("<tr>\n" +
-                "                <td style=\"background-color: #bbb;\"></td>\n" +
-                "                <td style=\"background-color: #eff;\">A</td>\n" +
-                "                <td style=\"background-color: #eff;\">B</td>\n" +
-                "                <td style=\"background-color: #eff;\">C</td>\n" +
-                "                <td style=\"background-color: #eff;\">D</td>\n" +
-                "                <td style=\"background-color: #eff;\">E</td>\n" +
-                "                <td style=\"background-color: #eff;\">F</td>\n" +
-                "                <td style=\"background-color: #eff;\">G</td>\n" +
-                "                <td style=\"background-color: #eff;\">H</td>\n" +
-                "                <td style=\"background-color: #eff;\">I</td>\n" +
-                "                <td style=\"background-color: #eff;\">J</td>\n" +
-                "\n" +
-                "            </tr>");
+        if(hauptfeld==true) {
+            ausgabe += String.format("<tr>\n" +
+                    "                <td style=\"background-color: #bbb;\"></td>\n" +
+                    "                <td style=\"background-color: #eff;\">A</td>\n" +
+                    "                <td style=\"background-color: #eff;\">B</td>\n" +
+                    "                <td style=\"background-color: #eff;\">C</td>\n" +
+                    "                <td style=\"background-color: #eff;\">D</td>\n" +
+                    "                <td style=\"background-color: #eff;\">E</td>\n" +
+                    "                <td style=\"background-color: #eff;\">F</td>\n" +
+                    "                <td style=\"background-color: #eff;\">G</td>\n" +
+                    "                <td style=\"background-color: #eff;\">H</td>\n" +
+                    "                <td style=\"background-color: #eff;\">I</td>\n" +
+                    "                <td style=\"background-color: #eff;\">J</td>\n" +
+                    "\n" +
+                    "            </tr>");
+        }
         for (int i = 0; i < field.length; i++) {
             if (i % 10 == 0)
-                ausgabe += " <tr>\n" + String.format("<td style=\"background-color: #eff;\">") + (i / 10 + 1) + "</td>\n";
+                if(hauptfeld==true) {
+                    ausgabe += " <tr>\n" + String.format("<td style=\"background-color: #eff;\">") + (i / 10 + 1) + "</td>\n";
+                } else{
+                    ausgabe += " <tr>\n";
+                }
             if (field[i].getLeft() == 0) {
                 if (hauptfeld == false) {
                     ausgabe += String.format("<td style=\"background-color: #fff;\"></td>\n");

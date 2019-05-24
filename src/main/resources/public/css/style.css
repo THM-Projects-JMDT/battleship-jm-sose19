@@ -135,6 +135,8 @@ table {
 }
 
 #enemyboard tr td {
+    width: 30px;
+    height: 30px;
     border: 1px solid #1c1c1c;
     font-family: Helvetica;
     font-size: 30px;
