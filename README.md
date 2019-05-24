@@ -1,9 +1,6 @@
 # Projekt: Battleship (Fr/2, Kr)
 
-> Unser Projekt ist "Schiffe versenken".
-
-TODO: Beschreibung
-
+> Unser Projekt ist "Schiffe versenken". //TODO: Beschreibung
 
 ![Screenshot](Screenshot.png)
 
@@ -16,5 +13,3 @@ Projektbeteiligte:
 
 
 <Inhaltsverzeichnis>
-
-
