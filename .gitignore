@@ -4,6 +4,7 @@ gradle
 .settings
 .classpath
 .project
+.idea
 gradlew
 gradlew.bat
 settings.gradle
