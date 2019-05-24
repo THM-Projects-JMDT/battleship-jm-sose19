@@ -1,5 +1,6 @@
 package battleship.game;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
@@ -8,7 +9,7 @@ import io.javalin.serversentevent.SseClient;
 public class Player {
     private String id;
     private SseClient client;
-    private SimpleMap<Integer, Integer>[] field;
+    private ArrayList<SimpleMap<Integer, Integer>> field;
     private Game game;
     private int[] shipslength = {2, 2, 3, 3, 4, 5};
     private final int[] shipsize = Arrays.copyOf(shipslength, shipslength.length);
@@ -18,9 +19,9 @@ public class Player {
 
     public Player(String id) {
         this.id = id;
-        field = new SimpleMap[100];
-        for (int i = 0; i < field.length; i++) {
-            field[i] = new SimpleMap<>(0, -1);
+        field = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            field.add(new SimpleMap<>(0, -1));
         }
     }
 
@@ -71,24 +72,24 @@ public class Player {
         int counter = shipslength.length - 1;
         while (shipslength[counter] == 0)
             counter--;
-        if (field[feld].getRight() != -1) return false;
+        if (field.get(feld).getRight() != -1) return false;
 
         int[] temp = new int[shipsize[counter] - shipslength[counter]];
         if (temp.length == 0) {
             shipslength[counter]--;
-            field[feld] = new SimpleMap<>(2, counter);
+            field.set(feld,new SimpleMap<>(2, counter));
             if(shipsize[counter]-shipslength[counter]==shipsize[counter])
                 client.sendEvent("ShipReady","ShipReady");
             return true;
         }
         int j = 0;
-        for (int i = 0; i < field.length; i++) {
-            if (field[i].getRight() == counter) temp[j++] = i;
+        for (int i = 0; i < field.size(); i++) {
+            if (field.get(i).getRight() == counter) temp[j++] = i;
         }
         if ((temp[0] % 10 == 0 || feld % 10 == 0) && (temp[0] % 10 == 9 || feld % 10 == 9)) return false;
         if (temp.length == 1 && (temp[0] - feld == 10 || temp[0] - feld == -10 || temp[0] - feld == 1 || temp[0] - feld == -1)) {
             shipslength[counter]--;
-            field[feld] = new SimpleMap<>(2, counter);
+            field.set(feld,new SimpleMap<>(2, counter));
             if(shipsize[counter]-shipslength[counter]==shipsize[counter])
                 client.sendEvent("ShipReady","ShipReady");
             return true;
@@ -102,14 +103,14 @@ public class Player {
             }
             if (temp[0] - multiplikator == feld) {
                 shipslength[counter]--;
-                field[feld] = new SimpleMap<>(2, counter);
+                field.set(feld,new SimpleMap<>(2, counter));
                 if(shipsize[counter]-shipslength[counter]==shipsize[counter])
                     client.sendEvent("ShipReady","ShipReady");
                 return true;
             }
             if (temp[temp.length - 1] + multiplikator == feld) {
                 shipslength[counter]--;
-                field[feld] = new SimpleMap<>(2, counter);
+                field.set(feld,new SimpleMap<>(2, counter));
                 if(shipsize[counter]-shipslength[counter]==shipsize[counter])
                     client.sendEvent("ShipReady","ShipReady");
                 return true;
@@ -124,9 +125,9 @@ public class Player {
             ausgabe += "<tr>\n";
             int[] temp = new int[shipsize[i]];
             int x = 0;
-            for (int j = 0; j < field.length; j++) {
-                if (field[j].getRight() == i)
-                    temp[x++] = field[j].getLeft();
+            for (int j = 0; j < field.size(); j++) {
+                if (field.get(j).getRight() == i)
+                    temp[x++] = field.get(j).getLeft();
             }
 
             for (int y = 0; y < temp.length; y++) {
@@ -168,31 +169,31 @@ public class Player {
                     "\n" +
                     "            </tr>");
         }
-        for (int i = 0; i < field.length; i++) {
+        for (int i = 0; i < field.size(); i++) {
             if (i % 10 == 0)
                 if(hauptfeld==true) {
                     ausgabe += " <tr>\n" + String.format("<td style=\"background-color: #eff;\">") + (i / 10 + 1) + "</td>\n";
                 } else{
                     ausgabe += " <tr>\n";
                 }
-            if (field[i].getLeft() == 0) {
+            if (field.get(i).getLeft() == 0) {
                 if (hauptfeld == false) {
                     ausgabe += String.format("<td style=\"background-color: #fff;\"></td>\n");
                 }else {
                     ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #fff;\"></td>\n");
                 }
             }
-            if (field[i].getLeft() == 1) {
+            if (field.get(i).getLeft() == 1) {
                     ausgabe += String.format("<td style=\"background-color: #888;\"></td>\n");
             }
-            if (field[i].getLeft() == 2) {
+            if (field.get(i).getLeft() == 2) {
                 if (phase2==true) {
                     ausgabe += String.format("<td style=\"background-color: #080;\"></td>\n");
                 } else {
                     ausgabe += String.format("<td onclick=\"sendMove(") + i + String.format(")\" style=\"background-color: #fff;\"></td>\n");
                 }
             }
-            if (field[i].getLeft() == 3) {
+            if (field.get(i).getLeft() == 3) {
                 if (hauptfeld == false) {
                     ausgabe += String.format("<td style=\"background-color: #f00;\"></td>\n");
                 } else {
@@ -210,17 +211,17 @@ public class Player {
         if (!myTurn)
             return false;
 
-        hitBoat = field[i].getLeft() == 2;
+        hitBoat = field.get(i).getLeft() == 2;
 
-        if (field[i].getLeft() == 0 || hitBoat) {
-            field[i].setLeft(field[i].getLeft() + 1);
+        if (field.get(i).getLeft() == 0 || hitBoat) {
+            field.get(i).setLeft(field.get(i).getLeft() + 1);
             return true;
         }
         return false;
     }
 
     public boolean checkifend() {
-        return Stream.of(field).mapToInt(n -> n.getLeft()).filter(n -> n % 2 == 0).sum() == 0;
+        return field.stream().mapToInt(n -> n.getLeft()).filter(n -> n % 2 == 0).sum() == 0;
     }
 
     public void changeMyTurn(){
