@@ -1,16 +1,20 @@
-<div id="login" class="w-50 p-4">
-    <div id="GameIDform" class="form-group">
-        <label for="GameID">Game-ID</label>
-        <input type="text" class="form-control" id="GameID" placeholder="Game-ID" oninput="resetFalseGameID()">
-        <label id="GameIDError">Wrong Game-ID! Please try again.</label>
-        <button id="copyID" type="button" class="btn btn-primary" onclick="copyID()">Copy-ID</button>
-    </div>
-    <div id="Nameform" class="form-group">
-        <label for="Name">Name</label>
-        <input type="text" class="form-control" id="Name" placeholder="Enter Name">
-    </div>
+<div class="row">
+    <div class="col-4"></div>
+    <div id="login" class="col-4">
+        <label class="login-label" for="GameID">Game-ID:</label>
+        <div class="input-group mb-3">
+            <div id="copyID" class="input-group-prepend">
+                <button class="btn btn-outline-primary" type="button" onclick="copyID()">Copy-ID</button>
+            </div>
+            <input type="text" class="form-control" id="GameID" placeholder="Game-ID" oninput="resetFalseGameID()">
+        </div>
+        <p><label for="GameID" id="GameIDError">Wrong Game-ID! Please try again.</label></p>
 
-    <div class="col-md-4">
-        <button id="newGame" type="button" class="btn btn-primary btn-lg" onclick="startGame()">Start Game</button>
+        <label class="login-label" for="Name">Enter your Name:</label>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Your Name" id="Name" name="Name">
+        </div>
+        <button id="startGame" type="button" class="btn  btn-outline-primary btn-lg" onclick="startGame()">Start Game</button>
     </div>
+    <div class="col-4"></div>
 </div>

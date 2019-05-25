@@ -61,15 +61,18 @@
     right: 0;
 }
 #login {
+    margin-top: 10px;
     border: 1px solid lightgrey;
     border-radius: 8px;
-    position: relative;
-    left: 400px;
-    margin: 8px;
-    align-content: center;
+    /*height: 250px;
+    /*align-content: center;*/
 }
-#copyID {
-    margin: 4px;
+.login-label {
+    margin-top: 4px;
+    color: #043296;
+}
+#startGame {
+    margin-bottom: 4px;
 }
 #GameIDError {
     display: none;
