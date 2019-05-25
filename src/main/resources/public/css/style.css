@@ -1,7 +1,13 @@
 *{
     font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
 }
-
+.navbar-dark {
+    background-color: #1b86c1;
+}
+.btn-primary  {
+    width: 150px;
+    height: 50px;
+}
 #window {
     display: none;
     position: fixed;
@@ -79,19 +85,20 @@
 table {
     border-collapse: collapse;
     border-spacing: 0;
+    color: white;
 }
 
 #mainboard {
     padding: 0px;
     margin: 0 auto;
-    /*border: 8px solid #1b86c1;*/
+    border: 4px solid #043296;
 }
 
 #mainboard tr td {
     width: 45px;
     height: 45px;
     border: 1px solid;
-    border-color: #1c1c1c;
+    border-color: #043296;
     font-size: 30px;
     text-align: center;
 }
@@ -107,45 +114,45 @@ table {
 #schiffe {
     padding: 0px;
     margin: 0 auto;
+    border: 4px solid #043296;
 }
 
 #schiffe tr td {
     width: 35px;
     height: 20px;
-    border: 1px solid #1c1c1c;
+    border: 1px solid #043296;
     font-size: 30px;
     text-align: center;
 }
 #enemyschiffe {
-    display: none;
     padding: 0px;
     margin: 0 auto;
+    border: 4px solid #043296;
 }
 
 #enemyschiffe tr td {
     width: 35px;
     height: 20px;
-    border: 1px solid #1c1c1c;
+    border: 1px solid; 
+    border-color: #043296;
     font-size: 30px;
     text-align: center;
 }
 #enemyboard {
-    display: none;
     padding: 0px;
     margin: 0 auto;
+    border: 4px solid #043296;
 }
 
 #enemyboard tr td {
     width: 30px;
     height: 30px;
-    border: 1px solid #1c1c1c;
+    border: 1px solid; 
+    border-color: #043296;
     font-size: 30px;
     text-align: center;
 }
 
-
-
 #mainboard tr td:hover {
-    background: #e4e4e4;
     cursor: pointer;
 }

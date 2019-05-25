@@ -155,24 +155,24 @@ public class Player {
         String ausgabe = "";
         if(hauptfeld==true) {
             ausgabe += String.format("<tr>\n" +
-                    "                <td style=\"background-color: #bbb;\"></td>\n" +
-                    "                <td style=\"background-color: #eff;\">A</td>\n" +
-                    "                <td style=\"background-color: #eff;\">B</td>\n" +
-                    "                <td style=\"background-color: #eff;\">C</td>\n" +
-                    "                <td style=\"background-color: #eff;\">D</td>\n" +
-                    "                <td style=\"background-color: #eff;\">E</td>\n" +
-                    "                <td style=\"background-color: #eff;\">F</td>\n" +
-                    "                <td style=\"background-color: #eff;\">G</td>\n" +
-                    "                <td style=\"background-color: #eff;\">H</td>\n" +
-                    "                <td style=\"background-color: #eff;\">I</td>\n" +
-                    "                <td style=\"background-color: #eff;\">J</td>\n" +
+                    "                <td style=\"background-color: #1b86c1;\"></td>\n" +
+                    "                <td style=\"background-color: #1b86c1;\">A</td>\n" +
+                    "                <td style=\"background-color: #1b86c1;\">B</td>\n" +
+                    "                <td style=\"background-color: #1b86c1;\">C</td>\n" +
+                    "                <td style=\"background-color: #1b86c1;\">D</td>\n" +
+                    "                <td style=\"background-color: #1b86c1;\">E</td>\n" +
+                    "                <td style=\"background-color: #1b86c1;\">F</td>\n" +
+                    "                <td style=\"background-color: #1b86c1;\">G</td>\n" +
+                    "                <td style=\"background-color: #1b86c1;\">H</td>\n" +
+                    "                <td style=\"background-color: #1b86c1;\">I</td>\n" +
+                    "                <td style=\"background-color: #1b86c1;\">J</td>\n" +
                     "\n" +
                     "            </tr>");
         }
         for (int i = 0; i < field.size(); i++) {
             if (i % 10 == 0)
                 if(hauptfeld==true) {
-                    ausgabe += " <tr>\n" + String.format("<td style=\"background-color: #eff;\">") + (i / 10 + 1) + "</td>\n";
+                    ausgabe += " <tr>\n" + String.format("<td style=\"background-color: #1b86c1;\">") + (i / 10 + 1) + "</td>\n";
                 } else{
                     ausgabe += " <tr>\n";
                 }

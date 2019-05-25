@@ -175,15 +175,12 @@ function realoadField(resonse='') {
 }
 async function reloadenemyField(resonse='') {
     document.getElementById('enemyboard').innerHTML = resonse;
-    //TODO bei allen vtl testen ob schon sichtbar? 
-    document.getElementById('enemyboard').style.display = "inline";
 }
 function reloadmyShips(resonse='') {
     document.getElementById('schiffe').innerHTML = resonse;
 }
 function reloadenemyShips(resonse='') {
     document.getElementById('enemyschiffe').innerHTML = resonse;
-    document.getElementById('enemyschiffe').style.display = "inline";
 }
 
 function invalidePlacement(resonse='') {
