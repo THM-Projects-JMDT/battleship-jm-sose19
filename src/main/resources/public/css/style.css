@@ -90,7 +90,12 @@ table {
     border-spacing: 0;
     color: white;
 }
-
+.game {
+    margin-top: 20px; 
+}
+.enemyboard {
+    margin-top: 20px;
+}
 #mainboard {
     padding: 0px;
     margin: 0 auto;
