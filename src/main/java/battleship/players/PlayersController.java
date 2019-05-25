@@ -25,7 +25,6 @@ public class PlayersController {
             }
 
             //Send Message to other player
-
             Sse.playerConect(Players.playWith(ctx), ctx.sessionAttribute("Name"));
         }
 

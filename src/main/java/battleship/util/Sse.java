@@ -22,6 +22,7 @@ public class Sse {
         updateMyships(p);
         //TODO chek if in second game phase and do then other things 
         getSetBoard(p);
+        sendGameID(p);
         if(po != null) {
             updateEnemyships(p, po);
             updateEnemyships(po, p);
@@ -33,6 +34,17 @@ public class Sse {
     public static void playerConect(Player po, String name) {
         if(hasClient(po))
             po.getClient().sendEvent("PlayerConect", name + " conected to the Game!");
+    }
+
+    public static void sendGameID(Player p) {
+        if(hasClient(p))
+            p.getClient().sendEvent("GameID", p.getGame().getId());
+    }
+
+    public static void deleteGameID(Player p) {
+        if(hasClient(p))
+        //TODo vtl mit ids 
+            p.getClient().sendEvent("delGameID", "delGameID");
     }
 
     public static void getSetBoard(Player p) {

@@ -200,6 +200,8 @@ async function conectSSE() {
     //Listener 
     eventSource.addEventListener('Conection', e => conectionStatus(e.data));
     eventSource.addEventListener('QuitGame', e => playerQuited(e.data));
+    eventSource.addEventListener('GameID', e => footerGameID(e.data));
+    eventSource.addEventListener('delGameID', e => delFooterGameID());
     eventSource.addEventListener('UpdateMyships', e => reloadmyShips(e.data));
     eventSource.addEventListener('UpdateEnemyships', e => reloadenemyShips(e.data));
     eventSource.addEventListener('UpdateEnemyboard', e => reloadenemyField(e.data));
@@ -225,6 +227,14 @@ async function conectSSE() {
     function playerQuited(data) {
         alert(data);
         getPage();
+    }
+
+    function footerGameID(data='') {
+        document.getElementById('footerText').innerHTML = "Game-ID: " + data;
+    }
+
+    function delFooterGameID() {
+        document.getElementById('footerText').innerHTML = "";
     }
 
     function wait(data = '') {

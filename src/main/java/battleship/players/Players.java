@@ -29,6 +29,7 @@ public class Players {
         
         Player p = getPlayer(ctx);
         
+        Sse.deleteGameID(p);
         Sse.closeConection(p);
         
         players.remove(p);
@@ -39,8 +40,8 @@ public class Players {
 
     //Remove Player and Close Sse
     public static boolean remove(Player p) {
-        //TODO test If SSE client is there
         Sse.deletetGame(p);
+        Sse.deleteGameID(p);
         Sse.closeConection(p);
         
         return players.remove(p);
