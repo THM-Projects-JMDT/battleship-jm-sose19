@@ -13,7 +13,7 @@ Projektbeteiligte:
 
 
 <Inhaltsverzeichnis>
-//TODO
+//TODO Inhaltsverzeichnis
 
 # Server-Sent Events (SSE)
 
@@ -28,7 +28,7 @@ app.sse("/sse", client -> {
 });
 ```
 ```js
-//Client mit sse verbinden
+//Client mit SSE verbinden
 var eventSource = new EventSource("//" + location.hostname + ":" + location.port + "/sse"); 
 
 //Antwort Listener
@@ -61,6 +61,36 @@ client.sendEvent("event", "data", "1");
 ```
 
 # Accessmanager
+
+```Java
+//AccesManager konfigurieren
+app.accessManager((handler, ctx, permittedRoles) -> {
+    MyRole userRole = getUserRole(ctx);
+    if (permittedRoles.contains(userRole)) {
+        handler.handle(ctx);
+    } else {
+        ctx.status(401).result("Unauthorized");
+    }
+});
+
+Role getUserRole(Context ctx) {
+    //Benutzer Role herausfinden und zurückgeben 
+}
+
+//Mögliche Rollen festlegen 
+enum MyRole implements Role {
+    ANYONE, ROLE_ONE, ROLE_TWO, ROLE_THREE;
+}
+```
+
+> **Achtung**:  app.accesManager muss vor app.start() aufgerufen werden
+
+```Java
+app.get("/test", ctx -> { 
+        //Normaler get code 
+    }, roles(ANYONE));
+    //als roles(ANYONE) muss ein Set<Role> mit allen erlaubent Rollen übergeben werden
+```
 
 # ctx.render()
 
