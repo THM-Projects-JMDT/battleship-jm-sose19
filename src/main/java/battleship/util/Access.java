@@ -6,7 +6,6 @@ import battleship.players.Players;
 import io.javalin.security.AccessManager;
 import io.javalin.security.Role;
 
-//TODO Acessmanager mit Game 
 public class Access {
     public static final Set<Role> ANYONE = Set.of(AccessRole.ANYONE);
     public static final Set<Role> REGISTERED = Set.of(AccessRole.REGISTERED);

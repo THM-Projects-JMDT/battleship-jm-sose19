@@ -35,7 +35,6 @@ public class Players {
         players.remove(p);
         return p.getGame().delete(p);
         //TODO sessionAttribute löschen ? 
-        //TODO SSE benenden?
     }
 
     //Remove Player and Close Sse
@@ -45,8 +44,7 @@ public class Players {
         Sse.closeConection(p);
         
         return players.remove(p);
-        //TODO sessionAttribute löschen ? 
-        //TODO SSE benenden?
+        //TODO sessionAttribute löschen ?
     }
 
     //Get Player by id
@@ -72,7 +70,7 @@ public class Players {
     }
 
 
-    public static Game getGame(Context ctx) throws NoSuchElementException {
+    public static Game getGameByID(Context ctx) throws NoSuchElementException {
         return players.stream()
                 .filter(p -> p.getGame() != null)
                 .map(p -> p.getGame())

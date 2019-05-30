@@ -16,9 +16,9 @@ public class PlayersController {
         //Join game with Game-ID
         if (!Players.hasGame(p)) {
             try {
-                if (!p.newGame(Players.getGame(ctx))) {
-                    //TODO Hadle if Player has Already a game (vtl nich nötig wenn überprüft von Acces manager)
-                    return;
+                if (!p.newGame(Players.getGameByID(ctx))) {
+                    //if Player has Already a game
+                    throw new BadRequestResponse("Player has Already a Game!");
                 }
             } catch (NoSuchElementException ex) {
                 ctx.header("Content-ID", "2");

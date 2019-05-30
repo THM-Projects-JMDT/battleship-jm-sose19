@@ -24,13 +24,17 @@ public class Sse {
     };
 
     public static void gameInit(Player p, Player po) {
-        //TODO chek if in second game phase and do then other things 
-        if(hasClient(p)) {
-            updateMyships(p);
+        //TODO if has wating screen
+        if(Players.hasGameState(p, 4)) {
+            updateEnemyBoard(p);
+            updateMyBoard(p, po);
+        } else if(hasClient(p)) {
             getSetBoard(p);
             sendGameID(p);
         }
-        if(po != null && hasClient(po)) {
+
+        updateMyships(p);
+        if(po != null) {
             updateEnemyships(p, po);
             updateEnemyships(po, p);
         }
