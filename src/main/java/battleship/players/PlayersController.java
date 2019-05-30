@@ -12,10 +12,11 @@ import io.javalin.Handler;
 public class PlayersController {
     public static Handler startGame = ctx -> {
         ctx.sessionAttribute("Name", ctx.queryParam("Name"));
+        Player p = Players.getPlayer(ctx);
         //Join game with Game-ID
-        if (!Players.hasGame(ctx)) {
+        if (!Players.hasGame(p)) {
             try {
-                if (!Players.getPlayer(ctx).newGame(Players.getGame(ctx))) {
+                if (!p.newGame(Players.getGame(ctx))) {
                     //TODO Hadle if Player has Already a game (vtl nich nötig wenn überprüft von Acces manager)
                     return;
                 }
@@ -25,7 +26,7 @@ public class PlayersController {
             }
 
             //Send Message to other player
-            Sse.playerConect(Players.playWith(ctx), ctx.sessionAttribute("Name"));
+            Sse.playerConect(p.getGame().otherPlayer(p), ctx.sessionAttribute("Name"));
         }
 
         ctx.header("Content-ID", "4");

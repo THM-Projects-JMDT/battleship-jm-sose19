@@ -57,19 +57,18 @@ public class Players {
             .orElseThrow();
     }
 
-    public static Player playWith(Context ctx) {
-        return getPlayer(ctx).getGame().otherPlayer(getPlayer(ctx));
-    }
-
     //Test if player has a game
+    public static boolean hasGame(Player p) {
+        return p.getGame() != null;
+    }
     public static boolean hasGame(Context ctx) {
         return getPlayer(ctx).getGame() != null;
     }
     //Test if Player has a game with status
-    public static boolean hasGameState(Context ctx, int state) {
-        if(!hasGame(ctx))
+    public static boolean hasGameState(Player p, int state) {
+        if(!hasGame(p))
             return false;
-        return getPlayer(ctx).getGame().getState() == state;
+        return p.getGame().getState() == state;
     }
 
 

@@ -19,17 +19,22 @@ public class Sse {
         Player po = p.getGame().otherPlayer(p);
         p.setClient(client);
         client.sendEvent("Conection", "Conected");
-        updateMyships(p);
+        gameInit(p, po);
+        client.onClose(close);
+    };
+
+    public static void gameInit(Player p, Player po) {
         //TODO chek if in second game phase and do then other things 
-        getSetBoard(p);
-        sendGameID(p);
-        if(po != null) {
+        if(hasClient(p)) {
+            updateMyships(p);
+            getSetBoard(p);
+            sendGameID(p);
+        }
+        if(po != null && hasClient(po)) {
             updateEnemyships(p, po);
             updateEnemyships(po, p);
         }
-
-        client.onClose(close);
-    };
+    }
 
     public static void playerConect(Player po, String name) {
         if(hasClient(po))

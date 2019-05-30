@@ -23,9 +23,10 @@ public class GameController {
     };
 
     public static Handler getGameid = ctx -> {
-        if(Players.hasGame(ctx)) {
+        Player p = Players.getPlayer(ctx);
+        if(Players.hasGame(p)) {
             ctx.header("Content-ID", "1");
-            ctx.result(Players.getPlayer(ctx).getGame().getId());
+            ctx.result(p.getGame().getId());
             return;
         }
         
