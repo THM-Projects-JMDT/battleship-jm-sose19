@@ -2,6 +2,7 @@ package battleship.game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 import io.javalin.serversentevent.SseClient;
 
@@ -240,5 +241,9 @@ public class Player {
             return this.id.equals(((Player) o).id);
         return false;
     }
-
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
