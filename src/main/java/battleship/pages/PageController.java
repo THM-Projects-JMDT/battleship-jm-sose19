@@ -8,8 +8,14 @@ import io.javalin.Handler;
 
 public class PageController {
     public static Handler getPage = ctx -> {
+        if(!Players.isPlayer(ctx)) {
+            ctx.header("Content-ID", "0").render(Path.Pages.START);
+            return;
+        }
+
         Player p = Players.getPlayer(ctx);
-        if(!Players.hasGame(p) || Players.hasGameState(p, 1)) {
+
+        if(!Players.hasGame(p)) {
             ctx.header("Content-ID", "3");
             ctx.render(Path.Pages.LOGIN);
             return;
