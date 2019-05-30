@@ -28,6 +28,8 @@ Projektbeteiligte:
 
 # Server-Sent Events (SSE)
 
+Um vom Server Daten an den Klient zu senden sind Server-Sent Events eine einfache und gute Möglichkeit. In Javalin muss man die Verbindungs Adresse wie folgt deklariren: 
+
 ```Java
 app.sse("/sse", client -> {
     //Daten Senden
@@ -38,10 +40,17 @@ app.sse("/sse", client -> {
     });
 });
 ```
-```js
-//Client mit SSE verbinden
-var eventSource = new EventSource("//" + location.hostname + ":" + location.port + "/sse"); 
 
+In dieser Methode definiert man was beim verbinden Passiert und mit client.onClose() kann man dann noch definieren was beim Beenden Passieren soll. Man bekommt einen SSE client übergeben der sozusagen die Verbindung darstellt. Mit `client.sendEvent("data")` kann man dann daten senden. Und mit client.ctx kommt man an den Context von Javalin. Nach dem verbindungs aufbau sollte man sich den client speichern um weiterhin daten Senden zu Können. In Java Script baut man wie folgt die Verbindung auf: 
+
+```js
+//Client mit SSE verbinden "/sse" -> muss in app.sse festgelegtem pfad entsprechen
+var eventSource = new EventSource("//" + location.hostname + ":" + location.port + "/sse"); 
+```
+
+Um die vom Server gesendeten daten beim Client zu verarbeiten muss man einen Event Listener definieren:  //TODO erklären mit e
+
+```js
 //Antwort Listener
 eventSource.addEventListener('message', e => {
     //Antwort verarbeiten
@@ -49,10 +58,14 @@ eventSource.addEventListener('message', e => {
 });
 ```
 
+Wenn man mehre verschidenen daten Senden will, die unterschiedlich vom Client verarbeitet werden sollen konn man beim Senden auch einen event namen festlegen: 
+
 ```Java
 //Daten mit bestimmtem event Senden
 client.sendEvent("event", "data");
 ```
+
+Um dann in Java Script die daten zu verarbeiten muss man dann für jedes event einen eigenen Listener anlegen: 
 
 ```js
 //Antwort Listener mit eigenem Event
@@ -62,10 +75,14 @@ eventSource.addEventListener('event', e => {
 });
 ```
 
+Wenn man in den Unterschiedlichen events auch noch eine unterscheidung zwichen den daten machen will kan man auch noch IDs angeben:  
+
 ```Java
 //Daten mit bestimmtem event + id Senden
 client.sendEvent("event", "data", "1");
 ```
+
+In Java Script kann man dann wie folgt auf die IDs zugreifen: 
 
 ```js
 //TODO with id 
