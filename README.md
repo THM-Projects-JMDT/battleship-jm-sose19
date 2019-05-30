@@ -4,7 +4,7 @@
 
 ![Screenshot](Screenshot-Battleship.png)
 
-Keywords: Bootstrap, Server-Sent Events (SSE), Accessmanager, Path, ctx.render()
+Keywords: Bootstrap, Server-Sent Events (SSE), Accessmanager, ctx.render(), Routes, Path
 
 Projektbeteiligte:
 
@@ -88,10 +88,48 @@ enum MyRole implements Role {
 ```Java
 app.get("/test", ctx -> { 
         //Normaler get code 
-    }, roles(ANYONE));
-    //als roles(ANYONE) muss ein Set<Role> mit allen erlaubent Rollen übergeben werden
+    }, Set<Role>);
+    //das Set<Role> legt die erlaubten Rollen fest 
 ```
 
 # ctx.render()
 
+```Java
+app.get("/page", ctx -> {
+    //Some code
+    ctx.render("path");
+})
+```
+
+> **Achtung**: Das Rendern von Verchiedenen Datei typen benötigt meist andere dependencies, um herauszufinden welche kann man einfach den Code einmal aufrufen und in der Konsole wird einem dann die benötigte dependencie angezeigt und man kann sie zu build.gradle hinzufügen.
+
+//TODO pfad erklären ab resources 
+
+>**Achtung**: Beim Rendern von **Markdown** dateien muss der **Datei Pfad** mit einem **'/'** beginnen da dies intern mit //TODO genaue bezeichnung
+
+```Java
+//Datei bekommen 
+ctx.render(path).resultString();
+//ctx.render mit SSE
+client.sendEvent("Key", client.ctx.render(path).resultString());
+```
+
+# Routes
+
+```Java
+app.routes(() -> {
+    get("/get", ctx -> { /*Some Code*/ });
+    post("/post", ctx -> { /*Some Code*/});
+});
+```
+//TOD mit path usw. 
+
+>**Achtung**: Damit man get usw. aufrufen kann muss man den APiBuilder importieren: 
+
+`import static io.javalin.apibuilder.ApiBuilder.*;`
+
 # Path
+
+//TODO 
+
+//vtl. noch ein ctx.Header, ctx.sessionAttribute("Name", ctx.queryParam("Name")), Javalin Exeptions, vtl. noch igenwas von js;
