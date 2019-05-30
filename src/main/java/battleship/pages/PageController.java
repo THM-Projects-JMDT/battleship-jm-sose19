@@ -21,13 +21,8 @@ public class PageController {
             return;
         }
         
-        //If Player has no SSe client force to Conect 
-        if(p.getClient() == null)
-            ctx.header("Content-ID", "4");
-        else
-            ctx.header("Content-ID", "0");
-        
+        //Return Game page and force to Conect SSE 
+        ctx.header("Content-ID", "4");
         ctx.render(Path.Pages.GAME);
-        Sse.gameInit(p, p.getGame().otherPlayer(p));
     };
 }
