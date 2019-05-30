@@ -226,6 +226,7 @@ async function conectSSE() {
     
     function playerQuited(data) {
         alert(data);
+        closeWindow()
         getPage();
     }
 
