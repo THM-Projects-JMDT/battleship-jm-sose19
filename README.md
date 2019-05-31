@@ -41,7 +41,7 @@ app.sse("/sse", client -> {
 });
 ```
 
-In dieser Methode definiert man was beim **Verbinden** passiert und mit **client.onClose()** kann man, dann noch definieren was nach dem **Verbindungs abbau** passiert. Man bekommt einen **SSE client** übergeben der alle **Verbindungsdetails** beinhaltet. Mit `client.sendEvent("data")` kann man Daten an den Client **sende**. Und mit `client.ctx` bekommt man den **Context** von Javalin. Nach dem Verbindungsaufbau sollte man sich den **client speichern** um weiterhin Daten Senden zu Können. In **Java Script** baut man wie folgt die Verbindung auf:
+In dieser Methode definiert man was beim **Verbinden** passiert und mit **client.onClose()** kann man, dann noch definieren was nach dem **Verbindungsabbau** passiert. Man bekommt einen **SSE client** übergeben der alle **Verbindungsdetails** beinhaltet. Mit `client.sendEvent("data")` kann man Daten an den Client **senden**. Und mit `client.ctx` bekommt man den **Context** von Javalin. Nach dem Verbindungsaufbau sollte man sich den **client speichern** um weiterhin Daten senden zu können. In **Java Script** baut man wie folgt die Verbindung auf:
 
 ```js
 //Client mit SSE verbinden
@@ -49,7 +49,7 @@ var eventSource = new EventSource("http://" + location.hostname + ":" + location
 //"/sse" -> muss dem in app.sse festgelegtem pfad entsprechen
 ```
 
-Um die vom Server gesendeten daten beim Client zu verarbeiten, muss man einen **Event Listener** definieren:
+Um die vom Server gesendeten Daten beim Client zu verarbeiten, muss man einen **Event Listener** definieren:
 
 ```js
 //Antwort Listener
@@ -61,14 +61,14 @@ eventSource.addEventListener('message', e => {
 
 Man bekommt dann das **event e** übergeben und kann mit `e.data` auf die gesendeten **Daten zugreifen**. 
 
-Wenn man verschiedene Daten Senden will, die **unterschiedlich** vom Client verarbeitet werden sollen, kann man beim Senden auch einen **Event Namen** festlegen:
+Wenn man verschiedene Daten senden will, die **unterschiedlich** vom Client verarbeitet werden sollen, kann man beim Senden auch einen **Event Namen** festlegen:
 
 ```Java
 //Daten mit bestimmtem Event Senden
 client.sendEvent("event", "data");
 ```
 
-Um in **Java Script** die daten zu verarbeiten, muss man für jedes Event einen **eigenen Listener** anlegen:
+Um in **Java Script** die Daten zu verarbeiten, muss man für jedes Event einen **eigenen Listener** anlegen:
 
 ```js
 //Antwort Listener mit eigenem Event
@@ -80,7 +80,7 @@ eventSource.addEventListener('event', e => {
 
 # Access Manager
 
-Um in Javalin **sicherstellen** zu können, wer eine **Anfrage stellen darf** kann man den Access Manager Verwenden. So kann man den Access Manager konfigurieren:
+Um in Javalin **sicherstellen** zu können, wer eine **Anfrage stellen darf** kann man einen Access Manager verwenden. So kann man den Access Manager konfigurieren:
 
 ```Java
 //AccesManager konfigurieren
@@ -99,9 +99,9 @@ app.accessManager((handler, ctx, permittedRoles) -> {
 
 > **Achtung**:  app.accesManager muss **vor** app.start() aufgerufen werden
 
-Der Acces Manager bekommt einen **Handler übergeben**, den **Context** und ein **Set** mit den **erlaubten Rollen**. Er testet dann ob der Client die **benötigte berechtungung** besitzt, ist dies der fall wird der **Handler aufgeführt**. Wenn nicht wurde ein **"Unauthoried"** zurückgegeben. 
+Der Acces Manager bekommt einen **Handler übergeben**, den **Context** und ein **Set** mit den **erlaubten Rollen**. Er testet dann ob der Client die **benötigte Berechtigung** besitzt, ist dies der Fall wird der **Handler ausgeführt**. Wenn nicht wurde ein **"Unauthoried"** zurückgegeben. 
 
-Um die **Rollen** zu **definieren**, muss man eine **enum** erstellen das `Role` **implementiert**. Dann benötigt man nur noch eine Methode, mit der man die Rolle des Benutzers bekommt:
+Um die **Rollen** zu **definieren**, muss man ein **enum** erstellen das `Role` **implementiert**. Dann benötigt man nur noch eine Methode, mit der man die Rolle des Benutzers bekommt:
 
 ```Java
 //Mögliche Rollen festlegen 
@@ -114,7 +114,7 @@ Role getUserRole(Context ctx) {
 }
 ```
 
-Nachdem man den Acces Manager konfiguriert hat, muss man nur noch **festlegen** welche **Berechtigungen** für die **anfragen** benötigt werden:   
+Nachdem man den Acces Manager konfiguriert hat, muss man nur noch **festlegen** welche **Berechtigungen** für die **Anfragen** benötigt werden:   
 
 ```Java
 app.get("/test", ctx -> { 
@@ -125,7 +125,7 @@ app.get("/test", ctx -> {
 
 Dies funktioniert **nicht nur** mit `app.get()`, sondern auch mit `app.post()` oder auch bei der **SSE Definition**.
 
-> **Tip**: Javalin lässt einem bei der Definition des Acces Managers viel **Spielraum** und somit benötigt man die Methode `getUserRole()` **nicht** um die Berechtigung zu überprüfen, man kann dies auch **anders lösen**. Wie wir das bei unserm Programm auch gemacht haben:
+> **Tipp**: Javalin lässt einem bei der Definition des Acces Managers viel **Spielraum** und somit benötigt man die Methode `getUserRole()` **nicht** um die Berechtigung zu überprüfen, man kann dies auch **anders lösen**. Wie wir das bei unserm Programm auch gemacht haben:
 
 ```Java
 Javalin app = Javalin.create()
