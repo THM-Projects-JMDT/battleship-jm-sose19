@@ -125,7 +125,7 @@ app.get("/test", ctx -> {
 
 Dies funktioniert **nicht nur** mit `app.get()`, sondern auch mit `app.post()` oder auch bei der **SSE Definition**.
 
-> **Tipp**: Javalin lässt einem bei der Definition des Acces Managers viel **Spielraum** und somit benötigt man die Methode `getUserRole()` **nicht** um die Berechtigung zu überprüfen, man kann dies auch **anders lösen**. Wie wir das bei unserm Programm auch gemacht haben:
+> **Tipp**: Javalin lässt einem bei der Definition des Access Managers viel **Spielraum** und somit benötigt man die Methode `getUserRole()` **nicht** um die Berechtigung zu überprüfen, man kann dies auch **anders lösen**. Wie wir das bei unserm Programm auch gemacht haben:
 
 ```Java
 Javalin app = Javalin.create()
@@ -149,7 +149,7 @@ Javalin app = Javalin.create()
 .start(7000); 
 ```
 
-In unserem Programm **stellen** wir mit dem Acess Manager **sicher**, das es den **Spieler gibt** bzw. das er auch ein **Spiel** hat, um `NullPointerExceptions` zu **vermeiden**.
+In unserem Programm **stellen** wir mit dem Acess Manager **sicher**, dass es den **Spieler gibt** bzw. das er auch ein **Spiel** hat, um `NullPointerExceptions` zu **vermeiden**.
 
 # ctx.render()
 
@@ -162,15 +162,15 @@ app.get("/page", ctx -> {
 })
 ```
 
-> **Achtung**: Das Rendern von verschiedenen Datei Typen benötigt meist andere **Abhänigkeiten**, um herauszufinden welche kann man einfach den **Cod**e einmal ausführen und in der Konsole wird einem dann eine **Fehler** Meldung mit der **benötigte Abhänigkeit** angezeigt und man kann diese einfach zu **build.gradle** hinzufügen.
+> **Achtung**: Das Rendern von verschiedenen Datei Typen benötigt meist andere **Abhänigkeiten**, um herauszufinden welche kann man einfach den **Code** einmal ausführen und in der Konsole wird einem dann eine **Fehler** Meldung mit der **benötigte Abhänigkeit** angezeigt und man kann diese einfach zu **build.gradle** hinzufügen.
 
-Bei der Pfad Angabe ist das Startverzeichnis der **"resources"** Ordner. Javalin verwendet immer die zur Dateiendung **passende** Rendering **Engin**e. Falls diese unterstützt wird.
+Bei der Pfad Angabe ist das Startverzeichnis der **"resources"** Ordner. Javalin verwendet immer die zur Dateiendung **passende** Rendering **Engine** falls diese unterstützt wird.
 
->**Achtung**: Beim Rendern von **Markdown** Dateien muss der **Datei Pfad** mit einem **"/"** beginnen da Javalin sonst die Dateien nicht findet. 
+>**Achtung**: Beim Rendern von **Markdown** Dateien muss der **Datei Pfad** mit einem **"/"** beginnen, da Javalin sonst die Dateien nicht findet. 
 
 Wenn man auch **nicht unterstützte** Dateien rendern will, kann man dies **selber definieren**, das wird [hier](https://javalin.io/documentation#faq) gut beschrieben.
 
-Man kann auch noch ein bei `ctx.render()` auch noch ein **Modell** übergeben, damit kann man **Werte Paare** übergeben, um **variablen** in Dateien zu **ersetzen**. Dies haben wir allerdings **nicht verwendet** und somit können wir hier **keine genauere Erklärung** dazu Liefern.
+Man kann bei `ctx.render()` auch noch ein **Modell** übergeben, damit kann man **Werte Paare** übergeben, um **Variablen** in Dateien zu **ersetzen**. Dies haben wir allerdings **nicht verwendet** und somit können wir hier **keine genauere Erklärung** dazu liefern.
 
 Um `ctx.render()` auch z.B. in **Server-Send Event verwenden** zu können, kann man die Methode `ctx.resultString()` verwenden:
 
@@ -183,7 +183,7 @@ client.sendEvent("Key", client.ctx.render(path).resultString());
 
 # Routes
 
-Um einem etwas **schreibarbeit** zu **ersparen**, kann man in Javalin `app.routes()` verwenden:
+Um einem etwas **Schreibarbeit** zu **ersparen**, kann man in Javalin `app.routes()` verwenden:
 
 ```Java
 import static io.javalin.apibuilder.ApiBuilder.*;
@@ -196,7 +196,7 @@ app.routes(() -> {
 });
 ```
 
->**Achtung**: Damit man das funktioniert muss man den **APiBuilder importieren**.
+>**Achtung**: Damit das funktioniert muss man den **APiBuilder importieren**.
 
 Man kann auch noch `path()` verwenden um die **Pfade zu setzen** und diese auch zu **schachteln**: 
 
@@ -212,7 +212,7 @@ app.routes(() -> {
 });
 ```
 
-> **Tip**: Man kann die **Hadler** in Javalin auch in andere **Klassen auslagern**. Dies sorgt für eine Bessere **Strukturierung** und erhöht die **Übersichtlichkeit** des Codes:
+> **Tip**: Man kann die **Handler** in Javalin auch in andere **Klassen auslagern**. Dies sorgt für eine Bessere **Strukturierung** und erhöht die **Übersichtlichkeit** des Codes:
 
 ```Java
 //Main Klasse
@@ -226,7 +226,7 @@ public static Handler getPage = ctx -> {
 
 # Javalin Exeptions
 
-Es gibt in Javalin einige **vordefiniterte HttpResponse Exeptions** die man verwenden kann, um auf fehlerhaft Request zu reagieren wie z.B. `throw new BadRequestResponse("nachicht")`: Diese Exeption "beantwortet" den Request mit dem **HTTP Status Code** `400`. Alle HttpResponse Exeptions sind [hier](https://javalin.io/documentation#default-responses) gut erklärt.
+Es gibt in Javalin einige **vordefiniterte HttpResponse Exeptions** die man verwenden kann, um auf fehlerhaft Request zu reagieren wie z.B. `throw new BadRequestResponse("Nachricht")`: Diese Exeption "beantwortet" den Request mit dem **HTTP Status Code** `400`. Alle HttpResponse Exeptions sind [hier](https://javalin.io/documentation#default-responses) gut erklärt.
 
 # Session Atribute
 
@@ -237,7 +237,7 @@ Um **Daten** einem Bestimmten **Client zuordnen** zu können, kann man diese als
 ctx.sessionAttribute("key", "value");
 ```
 
-Und so wieder Lessen: 
+Und so wieder lesen: 
 
 ```Java
 //Daten lesen
@@ -283,14 +283,14 @@ static FileSessionDataStore fileSessionDataStore() {
 }
 ```
 
-Dies ist nur ein **Anwendungsbeispiel,** man kann die Daten auch in einer **Datenbank speichern**. Dafür gibt es [hier](https://javalin.io/tutorials/jetty-session-handling-java) eine gutes Beispiel.
+Dies ist nur ein **Anwendungsbeispiel**, man kann die Daten auch in einer **Datenbank speichern**. Dafür gibt es [hier](https://javalin.io/tutorials/jetty-session-handling-java) eine gutes Beispiel.
 
 # Path
 
-> **Tip**: Wir haben bei unserem Programm um die **Pfadverwaltung** zu **vereinfachen** eine Klasse mit **statischen Variablen** erstellt, dies vereinfacht die Änderung eines Pfades, da man diesen dann nicht an **mehreren orten** ändern muss.
+> **Tipp**: Wir haben bei unserem Programm um die **Pfadverwaltung** zu **vereinfachen** eine Klasse mit **statischen Variablen** erstellt, dies vereinfacht die Änderung eines Pfades, da man diesen dann nicht an **mehreren Orten** ändern muss.
 # Streams
 
-In unserem **Programm** haben wir auch ein Paar **Streams** verwendent die wir hier noch einmal zur **Hilfe zeigen** wollten: 
+In unserem **Programm** haben wir auch ein Paar **Streams** verwendent die wir hier noch einmal zur **Hilfe zeigen** wollen: 
 
 ```Java
 return field.stream()
