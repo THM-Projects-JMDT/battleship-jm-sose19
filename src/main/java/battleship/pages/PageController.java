@@ -3,7 +3,6 @@ package battleship.pages;
 import battleship.game.Player;
 import battleship.players.Players;
 import battleship.util.Path;
-import battleship.util.Sse;
 import io.javalin.Handler;
 
 public class PageController {
