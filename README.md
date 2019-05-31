@@ -287,10 +287,10 @@ Dies ist nur ein **Anwendungsbeispiel,** man kann die Daten auch in einer **Date
 
 # Path
 
-> **Tip**: Wir haben bei unserem Programm um die **Pfadverwaltung** zu **vereinfachen** eine Klasse mit **statischen variablen** erstellt, dies vereinfacht die Änderung eines Pfades, da man diesen dann nicht an **mehreren orten** ändern muss.
+> **Tip**: Wir haben bei unserem Programm um die **Pfadverwaltung** zu **vereinfachen** eine Klasse mit **statischen Variablen** erstellt, dies vereinfacht die Änderung eines Pfades, da man diesen dann nicht an **mehreren orten** ändern muss.
 # Streams
 
-In unserem **Programm** haben wir auch ein Paar **Streams** verwendent die wir hier noch einaml zur **hilfe zeigen** wollten: 
+In unserem **Programm** haben wir auch ein Paar **Streams** verwendent die wir hier noch einmal zur **Hilfe zeigen** wollten: 
 
 ```Java
 return field.stream()
