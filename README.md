@@ -5,7 +5,7 @@ sie benötigen also 2 Rechner im selben Netzwerk oder zum Testen einfacher zwei 
 
 ![Screenshot](Screenshot-Battleship.png)
 
-Keywords: Bootstrap, Server-Sent Events (SSE), Access Manager, ctx.render(), Routes, Path
+Keywords: Bootstrap, Server-Sent Events (SSE), Access Manager, ctx.render(), Routes, Javalin Exeptions, Session Attribute, Path
 
 Projektbeteiligte:
 
@@ -20,11 +20,13 @@ Projektbeteiligte:
 * [Routes](#Routes)
 * [Javalin Exeption](#Javalin-Exeption)
 * [Streams](#Streams)
+* [Javalin Exeptions](#Javalin-Exeptions)
+* [Session Atribute](#Session-Atribute)
 * [Path](#Path)
 
 # Server-Sent Events (SSE)
 
-Um vom Server Daten an den Client zu senden sind Server-Sent Events eine einfache und gute Möglichkeit. In Javalin muss man diese wie folgt deklariren:
+Um vom **Server** Daten an den **Client** zu **senden** sind Server-Sent Events eine einfache und gute Möglichkeit. In Javalin muss man diese wie folgt deklariren:
 
 ```Java
 app.sse("/sse", client -> {
@@ -39,7 +41,7 @@ app.sse("/sse", client -> {
 });
 ```
 
-In dieser Methode definiert man was beim Verbinden passiert und mit client.onClose() kann man, dann noch definieren was nach dem Verbindungs abbau passiert. Man bekommt einen SSE client übergeben der alle Verbindungsdetails beinhaltet. Mit `client.sendEvent("data")` kann man Daten an den Client senden. Und mit `client.ctx` bekommt man den Context von Javalin. Nach dem Verbindungsaufbau sollte man sich den client speichern um weiterhin Daten Senden zu Können. In Java Script baut man wie folgt die Verbindung auf:
+In dieser Methode definiert man was beim **Verbinden** passiert und mit **client.onClose()** kann man, dann noch definieren was nach dem **Verbindungs abbau** passiert. Man bekommt einen **SSE client** übergeben der alle **Verbindungsdetails** beinhaltet. Mit `client.sendEvent("data")` kann man Daten an den Client **sende**. Und mit `client.ctx` bekommt man den **Context** von Javalin. Nach dem Verbindungsaufbau sollte man sich den **client speichern** um weiterhin Daten Senden zu Können. In **Java Script** baut man wie folgt die Verbindung auf:
 
 ```js
 //Client mit SSE verbinden
@@ -47,7 +49,7 @@ var eventSource = new EventSource("http://" + location.hostname + ":" + location
 //"/sse" -> muss dem in app.sse festgelegtem pfad entsprechen
 ```
 
-Um die vom Server gesendeten daten beim Client zu verarbeiten, muss man einen Event Listener definieren:
+Um die vom Server gesendeten daten beim Client zu verarbeiten, muss man einen **Event Listener** definieren:
 
 ```js
 //Antwort Listener
@@ -57,16 +59,16 @@ eventSource.addEventListener('message', e => {
 });
 ```
 
-Man bekommt dann das event e übergeben und kann mit `e.data` auf die gesendeten Dateien zugreifen. 
+Man bekommt dann das **event e** übergeben und kann mit `e.data` auf die gesendeten **Daten zugreifen**. 
 
-Wenn man verschiedene Daten Senden will, die unterschiedlich vom Client verarbeitet werden sollen, kann man beim Senden auch einen Event Namen festlegen:
+Wenn man verschiedene Daten Senden will, die **unterschiedlich** vom Client verarbeitet werden sollen, kann man beim Senden auch einen **Event Namen** festlegen:
 
 ```Java
 //Daten mit bestimmtem Event Senden
 client.sendEvent("event", "data");
 ```
 
-Um in Java Script die daten zu verarbeiten, muss man für jedes Event einen eigenen Listener anlegen:
+Um in **Java Script** die daten zu verarbeiten, muss man für jedes Event einen **eigenen Listener** anlegen:
 
 ```js
 //Antwort Listener mit eigenem Event
@@ -78,7 +80,7 @@ eventSource.addEventListener('event', e => {
 
 # Access Manager
 
-Um in Javalin sicherstellen zu können, wer eine Anfrage stellen darf kann man den Access Manager Verwenden. So kann man den Access Manager konfigurieren:
+Um in Javalin **sicherstellen** zu können, wer eine **Anfrage stellen darf** kann man den Access Manager Verwenden. So kann man den Access Manager konfigurieren:
 
 ```Java
 //AccesManager konfigurieren
@@ -95,11 +97,11 @@ app.accessManager((handler, ctx, permittedRoles) -> {
 });
 ```
 
-> **Achtung**:  app.accesManager muss vor app.start() aufgerufen werden
+> **Achtung**:  app.accesManager muss **vor** app.start() aufgerufen werden
 
-Der Acces Manager bekommt einen Handler übergeben, den Context und ein Set mit den erlaubten Rollen. Er testet dann ob der Client die benötigte berechtungung besitzt, ist dies der fall wird der Handler aufgeführt. Wenn nicht wurde ein "Unauthoried" zurückgegeben. 
+Der Acces Manager bekommt einen **Handler übergeben**, den **Context** und ein **Set** mit den **erlaubten Rollen**. Er testet dann ob der Client die **benötigte berechtungung** besitzt, ist dies der fall wird der **Handler aufgeführt**. Wenn nicht wurde ein **"Unauthoried"** zurückgegeben. 
 
-Um die Rolen zu definieren, muss man eine enum erstellen das `Role` implementiert. Dann benötigt man nur noch eine Methode, mit der man die Rolle des Benutzers bekommt:
+Um die **Rollen** zu **definieren**, muss man eine **enum** erstellen das `Role` **implementiert**. Dann benötigt man nur noch eine Methode, mit der man die Rolle des Benutzers bekommt:
 
 ```Java
 //Mögliche Rollen festlegen 
@@ -112,7 +114,7 @@ Role getUserRole(Context ctx) {
 }
 ```
 
-Nachdem man den Acces Manager konfiguriert hat, muss man nur noch festlegen welche Berechtigungen für die anfragen benötigt werden:   
+Nachdem man den Acces Manager konfiguriert hat, muss man nur noch **festlegen** welche **Berechtigungen** für die **anfragen** benötigt werden:   
 
 ```Java
 app.get("/test", ctx -> { 
@@ -121,9 +123,9 @@ app.get("/test", ctx -> {
     //das Set<Role> legt die erlaubten Rollen fest 
 ```
 
-Dies funktioniert nicht nur mit get, sondern auch mit `app.post()` oder auch bei der SSE Definition.
+Dies funktioniert **nicht nur** mit `app.get()`, sondern auch mit `app.post()` oder auch bei der **SSE Definition**.
 
-> **Tip**: Javalin lässt einem bei der Definition des Acces Managers viel Spielraum und somit benötigt man die Methode getUserRole() nicht um die Berechtigung zu überprüfen, man kann dies auch anders lösen. Wie wir das bei unserm Programm auch gemacht haben:
+> **Tip**: Javalin lässt einem bei der Definition des Acces Managers viel **Spielraum** und somit benötigt man die Methode `getUserRole()` **nicht** um die Berechtigung zu überprüfen, man kann dies auch **anders lösen**. Wie wir das bei unserm Programm auch gemacht haben:
 
 ```Java
 Javalin app = Javalin.create()
@@ -147,11 +149,11 @@ Javalin app = Javalin.create()
 .start(7000); 
 ```
 
-In unserem Programm stellen wir mit dem Acess Manager sicher, das es den Spieler gibt bzw. das er auch ein Spiel hat, um `NullPointerExceptions` zu vermeiden.
+In unserem Programm **stellen** wir mit dem Acess Manager **sicher**, das es den **Spieler gibt** bzw. das er auch ein **Spiel** hat, um `NullPointerExceptions` zu **vermeiden**.
 
 # ctx.render()
 
-Mit Javalin kann man einige dateien Rendern lassen (Aktuell sind es 6 Template Engins), um somit einfach HTML Dokumente als Antwort zu senden: 
+Mit Javalin kann man einige **Dateitypen** Rendern lassen (Aktuell sind es 6 Template Engins), um somit einfach HTML Dokumente als Antwort zu senden: 
 
 ```Java
 app.get("/page", ctx -> {
@@ -160,17 +162,17 @@ app.get("/page", ctx -> {
 })
 ```
 
-> **Achtung**: Das Rendern von verschiedenen Datei Typen benötigt meist andere Abhänigkeiten, um herauszufinden welche kann man einfach den Code einmal aufrufen und in der Konsole wird einem dann eine Fehler Meldung mit der benötigte Abhänigkeit angezeigt und man kann diese einfach zu build.gradle hinzufügen.
+> **Achtung**: Das Rendern von verschiedenen Datei Typen benötigt meist andere **Abhänigkeiten**, um herauszufinden welche kann man einfach den **Cod**e einmal ausführen und in der Konsole wird einem dann eine **Fehler** Meldung mit der **benötigte Abhänigkeit** angezeigt und man kann diese einfach zu **build.gradle** hinzufügen.
 
-Bei der Pfad Angabe ist das Startverzeichnis der **"resources"** Ordner. Javalin verwendet immer die zur Dateiendung passende Rendering Engine. Falls diese unterstützt wird.
+Bei der Pfad Angabe ist das Startverzeichnis der **"resources"** Ordner. Javalin verwendet immer die zur Dateiendung **passende** Rendering **Engin**e. Falls diese unterstützt wird.
 
 >**Achtung**: Beim Rendern von **Markdown** Dateien muss der **Datei Pfad** mit einem **"/"** beginnen da Javalin sonst die Dateien nicht findet. 
 
-Wenn man auch nicht unterstützte Dateien rendern will, kann man dies selber definieren, das wird [hier](https://javalin.io/documentation#faq) gut beschrieben.
+Wenn man auch **nicht unterstützte** Dateien rendern will, kann man dies **selber definieren**, das wird [hier](https://javalin.io/documentation#faq) gut beschrieben.
 
-Man kann auch noch ein bei `ctx.render()` auch noch ein Modell übergeben, damit kann man Werte Paare übergeben, um variablen in Dateien zu ersetzen. Dies haben wir allerdings nicht verwendet und somit können wir hier keine genauere Erklärung dazu Liefern.
+Man kann auch noch ein bei `ctx.render()` auch noch ein **Modell** übergeben, damit kann man **Werte Paare** übergeben, um **variablen** in Dateien zu **ersetzen**. Dies haben wir allerdings **nicht verwendet** und somit können wir hier **keine genauere Erklärung** dazu Liefern.
 
-Um `ctx.render()` auch z.B. in Server-Send Event verwenden zu können, kann man die Methode `ctx.resultString()` verwenden:
+Um `ctx.render()` auch z.B. in **Server-Send Event verwenden** zu können, kann man die Methode `ctx.resultString()` verwenden:
 
 ```Java
 //Datei bekommen 
@@ -181,7 +183,7 @@ client.sendEvent("Key", client.ctx.render(path).resultString());
 
 # Routes
 
-Um einem etwas schreibarbeit zu ersparen, kann man in Javalin app.routes() verwenden:
+Um einem etwas **schreibarbeit** zu **ersparen**, kann man in Javalin `app.routes()` verwenden:
 
 ```Java
 import static io.javalin.apibuilder.ApiBuilder.*;
@@ -194,9 +196,9 @@ app.routes(() -> {
 });
 ```
 
->**Achtung**: Damit man das funktioniert muss man den APiBuilder importieren.
+>**Achtung**: Damit man das funktioniert muss man den **APiBuilder importieren**.
 
-Man kann auch noch path() verwenden um die Pfade zu setzen und diese auch zu schachteln: 
+Man kann auch noch `path()` verwenden um die **Pfade zu setzen** und diese auch zu **schachteln**: 
 
 ```Java
 app.routes(() -> {
@@ -210,7 +212,7 @@ app.routes(() -> {
 });
 ```
 
-> **Tip**: Man kann die Hadler in Javalin auch in andere Klassen auslagern. Dies sorgt für eine Bessere Strukturierung und erhöht die Übersichtlichkeit des Codes:
+> **Tip**: Man kann die **Hadler** in Javalin auch in andere **Klassen auslagern**. Dies sorgt für eine Bessere **Strukturierung** und erhöht die **Übersichtlichkeit** des Codes:
 
 ```Java
 //Main Klasse
@@ -222,13 +224,13 @@ public static Handler getPage = ctx -> {
 };
 ```
 
-# Javalin Exeption
+# Javalin Exeptions
 
-Es gibt in Javalin einige vordefiniterte HttpResponse Exeptions die man verwenden kann, um auf fehlerhaft Request zu reagieren wie z.B. `throw new BadRequestResponse("nachicht")`: Diese Exeption beantwortet den Request mit dem HTTP Status Code `400`. Alle HttpResponse Exeptions sind [hier](https://javalin.io/documentation#default-responses) gut erklärt.
+Es gibt in Javalin einige **vordefiniterte HttpResponse Exeptions** die man verwenden kann, um auf fehlerhaft Request zu reagieren wie z.B. `throw new BadRequestResponse("nachicht")`: Diese Exeption "beantwortet" den Request mit dem **HTTP Status Code** `400`. Alle HttpResponse Exeptions sind [hier](https://javalin.io/documentation#default-responses) gut erklärt.
 
 # Session Atribute
 
-Um Daten einem Bestimmten Client zuordnen zu können, kann man diese als Session Attribute speichern: 
+Um **Daten** einem Bestimmten **Client zuordnen** zu können, kann man diese als Session Attribute speichern: 
 
 ```Java
 //Daten Speichern
@@ -242,16 +244,16 @@ Und so wieder Lessen:
 String data = ctx.sessionAttribute("key");
 ```
 
-Wenn man keine weiteren Einstellungen vornimmt werden die Dateien nur im Arbeitsspeicher des Servers zwischengespeichert und sind nach dem Neustart nicht mehr vorhanden. Wenn man will, das die Daten auch nach einem Neustart noch vorhanden sind oder man sie nicht im Arbeitsspeicher haben will, kann man die Konfiguration des Session Handlers ändern:
+Wenn man **keine** weiteren **Einstellungen** vornimmt werden die Dateien nur im **Arbeitsspeicher** des Servers zwischengespeichert und sind nach dem **Neustart nicht** mehr **vorhanden**. Wenn man will, das die Daten auch nach einem Neustart noch vorhanden sind oder man sie **nicht** im Arbeitsspeicher haben will, kann man die **Konfiguration** des Session Handlers **ändern**:
 
 ```Java
 //Main Methode
 app.sessionHandler(/*file Session Handler Configuriren*/)
 ```
 
-> **Achtung:** `app.sessionHandler()` muss vor `app.start()` aufgerufen werden. 
+> **Achtung:** `app.sessionHandler()` muss **vor** `app.start()` aufgerufen werden. 
 
-Dies haben wir in Unserm Programm zwar nicht verwendet, wir hatten das allerdings erst vor und somit konnte ich auch ein Beispiel erstellen:
+Dies haben wir in Unserm Programm zwar **nicht** verwendet, wir hatten das allerdings erst vor und somit konnte ich auch ein **Beispiel** erstellen:
 
 ```Java
 //Main Methode
@@ -281,14 +283,14 @@ static FileSessionDataStore fileSessionDataStore() {
 }
 ```
 
-Dies ist nur ein Anwendungsbeispiel, man kann die Daten auch in einer Datenbank speichern. Dafür gibt es [hier](https://javalin.io/tutorials/jetty-session-handling-java) eine gutes Beispiel.
+Dies ist nur ein **Anwendungsbeispiel,** man kann die Daten auch in einer **Datenbank speichern**. Dafür gibt es [hier](https://javalin.io/tutorials/jetty-session-handling-java) eine gutes Beispiel.
 
 # Path
 
-> **Tip**: Wir haben bei unserem Programm um die Pfadverwaltung zu vereinfachen dafür eine Klasse mit statischen Strings erstellt, dies vereinfacht die Änderung eines Pfades, da man diesen dann nicht an mehreren orten ändern muss.
+> **Tip**: Wir haben bei unserem Programm um die **Pfadverwaltung** zu **vereinfachen** eine Klasse mit **statischen variablen** erstellt, dies vereinfacht die Änderung eines Pfades, da man diesen dann nicht an **mehreren orten** ändern muss.
 # Streams
 
-In unserem Programm haben wir auch ein Paar streams verwendent die wir hier noch einaml zur hilfe zeigen wollten: 
+In unserem **Programm** haben wir auch ein Paar **Streams** verwendent die wir hier noch einaml zur **hilfe zeigen** wollten: 
 
 ```Java
 return field.stream()
