@@ -1,7 +1,21 @@
 # Projekt: Battleship (Fr/2, Kr)
 
 > Unser Projekt ist das Spiel "Schiffe versenken". Man Spielt es für gewöhnlich zu zweit,
-sie benötigen also 2 Rechner im selben Netzwerk oder zum Testen einfacher zwei unterschiedliche Browser. Zum Starten des Spiels muss ein Spieler ein neues Spiel erstellen, dies kann mit dem Button "New Game" gemacht werden, anschließend kann man noch seinen Namen angeben und die Game-ID abspeichern. Mit der Game-Id kann der andere Spieler dann über „Join Game“ dem Spiel beitreten. Es ist nicht möglich, dass 3 Spieler in einem Spiel sind, aber es können natürlich zur gleichen Zeit mehrere Spiele existieren. Hat das Spiel nun angefangen beginnt man, damit die Schiffe zu setzten. Dies erfolgt durch anklicken auf dem großem Spielfeld. Oben links bekommt man angezeigt, wie viele Schiffe man noch setzten muss. Dabei begint man mit dem Größten schiff. Haben beide Spieler ihre Schiffe gesetzt, beginnt das eigentliche Spiel. In der Mitte befindet sich jetzt das gegnerische Spielfeld, links oben und unten das eigene Feld sowie die eigenen Schiffe. Oben rechts sieht man die gegnerischen Schiffe (rot bedeutet Schiff wurde schon "getroffen"). Abwechselnd können nun die Spieler das gegnerische Spielfeld "aufdecken". Hat ein Spieler gewonnen wird dies angezeigt und das Spiel ist beendet.
+sie benötigen also 2 Rechner im selben Netzwerk oder zum Testen einfacher zwei unterschiedliche Browser. 
+Zum Starten des Spiel's muss ein Spieler ein neues Spiel erstellen,
+dies kann mit dem Button "New Game" gemacht werden, 
+anschließend kann man dem Spiel noch einen Namen angeben und die Game-ID in die Zwischenablage kopieren. 
+Mit der Game-Id kann der andere Spieler dann über "Join Game" dem Spiel beitreten. 
+Es ist nicht möglich, dass 3 Spieler in einem Spiel sind, aber es können natürlich zur gleichen Zeit mehrere Spiele existieren. 
+Hat das Spiel nun angefangen beginnt man, damit die Schiffe zu setzten. 
+Dies erfolgt durch anklicken auf dem großem Spielfeld. 
+Oben links bekommt man angezeigt, wie viele Schiffe man noch setzten muss. 
+Dabei beginnt man mit dem größten Schiff. Haben beide Spieler ihre Schiffe gesetzt, 
+beginnt das eigentliche Spiel. In der Mitte befindet sich jetzt das gegnerische Spielfeld, 
+links oben und unten das eigene Feld sowie die eigenen Schiffe. 
+Oben rechts sieht man die gegnerischen Schiffe (rot bedeutet Schiff wurde schon "getroffen"). 
+Abwechselnd können nun die Spieler das gegnerische Spielfeld "aufdecken". 
+Hat ein Spieler gewonnen wird dies angezeigt und das Spiel ist beendet.
 
 ![Screenshot](Screenshot-Battleship.png)
 
@@ -41,7 +55,10 @@ app.sse("/sse", client -> {
 });
 ```
 
-In dieser Methode definiert man was beim **Verbinden** passiert und mit **client.onClose()** kann man, dann noch definieren was nach dem **Verbindungsabbau** passiert. Man bekommt einen **SSE client** übergeben der alle **Verbindungsdetails** beinhaltet. Mit `client.sendEvent("data")` kann man Daten an den Client **senden**. Und mit `client.ctx` bekommt man den **Context** von Javalin. Nach dem Verbindungsaufbau sollte man sich den **client speichern** um weiterhin Daten senden zu können. In **Java Script** baut man wie folgt die Verbindung auf:
+In dieser Methode definiert man was beim **Verbinden** passiert und mit **client.onClose()** kann man, dann noch definieren was nach dem **Verbindungsabbau** passiert. 
+Man bekommt einen **SSE client** übergeben der alle **Verbindungsdetails** beinhaltet. 
+Mit `client.sendEvent("data")` kann man Daten an den Client **senden**, mit `client.ctx` bekommt man den **Context** von Javalin. 
+Nach dem Verbindungsaufbau sollte man sich den **client speichern** um weiterhin Daten senden zu können. In **Java Script** baut man wie folgt die Verbindung auf:
 
 ```js
 //Client mit SSE verbinden
@@ -80,7 +97,7 @@ eventSource.addEventListener('event', e => {
 
 # Access Manager
 
-Um in Javalin **sicherstellen** zu können, wer eine **Anfrage stellen darf** kann man einen Access Manager verwenden. So kann man den Access Manager konfigurieren:
+Um in Javalin **sicherstellen** zu können, wer eine **Anfrage stellen darf**, kann man einen Access Manager verwenden. So kann man den Access Manager konfigurieren:
 
 ```Java
 //AccesManager konfigurieren
@@ -99,9 +116,12 @@ app.accessManager((handler, ctx, permittedRoles) -> {
 
 > **Achtung**:  app.accesManager muss **vor** app.start() aufgerufen werden
 
-Der Acces Manager bekommt einen **Handler übergeben**, den **Context** und ein **Set** mit den **erlaubten Rollen**. Er testet dann ob der Client die **benötigte Berechtigung** besitzt, ist dies der Fall wird der **Handler ausgeführt**. Wenn nicht wurde ein **"Unauthoried"** zurückgegeben. 
+Der Acces Manager bekommt einen **Handler übergeben**, den **Context** und ein **Set** mit den **erlaubten Rollen**. 
+Er testet dann ob der Client die **benötigte Berechtigung** besitzt, ist dies der Fall wird der **Handler ausgeführt**. 
+Wenn nicht wird ein **"Unauthoried"** zurückgegeben. 
 
-Um die **Rollen** zu **definieren**, muss man ein **enum** erstellen das `Role` **implementiert**. Dann benötigt man nur noch eine Methode, mit der man die Rolle des Benutzers bekommt:
+Um die **Rollen** zu **definieren**, muss man ein **enum** erstellen das `Role` **implementiert**. 
+Außerdem benötigt man noch eine Methode, mit der man die Rolle des Benutzers bekommt:
 
 ```Java
 //Mögliche Rollen festlegen 
@@ -125,7 +145,8 @@ app.get("/test", ctx -> {
 
 Dies funktioniert **nicht nur** mit `app.get()`, sondern auch mit `app.post()` oder auch bei der **SSE Definition**.
 
-> **Tipp**: Javalin lässt einem bei der Definition des Access Managers viel **Spielraum** und somit benötigt man die Methode `getUserRole()` **nicht** um die Berechtigung zu überprüfen, man kann dies auch **anders lösen**. Wie wir das bei unserm Programm auch gemacht haben:
+> **Tipp**: Javalin lässt einem bei der Definition des Access Managers viel **Spielraum** und somit benötigt man die Methode `getUserRole()` **nicht**.
+Man kann die Überprüfung der Berechtigung auch **anders lösen**. Wie wir das bei unserem Programm auch gemacht haben:
 
 ```Java
 Javalin app = Javalin.create()
@@ -162,7 +183,7 @@ app.get("/page", ctx -> {
 })
 ```
 
-> **Achtung**: Das Rendern von verschiedenen Datei Typen benötigt meist andere **Abhänigkeiten**, um herauszufinden welche kann man einfach den **Code** einmal ausführen und in der Konsole wird einem dann eine **Fehler** Meldung mit der **benötigte Abhänigkeit** angezeigt und man kann diese einfach zu **build.gradle** hinzufügen.
+> **Achtung**: Das Rendern von verschiedenen Datei Typen benötigt meist andere **Abhänigkeiten**, um herauszufinden welche, kann man einfach den **Code** einmal ausführen und in der Konsole wird einem dann eine **Fehler** Meldung mit der **benötigte Abhänigkeit** angezeigt und man kann diese einfach zu **build.gradle** hinzufügen.
 
 Bei der Pfad Angabe ist das Startverzeichnis der **"resources"** Ordner. Javalin verwendet immer die zur Dateiendung **passende** Rendering **Engine** falls diese unterstützt wird.
 
@@ -170,7 +191,8 @@ Bei der Pfad Angabe ist das Startverzeichnis der **"resources"** Ordner. Javalin
 
 Wenn man auch **nicht unterstützte** Dateien rendern will, kann man dies **selber definieren**, das wird [hier](https://javalin.io/documentation#faq) gut beschrieben.
 
-Man kann bei `ctx.render()` auch noch ein **Modell** übergeben, damit kann man **Werte Paare** übergeben, um **Variablen** in Dateien zu **ersetzen**. Dies haben wir allerdings **nicht verwendet** und somit können wir hier **keine genauere Erklärung** dazu liefern.
+Man kann bei `ctx.render()` auch ein **Modell** übergeben, damit kann man **Werte Paare** übergeben, um **Variablen** in Dateien zu **ersetzen**. 
+Dies haben wir allerdings **nicht verwendet** und somit können wir hier **keine genauere Erklärung** dazu liefern.
 
 Um `ctx.render()` auch z.B. in **Server-Send Event verwenden** zu können, kann man die Methode `ctx.resultString()` verwenden:
 
@@ -183,7 +205,7 @@ client.sendEvent("Key", client.ctx.render(path).resultString());
 
 # Routes
 
-Um einem etwas **Schreibarbeit** zu **ersparen**, kann man in Javalin `app.routes()` verwenden:
+Um etwas **Schreibarbeit** zu **ersparen**, kann man in Javalin `app.routes()` verwenden:
 
 ```Java
 import static io.javalin.apibuilder.ApiBuilder.*;
@@ -198,7 +220,7 @@ app.routes(() -> {
 
 >**Achtung**: Damit das funktioniert muss man den **APiBuilder importieren**.
 
-Man kann auch noch `path()` verwenden um die **Pfade zu setzen** und diese auch zu **schachteln**: 
+Man kann ebenfalls auch `path()` verwenden um die **Pfade zu setzen** und zu **schachteln**: 
 
 ```Java
 app.routes(() -> {
@@ -226,11 +248,12 @@ public static Handler getPage = ctx -> {
 
 # Javalin Exeptions
 
-Es gibt in Javalin einige **vordefiniterte HttpResponse Exeptions** die man verwenden kann, um auf fehlerhaft Request zu reagieren wie z.B. `throw new BadRequestResponse("Nachricht")`: Diese Exeption "beantwortet" den Request mit dem **HTTP Status Code** `400`. Alle HttpResponse Exeptions sind [hier](https://javalin.io/documentation#default-responses) gut erklärt.
+Es gibt in Javalin einige **vordefiniterte HttpResponse Exeptions** die man verwenden kann, um auf fehlerhaft Request zu reagieren wie z.B. `throw new BadRequestResponse("Nachricht")`: 
+Diese Exeption "beantwortet" den Request mit dem **HTTP Status Code** `400`. Alle HttpResponse Exeptions sind [hier](https://javalin.io/documentation#default-responses) gut erklärt.
 
 # Session Atribute
 
-Um **Daten** einem Bestimmten **Client zuordnen** zu können, kann man diese als Session Attribute speichern: 
+Um **Daten** einem bestimmten **Client zuzuordnen**, kann man diese als Session Attribute speichern: 
 
 ```Java
 //Daten Speichern
@@ -244,7 +267,8 @@ Und so wieder lesen:
 String data = ctx.sessionAttribute("key");
 ```
 
-Wenn man **keine** weiteren **Einstellungen** vornimmt werden die Dateien nur im **Arbeitsspeicher** des Servers zwischengespeichert und sind nach dem **Neustart nicht** mehr **vorhanden**. Wenn man will, das die Daten auch nach einem Neustart noch vorhanden sind oder man sie **nicht** im Arbeitsspeicher haben will, kann man die **Konfiguration** des Session Handlers **ändern**:
+Wenn man **keine** weiteren **Einstellungen** vornimmt werden die Dateien nur im **Arbeitsspeicher** des Servers zwischengespeichert und sind nach dem **Neustart nicht** mehr **vorhanden**. 
+Wenn man will, das die Daten auch nach einem Neustart noch vorhanden sind oder man sie **nicht** im Arbeitsspeicher haben will, kann man die **Konfiguration** des Session Handlers **ändern**:
 
 ```Java
 //Main Methode
