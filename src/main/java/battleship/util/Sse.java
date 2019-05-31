@@ -19,7 +19,6 @@ public class Sse {
     };
 
     public static void gameInit(Player p, Player po) {
-        //TODO if has wating screen
         if(Players.hasGameState(p, 4)) {
             updateEnemyBoard(p);
             updateMyBoard(p, po);
