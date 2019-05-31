@@ -9,10 +9,6 @@ import io.javalin.serversentevent.SseClient;
 //TO send ctx.render with sse: client.sendEvent(Key, client.ctx.render(path).resultString());
 
 public class Sse {
-    private static Runnable close = () -> {
-        //TODO
-    };
-    
     public static Consumer<SseClient> init = client -> {
         //Client zum Player Hinzufügen (Durch AccesManager ist Sichergestellt das Player-id da und valide)
         Player p = Players.getPlayer(client.ctx);
@@ -20,7 +16,6 @@ public class Sse {
         p.setClient(client);
         client.sendEvent("Conection", "Conected");
         gameInit(p, po);
-        client.onClose(close);
     };
 
     public static void gameInit(Player p, Player po) {

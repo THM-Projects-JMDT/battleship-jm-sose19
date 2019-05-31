@@ -33,8 +33,12 @@ public class Players {
         Sse.closeConection(p);
         
         players.remove(p);
+
+        //sessionAttribute löschen
+        ctx.req.getSession().invalidate();
+
         return p.getGame().delete(p);
-        //TODO sessionAttribute löschen ? 
+
     }
 
     //Remove Player and Close Sse
@@ -43,8 +47,11 @@ public class Players {
         Sse.deleteGameID(p);
         Sse.closeConection(p);
         
+        //sessionAttribute löschen
+        if(p.getClient() != null)
+            p.getClient().ctx.req.getSession().invalidate();
+
         return players.remove(p);
-        //TODO sessionAttribute löschen ?
     }
 
     //Get Player by id
