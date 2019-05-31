@@ -97,9 +97,11 @@ public class Sse {
 
     public static void finish(Player winner, Player po) {
         if(hasClient(winner))
-            winner.getClient().sendEvent("YouWon", "You Won the Game");
+            winner.getClient().sendEvent("finish", po.getClient().ctx.render(Path.Pages.FINISH).resultString());
+            winner.getClient().sendEvent("YouWon", "You won the game!");
         if(hasClient(po))
-            po.getClient().sendEvent("YouLose", "You lose the Game");
+            po.getClient().sendEvent("finish", po.getClient().ctx.render(Path.Pages.FINISH).resultString());
+            po.getClient().sendEvent("YouLose", "You lost the game!");
     }
 
     public static void deletetGame(Player p) {

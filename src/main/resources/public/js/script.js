@@ -209,8 +209,9 @@ async function conectSSE() {
     eventSource.addEventListener('ShipReady', e => shipReady());
     eventSource.addEventListener('Wait', e => wait(e.data));
     eventSource.addEventListener('StartGame', e => start());
-    eventSource.addEventListener('YouWon', e => win());
-    eventSource.addEventListener('YouLose', e => lose());
+    eventSource.addEventListener('finish', e => gameFinished(e.data));
+    eventSource.addEventListener('YouWon', e => win(e.data));
+    eventSource.addEventListener('YouLose', e => lose(e.data));
     //Message handle Functions
     function conectionStatus(data) {
         //TODO vlt. mit id wie? 
@@ -248,12 +249,18 @@ async function conectSSE() {
         closeWindow();
     }
 
-    function win() {
-            alert("You Won the Game!");
+    function gameFinished(data = '') {
+        waiting.innerHTML = data;
+        myWindow.style.display = "block";
+        waiting.style.display = "block";
     }
 
-    function lose() {
-        alert("You Lost the Game!");
+    function win(data = '') {
+        document.getElementById('finishText').innerHTML = data;
+    }
+
+    function lose(data = '') {
+        document.getElementById('finishText').innerHTML = data;
  }
 
     function shipReady() {

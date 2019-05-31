@@ -11,7 +11,8 @@ public class Player {
     private SseClient client;
     private ArrayList<SimpleMap<Integer, Integer>> field;
     private Game game;
-    private int[] shipslength = {2, 2, 3, 3, 4, 5};
+    private int[] shipslength = {2};
+    //private int[] shipslength = {2, 2, 3, 3, 4, 5};
     private final int[] shipsize = Arrays.copyOf(shipslength, shipslength.length);
     private boolean hitBoat; 
 

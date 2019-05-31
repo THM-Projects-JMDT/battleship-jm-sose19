@@ -3,6 +3,7 @@ package battleship.pages;
 import battleship.game.Player;
 import battleship.players.Players;
 import battleship.util.Path;
+import battleship.util.Sse;
 import io.javalin.Handler;
 
 public class PageController {
@@ -20,6 +21,12 @@ public class PageController {
             return;
         }
         
+        if(p.getGame().winner() != null) {
+            Players.removeWithGame(ctx);
+            ctx.header("Content-ID", "0").render(Path.Pages.START);
+            return; 
+        }
+
         //Return Game page and force to Conect SSE 
         ctx.header("Content-ID", "4");
         ctx.render(Path.Pages.GAME);

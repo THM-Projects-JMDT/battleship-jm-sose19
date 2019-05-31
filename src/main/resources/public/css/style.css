@@ -178,3 +178,7 @@ table {
 #footerText {
     color: white;
 }
+#finishText {
+    color: white;
+    font-size: 50px;
+}
