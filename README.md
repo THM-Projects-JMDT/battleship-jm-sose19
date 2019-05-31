@@ -162,13 +162,13 @@ app.get("/page", ctx -> {
 
 > **Achtung**: Das Rendern von verschiedenen Datei Typen benötigt meist andere Abhänigkeiten, um herauszufinden welche kann man einfach den Code einmal aufrufen und in der Konsole wird einem dann eine Fehler Meldung mit der benötigte Abhänigkeit angezeigt und man kann diese einfach zu build.gradle hinzufügen.
 
-Bei der Pfad Angabe ist das Start Verzeichnis der **"resources"** Ordner. Javalin verwendet immer die zur Dateiendung passende Rendering Engine. Fals diese unterschtützt wird. 
+Bei der Pfad Angabe ist das Startverzeichnis der **"resources"** Ordner. Javalin verwendet immer die zur Dateiendung passende Rendering Engine. Falls diese unterstützt wird.
 
 >**Achtung**: Beim Rendern von **Markdown** Dateien muss der **Datei Pfad** mit einem **"/"** beginnen da Javalin sonst die Dateien nicht findet. 
 
-Wenn man auch nicht unterstützte dateien Rendern will kann man diese selber definieren, das wir auf der [Javalin Webseite](https://javalin.io/documentation#faq) gut beschrieben.
+Wenn man auch nicht unterstützte Dateien rendern will, kann man dies selber definieren, das wird [hier](https://javalin.io/documentation#faq) gut beschrieben.
 
-Man kann auch noch ein bei `ctx.render()` auch noch ein Modell übergeben, damit kann man Werte Paare übergeben, um variablen in dateien zu ersetzen. Dies haben wir allerdings nicht verwendet und somit können wir hier keine genauere Erklärung dazu Liefern.  
+Man kann auch noch ein bei `ctx.render()` auch noch ein Modell übergeben, damit kann man Werte Paare übergeben, um variablen in Dateien zu ersetzen. Dies haben wir allerdings nicht verwendet und somit können wir hier keine genauere Erklärung dazu Liefern.
 
 Um `ctx.render()` auch z.B. in Server-Send Event verwenden zu können, kann man die Methode `ctx.resultString()` verwenden:
 
@@ -224,7 +224,7 @@ public static Handler getPage = ctx -> {
 
 # Javalin Exeption
 
-Es gibt in Javalin einige vordefiniterte HttpResponse Exeptions die man verwenden kann, um auf fehlerhaft Request zu reagieren wie z.B. `throw new BadRequestResponse("nachicht")`: Diese Exeption beantwortet den Request mit dem HTTP Status Code `400`. Alle HttpResponse Exeptions sind auf der [Javalin Website](https://javalin.io/documentation#default-responses) gut erklärt.
+Es gibt in Javalin einige vordefiniterte HttpResponse Exeptions die man verwenden kann, um auf fehlerhaft Request zu reagieren wie z.B. `throw new BadRequestResponse("nachicht")`: Diese Exeption beantwortet den Request mit dem HTTP Status Code `400`. Alle HttpResponse Exeptions sind [hier](https://javalin.io/documentation#default-responses) gut erklärt.
 
 # Session Atribute
 
@@ -281,7 +281,7 @@ static FileSessionDataStore fileSessionDataStore() {
 }
 ```
 
-Dies ist nur ein Anwendungsbeispiel, man kann die Daten auch in einer Datenbank speichern. Dafür gibt es eine gutes Beispiel auf der [Javalin Webseite](https://javalin.io/tutorials/jetty-session-handling-java).
+Dies ist nur ein Anwendungsbeispiel, man kann die Daten auch in einer Datenbank speichern. Dafür gibt es [hier](https://javalin.io/tutorials/jetty-session-handling-java) eine gutes Beispiel.
 
 # Path
 
